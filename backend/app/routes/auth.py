@@ -1,39 +1,40 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
-from app import db
+from app import db, limiter
 from app.models import User
+import os
 
 bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 
 @bp.route('/register', methods=['POST'])
 def register():
-    """Register a new user"""
+    """Register a new user — LOCKED: only allowed if REGISTRATION_ENABLED=true"""
+    # Registration lock — disabled by default in production
+    if os.getenv('REGISTRATION_ENABLED', 'false').lower() != 'true':
+        return jsonify({'error': 'Registration is currently closed.'}), 403
+
     data = request.get_json()
-    
-    if not data or not data.get('username') or not data.get('email') or not data.get('password'):
+
+    if not data or not data.get('username') or not data.get('password'):
         return jsonify({'error': 'Missing required fields'}), 400
-    
+
     # Check if user already exists
     if User.query.filter_by(username=data['username']).first():
         return jsonify({'error': 'Username already exists'}), 400
-    
-    if User.query.filter_by(email=data['email']).first():
-        return jsonify({'error': 'Email already exists'}), 400
-    
+
     # Create new user
     user = User(
         username=data['username'],
-        email=data['email']
+        email=data.get('email', f"{data['username']}@sirawdink.local")
     )
     user.set_password(data['password'])
-    
+
     db.session.add(user)
     db.session.commit()
-    
-    # Create tokens
-    access_token = create_access_token(identity=user.id)
-    refresh_token = create_refresh_token(identity=user.id)
-    
+
+    access_token = create_access_token(identity=str(user.id))
+    refresh_token = create_refresh_token(identity=str(user.id))
+
     return jsonify({
         'message': 'User created successfully',
         'user': user.to_dict(),
@@ -43,21 +44,22 @@ def register():
 
 
 @bp.route('/login', methods=['POST'])
+@limiter.limit("5 per minute")
 def login():
-    """Login user"""
+    """Login user — rate limited to 5 attempts per minute per IP"""
     data = request.get_json()
-    
+
     if not data or not data.get('username') or not data.get('password'):
         return jsonify({'error': 'Missing username or password'}), 400
-    
+
     user = User.query.filter_by(username=data['username']).first()
-    
+
     if not user or not user.check_password(data['password']):
         return jsonify({'error': 'Invalid username or password'}), 401
-    
-    access_token = create_access_token(identity=user.id)
-    refresh_token = create_refresh_token(identity=user.id)
-    
+
+    access_token = create_access_token(identity=str(user.id))
+    refresh_token = create_refresh_token(identity=str(user.id))
+
     return jsonify({
         'user': user.to_dict(),
         'access_token': access_token,
@@ -70,8 +72,7 @@ def login():
 def refresh():
     """Refresh access token"""
     current_user_id = get_jwt_identity()
-    access_token = create_access_token(identity=current_user_id)
-    
+    access_token = create_access_token(identity=str(current_user_id))
     return jsonify({'access_token': access_token}), 200
 
 
@@ -81,10 +82,10 @@ def get_current_user():
     """Get current user info"""
     current_user_id = get_jwt_identity()
     user = User.query.get(current_user_id)
-    
+
     if not user:
         return jsonify({'error': 'User not found'}), 404
-    
+
     return jsonify(user.to_dict()), 200
 
 
@@ -94,12 +95,12 @@ def update_current_user():
     """Update current user info"""
     current_user_id = get_jwt_identity()
     user = User.query.get(current_user_id)
-    
+
     if not user:
         return jsonify({'error': 'User not found'}), 404
-    
+
     data = request.get_json()
-    
+
     if 'email' in data:
         user.email = data['email']
     if 'timezone' in data:
@@ -108,7 +109,6 @@ def update_current_user():
         user.theme = data['theme']
     if 'password' in data:
         user.set_password(data['password'])
-    
+
     db.session.commit()
-    
     return jsonify(user.to_dict()), 200
