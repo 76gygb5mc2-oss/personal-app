@@ -262,6 +262,10 @@ function WorkTracker({ pin, username }) {
   // Week history
   const [weekHistory, setWeekHistory] = useState([]);
   const [weekNote, setWeekNote] = useState('');
+  const [lockedSchedule, setLockedSchedule] = useState(null);
+  const [savedAlert, setSavedAlert] = useState('');
+  const [addingPast, setAddingPast] = useState(false);
+  const [pastEntry, setPastEntry] = useState({ date: '', hours: '', gross: '', note: '' });
 
   // Load saved data
   useEffect(() => {
@@ -272,12 +276,13 @@ function WorkTracker({ pin, username }) {
       if (d.expenses) setExpenses(d.expenses);
       if (d.savings) setSavings(s => ({ ...s, ...d.savings }));
       if (d.weekHistory) setWeekHistory(d.weekHistory);
+      if (d.lockedSchedule) setLockedSchedule(d.lockedSchedule);
     }
   }, [encKey]);
 
   // Auto-save
   useEffect(() => {
-    save({ schedule, wage, expenses, savings: { goal: savings.goal, current: savings.current }, weekHistory }, encKey);
+    save({ schedule, wage, expenses, savings: { goal: savings.goal, current: savings.current }, weekHistory, lockedSchedule }, encKey);
   }, [schedule, wage, expenses, savings.goal, savings.current, weekHistory, encKey]);
 
   const week = buildWeek(schedule);
@@ -286,6 +291,59 @@ function WorkTracker({ pin, username }) {
   const remaining = pay.net - totalExpenses;
 
   const updateDay = (day, field, value) => setSchedule(s => ({ ...s, [day]: { ...s[day], [field]: value } }));
+
+  const lockSchedule = () => {
+    setLockedSchedule(JSON.parse(JSON.stringify(schedule)));
+    setSavedAlert('✅ Schedule locked as your default template!');
+    setTimeout(() => setSavedAlert(''), 3000);
+  };
+
+  const loadLockedSchedule = () => {
+    if (lockedSchedule) {
+      setSchedule(JSON.parse(JSON.stringify(lockedSchedule)));
+      setSavedAlert('📋 Default schedule loaded!');
+      setTimeout(() => setSavedAlert(''), 3000);
+    }
+  };
+
+  const saveCurrentWeek = () => {
+    const entry = {
+      id: Date.now(),
+      date: new Date().toLocaleDateString(),
+      totalHours: week.total,
+      gross: pay.gross,
+      net: pay.net,
+      expenses: totalExpenses,
+      remaining,
+      note: weekNote,
+    };
+    setWeekHistory(prev => [entry, ...prev].slice(0, 24));
+    setWeekNote('');
+    setSavedAlert('✅ Week saved to history!');
+    setTimeout(() => setSavedAlert(''), 3000);
+  };
+
+  const addPastWeek = () => {
+    if (!pastEntry.date || !pastEntry.hours) return;
+    const hrs = parseFloat(pastEntry.hours) || 0;
+    const gross = parseFloat(pastEntry.gross) || (hrs * wage);
+    const entry = {
+      id: Date.now(),
+      date: pastEntry.date,
+      totalHours: hrs,
+      gross,
+      net: gross * 0.75,
+      expenses: 0,
+      remaining: gross * 0.75,
+      note: pastEntry.note || 'Past week (manually added)',
+      isPast: true,
+    };
+    setWeekHistory(prev => [...prev, entry].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 24));
+    setPastEntry({ date: '', hours: '', gross: '', note: '' });
+    setAddingPast(false);
+    setSavedAlert('✅ Past week added to history!');
+    setTimeout(() => setSavedAlert(''), 3000);
+  };
 
   const addExpense = () => {
     if (!newExp.amount || parseFloat(newExp.amount) <= 0) return;
@@ -375,8 +433,36 @@ function WorkTracker({ pin, username }) {
       {/* ── TAB 0: SCHEDULE ── */}
       {tab === 0 && (
         <Box>
+          {savedAlert && (
+            <Alert severity="success" sx={{ mb: 2, bgcolor: 'rgba(45,106,79,0.2)', color: G.mint, border: '1px solid rgba(148,204,171,0.3)' }}>
+              {savedAlert}
+            </Alert>
+          )}
+
+          {/* Action buttons */}
+          <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap', mb: 2 }}>
+            <Button variant="contained" startIcon={<LockIcon />} onClick={lockSchedule}
+              sx={{ bgcolor: G.pine, '&:hover': { bgcolor: G.fern }, textTransform: 'none', fontWeight: 700 }}>
+              Lock as Default
+            </Button>
+            <Button variant="outlined" onClick={loadLockedSchedule} disabled={!lockedSchedule}
+              sx={{ borderColor: G.sage, color: G.sage, '&:hover': { borderColor: G.mint, color: G.mint }, textTransform: 'none', fontWeight: 600 }}>
+              Load Default
+            </Button>
+            <Button variant="contained" startIcon={<SaveIcon />} onClick={saveCurrentWeek}
+              sx={{ bgcolor: '#065f46', '&:hover': { bgcolor: G.pine }, textTransform: 'none', fontWeight: 700 }}>
+              Save This Week
+            </Button>
+          </Box>
+
+          {lockedSchedule && (
+            <Alert severity="info" sx={{ mb: 2, bgcolor: 'rgba(59,130,246,0.08)', color: '#93c5fd', border: '1px solid rgba(59,130,246,0.2)', fontSize: '0.8rem' }}>
+              🔒 You have a locked default schedule. Click "Load Default" to restore it any time.
+            </Alert>
+          )}
+
           <Typography sx={{ color: G.sage, fontSize: '0.82rem', mb: 2 }}>
-            Your default schedule is pre-filled. Edit any day for this week's actual hours.
+            Edit your schedule below. Lock it as your default template, then save each week to history.
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
             {DAYS.map(day => {
@@ -681,19 +767,72 @@ function WorkTracker({ pin, username }) {
       {/* ── TAB 4: HISTORY ── */}
       {tab === 4 && (
         <Box>
-          <Typography sx={{ color: G.sage, fontSize: '0.82rem', mb: 2 }}>Last 12 saved weeks</Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+            <Typography sx={{ color: G.sage, fontSize: '0.82rem' }}>Up to 24 saved weeks</Typography>
+            <Button variant="outlined" size="small" startIcon={<AddIcon />} onClick={() => setAddingPast(v => !v)}
+              sx={{ borderColor: G.sage, color: G.sage, '&:hover': { borderColor: G.mint, color: G.mint }, textTransform: 'none', fontWeight: 600 }}>
+              Add Previous Week
+            </Button>
+          </Box>
+
+          {savedAlert && (
+            <Alert severity="success" sx={{ mb: 2, bgcolor: 'rgba(45,106,79,0.2)', color: G.mint, border: '1px solid rgba(148,204,171,0.3)' }}>
+              {savedAlert}
+            </Alert>
+          )}
+
+          {/* Add past week form */}
+          {addingPast && (
+            <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.2)', borderRadius: 3, mb: 3 }}>
+              <CardContent sx={{ p: 2.5 }}>
+                <Typography fontWeight={700} sx={{ color: G.foam, mb: 2 }}>📅 Add Previous Week</Typography>
+                <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'flex-end' }}>
+                  <TextField size="small" label="Week Date" type="date" value={pastEntry.date}
+                    onChange={e => setPastEntry(p => ({ ...p, date: e.target.value }))}
+                    InputLabelProps={{ shrink: true }}
+                    sx={{ ...inputSx, width: 160 }} />
+                  <TextField size="small" label="Total Hours" type="number" placeholder="e.g. 36.5"
+                    value={pastEntry.hours}
+                    onChange={e => setPastEntry(p => ({ ...p, hours: e.target.value }))}
+                    sx={{ ...inputSx, width: 140 }} />
+                  <TextField size="small" label="Gross Pay ($)" type="number" placeholder="optional"
+                    value={pastEntry.gross}
+                    onChange={e => setPastEntry(p => ({ ...p, gross: e.target.value }))}
+                    InputProps={{ startAdornment: <InputAdornment position="start"><Typography sx={{ color: G.sage }}>$</Typography></InputAdornment> }}
+                    sx={{ ...inputSx, width: 160 }} />
+                  <TextField size="small" label="Note (optional)" value={pastEntry.note}
+                    onChange={e => setPastEntry(p => ({ ...p, note: e.target.value }))}
+                    placeholder="e.g. Short week, vacation"
+                    sx={{ ...inputSx, flex: 1, minWidth: 180 }} />
+                  <Button variant="contained" startIcon={<SaveIcon />} onClick={addPastWeek}
+                    disabled={!pastEntry.date || !pastEntry.hours}
+                    sx={{ bgcolor: G.pine, '&:hover': { bgcolor: G.fern }, fontWeight: 700, py: 1 }}>
+                    Add
+                  </Button>
+                  <Button onClick={() => setAddingPast(false)} sx={{ color: G.sage, textTransform: 'none' }}>Cancel</Button>
+                </Box>
+                <Typography sx={{ color: G.sage, fontSize: '0.75rem', mt: 1 }}>
+                  💡 If gross pay is left blank, it'll be calculated from your hours × current wage.
+                </Typography>
+              </CardContent>
+            </Card>
+          )}
+
           {weekHistory.length === 0 ? (
             <Box sx={{ textAlign: 'center', py: 6 }}>
-              <Typography sx={{ color: G.sage }}>No history yet. Go to Weekly Review and save a week.</Typography>
+              <Typography sx={{ color: G.sage }}>No history yet. Save a week from the Schedule tab or add a previous week above.</Typography>
             </Box>
           ) : (
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
               {weekHistory.map((w, i) => (
-                <Card key={w.id} sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
+                <Card key={w.id} sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: `1px solid ${w.isPast ? 'rgba(59,130,246,0.2)' : 'rgba(148,204,171,0.1)'}`, borderRadius: 3 }}>
                   <CardContent sx={{ p: 2.5 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
                       <Box>
-                        <Typography fontWeight={700} sx={{ color: G.foam }}>Week of {w.date}</Typography>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                          <Typography fontWeight={700} sx={{ color: G.foam }}>Week of {w.date}</Typography>
+                          {w.isPast && <Chip label="Past" size="small" sx={{ bgcolor: 'rgba(59,130,246,0.15)', color: '#93c5fd', fontSize: '0.65rem', height: 18 }} />}
+                        </Box>
                         {w.note && <Typography sx={{ color: G.sage, fontSize: '0.8rem', mt: 0.3 }}>📝 {w.note}</Typography>}
                       </Box>
                       <IconButton size="small" onClick={() => setWeekHistory(prev => prev.filter((_, j) => j !== i))} sx={{ color: 'rgba(232,245,238,0.2)', '&:hover': { color: '#ef4444' } }}>
