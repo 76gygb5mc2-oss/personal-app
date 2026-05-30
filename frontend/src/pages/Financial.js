@@ -75,7 +75,7 @@ function PinLock({ onUnlock }) {
         <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 1.2 }}>
           {[1,2,3,4,5,6,7,8,9,'',0,'⌫'].map((k, i) => (
             <Box key={i} onClick={() => { if (k === '') return; if (k === '⌫') setPin(p => p.slice(0,-1)); else addDigit(String(k)); }}
-              sx={{ py: 1.8, borderRadius: 2.5, textAlign: 'center', cursor: k === '' || locked ? 'default' : 'pointer', bgcolor: k === '' ? 'transparent' : 'rgba(71,133,89,0.1)', border: `1px solid ${k === '' ? 'transparent' : 'rgba(255,255,255,0.10)'}`, color: D.text1, fontWeight: 700, fontSize: '1.2rem', opacity: locked && k !== '' ? 0.4 : 1, transition: 'all 0.15s', '&:hover': k !== '' && !locked ? { bgcolor: 'rgba(71,133,89,0.25)', transform: 'scale(1.05)' } : {}, userSelect: 'none' }}>{k}</Box>
+              sx={{ py: 1.8, borderRadius: 2.5, textAlign: 'center', cursor: k === '' || locked ? 'default' : 'pointer', bgcolor: k === '' ? 'transparent' : 'rgba(255,255,255,0.04)', border: `1px solid ${k === '' ? 'transparent' : 'rgba(255,255,255,0.10)'}`, color: D.text1, fontWeight: 700, fontSize: '1.2rem', opacity: locked && k !== '' ? 0.4 : 1, transition: 'all 0.15s', '&:hover': k !== '' && !locked ? { bgcolor: 'rgba(71,133,89,0.25)', transform: 'scale(1.05)' } : {}, userSelect: 'none' }}>{k}</Box>
           ))}
         </Box>
       </Box>
@@ -224,7 +224,7 @@ function WeeklyReview({ week, pay, expenses, wage, savings }) {
           <Box key={i} sx={{
             p: 2, borderRadius: 2.5, display: 'flex', gap: 1.5, alignItems: 'flex-start',
             bgcolor: n.type === 'error' ? 'rgba(239,68,68,0.08)' : n.type === 'warning' ? 'rgba(245,158,11,0.08)' : n.type === 'success' ? 'rgba(255,255,255,0.04)' : 'rgba(148,204,171,0.06)',
-            border: `1px solid ${n.type === 'error' ? 'rgba(239,68,68,0.2)' : n.type === 'warning' ? 'rgba(245,158,11,0.2)' : n.type === 'success' ? 'rgba(255,255,255,0.06)' : 'rgba(148,204,171,0.1)'}`,
+            border: `1px solid ${n.type === 'error' ? 'rgba(239,68,68,0.2)' : n.type === 'warning' ? 'rgba(245,158,11,0.2)' : n.type === 'success' ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.06)'}`,
           }}>
             <Typography sx={{ fontSize: '1.1rem', flexShrink: 0, mt: 0.1 }}>{n.icon}</Typography>
             <Typography sx={{ color: D.text1, fontSize: '0.85rem', lineHeight: 1.6 }}>{n.text}</Typography>
@@ -367,7 +367,7 @@ function WorkTracker({ pin, username }) {
   };
 
   const inputSx = {
-    '& .MuiOutlinedInput-root': { bgcolor: 'rgba(13,38,24,0.6)', color: D.text1, '& fieldset': { borderColor: 'rgba(255,255,255,0.10)' }, '&:hover fieldset': { borderColor: D.text2 }, '&.Mui-focused fieldset': { borderColor: D.text2, borderWidth: 2 } },
+    '& .MuiOutlinedInput-root': { bgcolor: D.bg2, color: D.text1, '& fieldset': { borderColor: 'rgba(255,255,255,0.10)' }, '&:hover fieldset': { borderColor: D.text2 }, '&.Mui-focused fieldset': { borderColor: D.text2, borderWidth: 2 } },
     '& .MuiInputLabel-root': { color: D.text3 },
     '& .MuiInputLabel-root.Mui-focused': { color: D.text2 },
     '& .MuiInputBase-input': { color: D.text1 },
@@ -386,7 +386,7 @@ function WorkTracker({ pin, username }) {
       </Box>
 
       {/* Wage setting */}
-      <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3, mb: 3 }}>
+      <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3, mb: 3 }}>
         <CardContent sx={{ p: 2.5 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
             <AttachMoneyIcon sx={{ color: D.text2 }} />
@@ -407,13 +407,13 @@ function WorkTracker({ pin, username }) {
       <Box sx={{ display: 'grid', gridTemplateColumns: { xs: 'repeat(2,1fr)', md: 'repeat(3,1fr)', lg: 'repeat(6,1fr)' }, gap: 1.5, mb: 3 }}>
         {[
           { label: 'Total Hours', value: fmtHrs(week.total), color: D.text2, icon: '⏱' },
-          { label: 'Overtime', value: week.overtime > 0 ? fmtHrs(week.overtime) : 'None', color: week.overtime > 0 ? '#f59e0b' : D.text3, icon: '🔥' },
+          { label: 'Overtime', value: week.overtime > 0 ? fmtHrs(week.overtime) : 'None', color: week.overtime > 0 ? 'rgba(255,255,255,0.6)' : D.text3, icon: '🔥' },
           { label: 'Gross Pay', value: `$${fmt(pay.gross)}`, color: D.bg4, icon: '💵' },
           { label: 'Est. Take-Home', value: `$${fmt(pay.net)}`, color: D.text2, icon: '🏦' },
-          { label: 'Expenses', value: `$${fmt(totalExpenses)}`, color: totalExpenses > pay.net ? '#ef4444' : '#f59e0b', icon: '💸' },
+          { label: 'Expenses', value: `$${fmt(totalExpenses)}`, color: totalExpenses > pay.net ? '#ef4444' : 'rgba(255,255,255,0.6)', icon: '💸' },
           { label: 'Remaining', value: `${remaining >= 0 ? '+' : ''}$${fmt(remaining)}`, color: remaining >= 0 ? D.bg4 : '#ef4444', icon: remaining >= 0 ? '✅' : '🚨' },
         ].map(m => (
-          <Box key={m.label} sx={{ p: 2, borderRadius: 3, bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.08)', textAlign: 'center' }}>
+          <Box key={m.label} sx={{ p: 2, borderRadius: 3, bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.05)', textAlign: 'center' }}>
             <Typography sx={{ fontSize: '1.3rem', mb: 0.3 }}>{m.icon}</Typography>
             <Typography sx={{ fontSize: '0.62rem', color: D.text3, textTransform: 'uppercase', letterSpacing: 1 }}>{m.label}</Typography>
             <Typography sx={{ fontWeight: 800, fontSize: '0.95rem', color: m.color, mt: 0.3 }}>{m.value}</Typography>
@@ -471,7 +471,7 @@ function WorkTracker({ pin, username }) {
               const night = !d.off && isNightShift(d.start, d.end);
               const long = isLongShift(hrs);
               return (
-                <Card key={day} sx={{ bgcolor: d.off ? 'rgba(13,38,24,0.4)' : 'rgba(13,38,24,0.7)', border: `1px solid ${d.off ? 'rgba(148,204,171,0.06)' : night ? 'rgba(139,92,246,0.25)' : 'rgba(255,255,255,0.08)'}`, borderRadius: 3, opacity: d.off ? 0.6 : 1 }}>
+                <Card key={day} sx={{ bgcolor: d.off ? 'rgba(13,38,24,0.4)' : D.bg2, border: `1px solid ${d.off ? 'rgba(148,204,171,0.06)' : night ? 'rgba(139,92,246,0.25)' : 'rgba(255,255,255,0.08)'}`, borderRadius: 3, opacity: d.off ? 0.6 : 1 }}>
                   <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
                       {/* Day label */}
@@ -480,7 +480,7 @@ function WorkTracker({ pin, username }) {
                         <Box sx={{ display: 'flex', gap: 0.5, mt: 0.3 }}>
                           {night && !d.off && <Chip label="Night" size="small" icon={<NightlightIcon sx={{ fontSize: '10px !important' }} />} sx={{ bgcolor: 'rgba(139,92,246,0.2)', color: '#c4b5fd', fontSize: '0.6rem', height: 18 }} />}
                           {long && !d.off && <Chip label="Long" size="small" icon={<AccessTimeIcon sx={{ fontSize: '10px !important' }} />} sx={{ bgcolor: 'rgba(245,158,11,0.2)', color: '#fbbf24', fontSize: '0.6rem', height: 18 }} />}
-                          {d.off && <Chip label="Day Off" size="small" sx={{ bgcolor: 'rgba(148,204,171,0.08)', color: D.text3, fontSize: '0.6rem', height: 18 }} />}
+                          {d.off && <Chip label="Day Off" size="small" sx={{ bgcolor: 'rgba(255,255,255,0.05)', color: D.text3, fontSize: '0.6rem', height: 18 }} />}
                         </Box>
                       </Box>
 
@@ -524,7 +524,7 @@ function WorkTracker({ pin, username }) {
                 <Box><Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>DAY SHIFTS</Typography><Typography sx={{ color: D.text1, fontWeight: 700 }}>{fmtHrs(week.dayHrs)}</Typography></Box>
                 <Box><Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>NIGHT SHIFTS</Typography><Typography sx={{ color: '#c4b5fd', fontWeight: 700 }}>{fmtHrs(week.nightHrs)}</Typography></Box>
                 <Box><Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>LONG SHIFTS</Typography><Typography sx={{ color: '#fbbf24', fontWeight: 700 }}>{week.longShifts} shift{week.longShifts !== 1 ? 's' : ''}</Typography></Box>
-                <Box><Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>OVERTIME</Typography><Typography sx={{ color: week.overtime > 0 ? '#f59e0b' : D.text3, fontWeight: 700 }}>{week.overtime > 0 ? fmtHrs(week.overtime) : 'None'}</Typography></Box>
+                <Box><Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>OVERTIME</Typography><Typography sx={{ color: week.overtime > 0 ? 'rgba(255,255,255,0.6)' : D.text3, fontWeight: 700 }}>{week.overtime > 0 ? fmtHrs(week.overtime) : 'None'}</Typography></Box>
                 <Box><Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>DAYS WORKED</Typography><Typography sx={{ color: D.text1, fontWeight: 700 }}>{week.days.filter(d => !d.off).length} / 7</Typography></Box>
               </Box>
             </CardContent>
@@ -536,7 +536,7 @@ function WorkTracker({ pin, username }) {
       {tab === 1 && (
         <Box>
           {/* Add expense */}
-          <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3, mb: 3 }}>
+          <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3, mb: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
               <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>Add Expense</Typography>
               <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'flex-end' }}>
@@ -563,7 +563,7 @@ function WorkTracker({ pin, username }) {
           </Card>
 
           {/* Expense list */}
-          <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3, mb: 3 }}>
+          <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3, mb: 3 }}>
             <CardContent sx={{ p: 0 }}>
               <Box sx={{ p: 2.5, pb: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Typography fontWeight={700} sx={{ color: D.text1 }}>Weekly Expenses ({expenses.length})</Typography>
@@ -599,7 +599,7 @@ function WorkTracker({ pin, username }) {
 
           {/* Expense breakdown */}
           {expenses.length > 0 && (
-            <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3, mb: 3 }}>
+            <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3, mb: 3 }}>
               <CardContent sx={{ p: 2.5 }}>
                 <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>Breakdown</Typography>
                 {EXPENSE_CATEGORIES.filter(c => expenses.some(e => e.category === c)).map(cat => {
@@ -614,11 +614,11 @@ function WorkTracker({ pin, username }) {
                           <Typography sx={{ color: 'rgba(255,255,255,0.20)', fontSize: '0.78rem' }}>{pct.toFixed(1)}%</Typography>
                         </Box>
                       </Box>
-                      <LinearProgress variant="determinate" value={Math.min(pct * 2, 100)} sx={{ height: 4, borderRadius: 2, bgcolor: 'rgba(148,204,171,0.08)', '& .MuiLinearProgress-bar': { bgcolor: cat === 'Savings' ? D.bg4 : '#ef4444', borderRadius: 2 } }} />
+                      <LinearProgress variant="determinate" value={Math.min(pct * 2, 100)} sx={{ height: 4, borderRadius: 2, bgcolor: 'rgba(255,255,255,0.05)', '& .MuiLinearProgress-bar': { bgcolor: cat === 'Savings' ? D.bg4 : '#ef4444', borderRadius: 2 } }} />
                     </Box>
                   );
                 })}
-                <Divider sx={{ my: 2, borderColor: 'rgba(148,204,171,0.1)' }} />
+                <Divider sx={{ my: 2, borderColor: 'rgba(255,255,255,0.06)' }} />
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography fontWeight={700} sx={{ color: D.text1 }}>Total Expenses</Typography>
                   <Typography fontWeight={800} sx={{ color: '#f87171', fontSize: '1.1rem' }}>${fmt(totalExpenses)}</Typography>
@@ -632,7 +632,7 @@ function WorkTracker({ pin, username }) {
           )}
 
           {/* Savings goal */}
-          <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
+          <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
               <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>🎯 Savings Goal</Typography>
               <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
@@ -654,7 +654,7 @@ function WorkTracker({ pin, username }) {
                     <Typography sx={{ color: D.text2, fontWeight: 700, fontSize: '0.85rem' }}>${savings.current.toLocaleString()} / ${savings.goal.toLocaleString()}</Typography>
                   </Box>
                   <LinearProgress variant="determinate" value={Math.min((savings.current / savings.goal) * 100, 100)}
-                    sx={{ height: 8, borderRadius: 4, bgcolor: 'rgba(148,204,171,0.08)', '& .MuiLinearProgress-bar': { bgcolor: D.bg4, borderRadius: 4 } }} />
+                    sx={{ height: 8, borderRadius: 4, bgcolor: 'rgba(255,255,255,0.05)', '& .MuiLinearProgress-bar': { bgcolor: D.bg4, borderRadius: 4 } }} />
                   <Typography sx={{ color: D.text3, fontSize: '0.75rem', mt: 0.5 }}>
                     {((savings.current / savings.goal) * 100).toFixed(1)}% complete · ${Math.max(0, savings.goal - savings.current).toLocaleString()} to go
                   </Typography>
@@ -675,18 +675,18 @@ function WorkTracker({ pin, username }) {
           )}
 
           {/* Pay breakdown */}
-          <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
+          <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
               <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>💵 Pay Breakdown</Typography>
               {[
                 { label: 'Regular Hours', value: fmtHrs(week.regularHrs), sub: `${week.regularHrs.toFixed(1)} hrs × $${wage}/hr`, amount: week.regularHrs * wage, color: D.text1 },
-                { label: 'Overtime Hours', value: fmtHrs(week.overtime), sub: `${week.overtime.toFixed(1)} hrs × $${(wage * 1.5).toFixed(2)}/hr (1.5x)`, amount: week.overtime * wage * 1.5, color: '#f59e0b' },
+                { label: 'Overtime Hours', value: fmtHrs(week.overtime), sub: `${week.overtime.toFixed(1)} hrs × $${(wage * 1.5).toFixed(2)}/hr (1.5x)`, amount: week.overtime * wage * 1.5, color: 'rgba(255,255,255,0.6)' },
                 { label: 'Gross Weekly Pay', value: `$${fmt(pay.gross)}`, sub: 'Before taxes', amount: null, color: D.bg4, bold: true },
                 { label: `Est. Tax (~${(pay.taxRate * 100).toFixed(0)}%)`, value: `-$${fmt(pay.estimatedTax)}`, sub: 'Approximate withholding', amount: null, color: '#f87171' },
                 { label: 'Est. Take-Home', value: `$${fmt(pay.net)}`, sub: 'After estimated taxes', amount: null, color: D.text2, bold: true },
               ].map((row, i) => (
                 <Box key={i}>
-                  {i > 0 && <Divider sx={{ my: 1.5, borderColor: 'rgba(148,204,171,0.08)' }} />}
+                  {i > 0 && <Divider sx={{ my: 1.5, borderColor: 'rgba(255,255,255,0.05)' }} />}
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Box>
                       <Typography sx={{ color: row.bold ? D.text1 : D.text3, fontWeight: row.bold ? 700 : 400, fontSize: '0.88rem' }}>{row.label}</Typography>
@@ -700,7 +700,7 @@ function WorkTracker({ pin, username }) {
           </Card>
 
           {/* Projections */}
-          <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
+          <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
               <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>📈 Pay Projections</Typography>
               <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 2 }}>
@@ -709,7 +709,7 @@ function WorkTracker({ pin, username }) {
                   { label: 'Biweekly', gross: pay.biweekly, net: pay.net * 2 },
                   { label: 'Monthly (×4.33)', gross: pay.monthly, net: pay.net * 4.33 },
                 ].map(p => (
-                  <Box key={p.label} sx={{ p: 2, borderRadius: 2, bgcolor: 'rgba(71,133,89,0.08)', border: '1px solid rgba(148,204,171,0.08)', textAlign: 'center' }}>
+                  <Box key={p.label} sx={{ p: 2, borderRadius: 2, bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.05)', textAlign: 'center' }}>
                     <Typography sx={{ color: D.text3, fontSize: '0.72rem', mb: 1 }}>{p.label}</Typography>
                     <Typography sx={{ color: D.bg4, fontWeight: 800, fontSize: '1.1rem' }}>${Math.round(p.gross).toLocaleString()}</Typography>
                     <Typography sx={{ color: D.text3, fontSize: '0.7rem' }}>gross</Typography>
@@ -722,7 +722,7 @@ function WorkTracker({ pin, username }) {
           </Card>
 
           {/* Shift summary */}
-          <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
+          <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
               <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>🗓 Shift Details</Typography>
               {week.days.filter(d => !d.off).map(d => (
@@ -750,7 +750,7 @@ function WorkTracker({ pin, username }) {
       {tab === 3 && (
         <Box>
           <WeeklyReview week={week} pay={pay} expenses={expenses} wage={wage} savings={savings} />
-          <Card sx={{ mt: 3, bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
+          <Card sx={{ mt: 3, bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
               <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>📝 Save This Week</Typography>
               <TextField fullWidth multiline rows={2} placeholder="Any notes about this week? (missed hours, unusual shifts, etc.)"
@@ -783,7 +783,7 @@ function WorkTracker({ pin, username }) {
 
           {/* Add past week form */}
           {addingPast && (
-            <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 3, mb: 3 }}>
+            <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.12)', borderRadius: 3, mb: 3 }}>
               <CardContent sx={{ p: 2.5 }}>
                 <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>📅 Add Previous Week</Typography>
                 <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'flex-end' }}>
@@ -825,7 +825,7 @@ function WorkTracker({ pin, username }) {
           ) : (
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
               {weekHistory.map((w, i) => (
-                <Card key={w.id} sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: `1px solid ${w.isPast ? 'rgba(59,130,246,0.2)' : 'rgba(148,204,171,0.1)'}`, borderRadius: 3 }}>
+                <Card key={w.id} sx={{ bgcolor: D.bg2, border: `1px solid ${w.isPast ? 'rgba(59,130,246,0.2)' : 'rgba(255,255,255,0.06)'}`, borderRadius: 3 }}>
                   <CardContent sx={{ p: 2.5 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
                       <Box>

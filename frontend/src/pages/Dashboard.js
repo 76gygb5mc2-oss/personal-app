@@ -12,6 +12,10 @@ import SmartToyIcon      from '@mui/icons-material/SmartToy';
 import AssessmentIcon    from '@mui/icons-material/Assessment';
 import NorthEastIcon     from '@mui/icons-material/NorthEast';
 import { D, FONTS } from '../theme';
+import NumberTicker from '../components/ui/NumberTicker';
+import ShinyText from '../components/ui/ShinyText';
+import WordRotate from '../components/ui/WordRotate';
+import BorderBeam from '../components/ui/BorderBeam';
 
 const sections = [
   { title: 'Business',   sub: 'Deep-dive ideas & full execution blueprints', icon: <BusinessIcon />,      path: '/business',  num: '01' },
@@ -126,6 +130,8 @@ function ModuleCard({ item, onClick }) {
           background: `radial-gradient(300px circle at ${spotPos.x}px ${spotPos.y}px, rgba(255,255,255,0.04), transparent 60%)`,
         }} />
       )}
+      {/* BorderBeam on hover */}
+      {hovered && <BorderBeam size={100} duration={3} borderRadius={16} />}
 
       {/* Top gradient line on hover */}
       <div style={{
@@ -230,61 +236,49 @@ export default function Dashboard() {
 
         {/* ── HERO ── */}
         <Box sx={{ mb: { xs: 8, md: 12 }, maxWidth: 680 }}>
-          <Typography sx={{
-            fontSize: '0.68rem', letterSpacing: 4, textTransform: 'uppercase',
-            color: D.text4, fontWeight: 500, mb: 3, fontFamily: FONTS.mono,
-          }}>
+          {/* Date */}
+          <div style={{ fontSize: '0.68rem', letterSpacing: 4, textTransform: 'uppercase', color: D.text4, fontWeight: 500, marginBottom: 24, fontFamily: FONTS.mono }}>
             {today}
-          </Typography>
+          </div>
 
-          <Typography sx={{
-            fontSize: { xs: '2.8rem', sm: '4rem', md: '5rem' },
-            fontWeight: 700, lineHeight: 1.05,
-            letterSpacing: '-2px', color: D.text1, mb: 1,
-            fontFamily: FONTS.sans,
-          }}>
+          {/* Greeting */}
+          <div style={{ fontSize: 'clamp(2.4rem,6vw,5rem)', fontWeight: 700, lineHeight: 1.05, letterSpacing: '-2px', color: D.text1, marginBottom: 4, fontFamily: FONTS.sans }}>
             {greeting},
-          </Typography>
+          </div>
 
-          <Typography sx={{
-            fontSize: { xs: '2.8rem', sm: '4rem', md: '5rem' },
-            fontWeight: 700, lineHeight: 1.05,
-            letterSpacing: '-2px', mb: 4,
-            fontFamily: FONTS.sans,
-            background: 'linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.35) 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}>
-            Sirawdink.
-          </Typography>
+          {/* Shiny name */}
+          <div style={{ fontSize: 'clamp(2.4rem,6vw,5rem)', fontWeight: 700, lineHeight: 1.05, letterSpacing: '-2px', marginBottom: 16, fontFamily: FONTS.sans }}>
+            <ShinyText>Sirawdink.</ShinyText>
+          </div>
 
-          <Typography sx={{
-            fontSize: { xs: '0.95rem', sm: '1.05rem' },
-            color: D.text4, lineHeight: 1.8,
-            maxWidth: 480, mb: 5, fontWeight: 400,
-          }}>
-            Your personal operating system. Everything you need to build, earn, grow, and become — all in one place.
-          </Typography>
+          {/* Word rotate subtitle */}
+          <div style={{ fontSize: 'clamp(0.95rem,2vw,1.1rem)', color: D.text4, marginBottom: 36, fontWeight: 400 }}>
+            Your personal OS for{' '}
+            <WordRotate
+              words={['business growth.', 'financial clarity.', 'daily mindset.', 'building habits.', 'learning faster.']}
+              style={{ color: D.text2, fontWeight: 500 }}
+            />
+          </div>
 
-          {/* Stat pills */}
-          <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap' }}>
+          {/* Animated stat counters */}
+          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
             {[
-              { v: '9',  l: 'Modules' },
-              { v: '4+', l: 'Ideas' },
-              { v: '3',  l: 'Courses' },
-              { v: 'AI', l: 'Ready' },
-            ].map(s => (
+              { v: 9,    l: 'Modules',  suffix: '' },
+              { v: 4,    l: 'Ideas',    suffix: '+' },
+              { v: 3,    l: 'Courses',  suffix: '' },
+              { v: 100,  l: 'AI Ready', suffix: '%' },
+            ].map((s, i) => (
               <Box key={s.l} sx={{
                 px: 2, py: 0.8, borderRadius: 2,
-                background: D.bg3,
-                border: `1px solid ${D.border1}`,
+                background: D.bg3, border: `1px solid ${D.border1}`,
                 display: 'flex', alignItems: 'center', gap: 1,
                 transition: 'all 0.2s',
                 '&:hover': { background: D.bg4, borderColor: D.border2 },
               }}>
-                <Typography fontWeight={600} sx={{ color: D.text1, fontSize: '0.85rem', fontFamily: FONTS.mono }}>{s.v}</Typography>
-                <Typography sx={{ color: D.text4, fontSize: '0.75rem' }}>{s.l}</Typography>
+                <span style={{ fontWeight: 600, color: D.text1, fontSize: '0.85rem', fontFamily: FONTS.mono }}>
+                  <NumberTicker value={s.v} delay={i * 0.15} />{s.suffix}
+                </span>
+                <span style={{ color: D.text4, fontSize: '0.75rem' }}>{s.l}</span>
               </Box>
             ))}
           </Box>

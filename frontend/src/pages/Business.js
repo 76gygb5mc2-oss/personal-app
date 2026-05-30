@@ -166,14 +166,14 @@ export default function Business() {
           </Typography>
         </Box>
         <Tooltip title="See next idea">
-          <IconButton onClick={nextIdea} sx={{ bgcolor: 'rgba(71,133,89,0.08)', border: '1px solid rgba(71,133,89,0.18)', '&:hover': { bgcolor: 'rgba(71,133,89,0.18)' } }}>
+          <IconButton onClick={nextIdea} sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' } }}>
             <RefreshIcon sx={{ color: `rgba(255,255,255,0.4)` }} />
           </IconButton>
         </Tooltip>
       </Box>
 
       {/* Main Idea Card */}
-      <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
+      <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 3, mb: 3 }}>
         <CardContent sx={{ p: 4 }}>
           {/* Top badges */}
           <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 3 }}>
@@ -181,9 +181,9 @@ export default function Business() {
             <Chip
               label={`Difficulty: ${idea.difficulty}`}
               size="small"
-              sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: difficultyColor[idea.difficulty] || `rgba(255,255,255,0.4)`, fontWeight: 600 }}
+              sx={{ bgcolor: 'rgba(255,255,255,0.04)', color: difficultyColor[idea.difficulty] || `rgba(255,255,255,0.4)`, fontWeight: 600 }}
             />
-            <Chip label={`Revenue in ${idea.timeToRevenue}`} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: '#a78bfa', fontWeight: 600 }} />
+            <Chip label={`Revenue in ${idea.timeToRevenue}`} size="small" sx={{ bgcolor: 'rgba(255,255,255,0.04)', color: '#a78bfa', fontWeight: 600 }} />
           </Box>
 
           {/* Title */}
@@ -191,7 +191,7 @@ export default function Business() {
             <Typography variant="h5" fontWeight={700} sx={{ color: D.text1, flex: 1, pr: 2 }}>
               {idea.title}
             </Typography>
-            <IconButton onClick={() => setSaved(!saved)} size="small" sx={{ color: saved ? '#f59e0b' : `rgba(255,255,255,0.5)` }}>
+            <IconButton onClick={() => setSaved(!saved)} size="small" sx={{ color: saved ? 'rgba(255,255,255,0.6)' : `rgba(255,255,255,0.5)` }}>
               {saved ? <BookmarkIcon /> : <BookmarkBorderIcon />}
             </IconButton>
           </Box>
@@ -204,9 +204,9 @@ export default function Business() {
             {[
               { icon: <AttachMoneyIcon sx={{ fontSize: 18 }} />, label: 'Startup Cost', value: idea.startupCost, color: D.bg4 },
               { icon: <TrendingUpIcon sx={{ fontSize: 18 }} />, label: 'Monthly Potential', value: idea.potential, color: D.text3 },
-              { icon: <LightbulbIcon sx={{ fontSize: 18 }} />, label: 'Time to Revenue', value: idea.timeToRevenue, color: '#f59e0b' },
+              { icon: <LightbulbIcon sx={{ fontSize: 18 }} />, label: 'Time to Revenue', value: idea.timeToRevenue, color: 'rgba(255,255,255,0.6)' },
             ].map((metric) => (
-              <Box key={metric.label} sx={{ bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2, minWidth: 180, flex: 1 }}>
+              <Box key={metric.label} sx={{ bgcolor: 'rgba(255,255,255,0.04)', borderRadius: 2, p: 2, minWidth: 180, flex: 1 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5, color: metric.color }}>
                   {metric.icon}
                   <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.4)`, textTransform: 'uppercase', letterSpacing: 1 }}>
@@ -220,7 +220,7 @@ export default function Business() {
             ))}
           </Box>
 
-          <Divider sx={{ borderColor: 'rgba(71,133,89,0.08)', mb: 3 }} />
+          <Divider sx={{ borderColor: 'rgba(255,255,255,0.04)', mb: 3 }} />
 
           {/* Deep Dive Sections */}
           {[
@@ -278,7 +278,7 @@ export default function Business() {
                 <Box>
                   {idea.risks.map((risk, i) => (
                     <Box key={i} sx={{ display: 'flex', gap: 1.5, mb: 1.5, alignItems: 'flex-start' }}>
-                      <WarningIcon sx={{ color: '#f59e0b', fontSize: 18, mt: 0.3 }} />
+                      <WarningIcon sx={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, mt: 0.3 }} />
                       <Typography sx={{ color: D.text1, lineHeight: 1.7 }}>{risk}</Typography>
                     </Box>
                   ))}
@@ -292,7 +292,7 @@ export default function Business() {
               content: (
                 <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
                   {idea.tools.map((tool, i) => (
-                    <Chip key={i} label={tool} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: `rgba(255,255,255,0.4)`, border: '1px solid rgba(71,133,89,0.18)' }} />
+                    <Chip key={i} label={tool} sx={{ bgcolor: 'rgba(255,255,255,0.04)', color: `rgba(255,255,255,0.4)`, border: '1px solid rgba(255,255,255,0.08)' }} />
                   ))}
                 </Box>
               )
@@ -302,7 +302,7 @@ export default function Business() {
               key={section.key}
               expanded={expandedSection === section.key}
               onChange={() => setExpandedSection(expandedSection === section.key ? null : section.key)}
-              sx={{ bgcolor: 'rgba(71,133,89,0.08)', border: '1px solid rgba(71,133,89,0.18)', borderRadius: '8px !important', mb: 1, '&:before': { display: 'none' } }}
+              sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px !important', mb: 1, '&:before': { display: 'none' } }}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: `rgba(255,255,255,0.4)` }} />}>
                 <Typography fontWeight={600} sx={{ color: D.text1 }}>{section.label}</Typography>

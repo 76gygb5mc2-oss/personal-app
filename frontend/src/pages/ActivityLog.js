@@ -19,7 +19,7 @@ const saveActivities = (a) => localStorage.setItem(KEY, JSON.stringify(a));
 const CATEGORIES = [
   { label: 'Work',       emoji: '💼', color: '#60a5fa' },
   { label: 'Health',     emoji: '🏃', color: '#4ade80' },
-  { label: 'Food',       emoji: '🍽️', color: '#f59e0b' },
+  { label: 'Food',       emoji: '🍽️', color: 'rgba(255,255,255,0.6)' },
   { label: 'Learning',   emoji: '📚', color: '#a78bfa' },
   { label: 'Personal',   emoji: '🧘', color: '#f472b6' },
   { label: 'Social',     emoji: '👥', color: '#34d399' },
@@ -126,7 +126,7 @@ export default function ActivityLog() {
 
   const inputSx = {
     '& .MuiOutlinedInput-root': {
-      bgcolor: 'rgba(13,38,24,0.6)', color: D.text1,
+      bgcolor: D.bg2, color: D.text1,
       '& fieldset': { borderColor: 'rgba(255,255,255,0.10)' },
       '&:hover fieldset': { borderColor: D.text2 },
       '&.Mui-focused fieldset': { borderColor: D.text2, borderWidth: 2 },
@@ -147,7 +147,7 @@ export default function ActivityLog() {
 
       {/* Today stats */}
       <Box sx={{ display: 'flex', gap: 1.5, mb: 3, flexWrap: 'wrap' }}>
-        <Box sx={{ px: 2.5, py: 1.5, borderRadius: 3, bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', display: 'flex', alignItems: 'center', gap: 1.5 }}>
+        <Box sx={{ px: 2.5, py: 1.5, borderRadius: 3, bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', gap: 1.5 }}>
           <CalendarTodayIcon sx={{ color: D.text2, fontSize: 18 }} />
           <Box>
             <Typography sx={{ color: D.text3, fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: 1 }}>Today</Typography>
@@ -155,7 +155,7 @@ export default function ActivityLog() {
           </Box>
         </Box>
         {topCat && (
-          <Box sx={{ px: 2.5, py: 1.5, borderRadius: 3, bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', display: 'flex', alignItems: 'center', gap: 1.5 }}>
+          <Box sx={{ px: 2.5, py: 1.5, borderRadius: 3, bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', gap: 1.5 }}>
             <Typography sx={{ fontSize: '1.2rem' }}>{getCat(topCat[0]).emoji}</Typography>
             <Box>
               <Typography sx={{ color: D.text3, fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: 1 }}>Most logged</Typography>
@@ -163,7 +163,7 @@ export default function ActivityLog() {
             </Box>
           </Box>
         )}
-        <Box sx={{ px: 2.5, py: 1.5, borderRadius: 3, bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', display: 'flex', alignItems: 'center', gap: 1.5 }}>
+        <Box sx={{ px: 2.5, py: 1.5, borderRadius: 3, bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', gap: 1.5 }}>
           <AccessTimeIcon sx={{ color: D.text2, fontSize: 18 }} />
           <Box>
             <Typography sx={{ color: D.text3, fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: 1 }}>Total logged</Typography>
@@ -182,7 +182,7 @@ export default function ActivityLog() {
       {tab === 0 && (
         <Box>
           {/* Quick log card */}
-          <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 3, mb: 3 }}>
+          <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.08)', borderRadius: 3, mb: 3 }}>
             <CardContent sx={{ p: 3 }}>
               <Typography fontWeight={700} sx={{ color: D.text1, mb: 2.5 }}>What did you do?</Typography>
 
@@ -207,9 +207,9 @@ export default function ActivityLog() {
                     onClick={() => set('category', cat.label)}
                     sx={{
                       cursor: 'pointer',
-                      bgcolor: form.category === cat.label ? 'rgba(71,133,89,0.3)' : 'rgba(13,38,24,0.5)',
+                      bgcolor: form.category === cat.label ? 'rgba(255,255,255,0.08)' : 'rgba(13,38,24,0.5)',
                       color: form.category === cat.label ? D.text1 : D.text3,
-                      border: `1px solid ${form.category === cat.label ? cat.color + '60' : 'rgba(148,204,171,0.1)'}`,
+                      border: `1px solid ${form.category === cat.label ? cat.color + '60' : 'rgba(255,255,255,0.06)'}`,
                       fontWeight: form.category === cat.label ? 700 : 400,
                       fontSize: '0.8rem',
                       transition: 'all 0.15s',
@@ -254,7 +254,7 @@ export default function ActivityLog() {
               {/* Preview + Submit */}
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
                 {form.title && (
-                  <Box sx={{ flex: 1, px: 2, py: 1, borderRadius: 2, bgcolor: 'rgba(71,133,89,0.1)', border: '1px solid rgba(148,204,171,0.1)' }}>
+                  <Box sx={{ flex: 1, px: 2, py: 1, borderRadius: 2, bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
                     <Typography sx={{ color: D.text1, fontSize: '0.85rem', fontWeight: 600 }}>
                       {getCat(form.category).emoji} {form.title}
                     </Typography>
@@ -272,7 +272,7 @@ export default function ActivityLog() {
                   sx={{
                     py: 1.5, px: 3, fontWeight: 800, fontSize: '0.95rem',
                     bgcolor: D.bg2, '&:hover': { bgcolor: D.bg3 },
-                    '&.Mui-disabled': { bgcolor: 'rgba(71,133,89,0.1)', color: D.text3 },
+                    '&.Mui-disabled': { bgcolor: 'rgba(255,255,255,0.04)', color: D.text3 },
                   }}
                 >
                   Save Activity
@@ -299,7 +299,7 @@ export default function ActivityLog() {
                 return (
                   <Box key={a.id} sx={{
                     display: 'flex', alignItems: 'flex-start', gap: 1.5, p: 2, borderRadius: 2.5,
-                    bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.08)',
+                    bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.05)',
                     transition: 'all 0.15s', '&:hover': { borderColor: 'rgba(255,255,255,0.12)', transform: 'translateX(3px)' },
                   }}>
                     {/* Color dot */}
@@ -352,9 +352,9 @@ export default function ActivityLog() {
                 size="small"
                 sx={{
                   cursor: 'pointer',
-                  bgcolor: filterCat === cat ? 'rgba(71,133,89,0.3)' : 'rgba(13,38,24,0.5)',
+                  bgcolor: filterCat === cat ? 'rgba(255,255,255,0.08)' : 'rgba(13,38,24,0.5)',
                   color: filterCat === cat ? D.text1 : D.text3,
-                  border: `1px solid ${filterCat === cat ? 'rgba(148,204,171,0.35)' : 'rgba(148,204,171,0.08)'}`,
+                  border: `1px solid ${filterCat === cat ? 'rgba(148,204,171,0.35)' : 'rgba(255,255,255,0.05)'}`,
                   fontWeight: filterCat === cat ? 700 : 400,
                   fontSize: '0.75rem',
                   '&:hover': { bgcolor: 'rgba(255,255,255,0.05)' },
@@ -376,8 +376,8 @@ export default function ActivityLog() {
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1.5 }}>
                     <Typography sx={{ color: D.text2, fontWeight: 800, fontSize: '0.95rem' }}>{formatDate(date)}</Typography>
                     <Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>{date}</Typography>
-                    <Chip label={`${acts.length} activities`} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.1)', color: D.text3, fontSize: '0.65rem', height: 18 }} />
-                    <Box sx={{ flex: 1, height: 1, bgcolor: 'rgba(148,204,171,0.08)' }} />
+                    <Chip label={`${acts.length} activities`} size="small" sx={{ bgcolor: 'rgba(255,255,255,0.04)', color: D.text3, fontSize: '0.65rem', height: 18 }} />
+                    <Box sx={{ flex: 1, height: 1, bgcolor: 'rgba(255,255,255,0.05)' }} />
                   </Box>
 
                   {/* Activities for this day */}
@@ -388,7 +388,7 @@ export default function ActivityLog() {
                       return (
                         <Box key={a.id} sx={{
                           display: 'flex', alignItems: 'flex-start', gap: 1.5, p: 2, borderRadius: 2.5,
-                          bgcolor: 'rgba(13,38,24,0.6)', border: '1px solid rgba(148,204,171,0.07)',
+                          bgcolor: D.bg2, border: '1px solid rgba(148,204,171,0.07)',
                           transition: 'all 0.15s', '&:hover': { borderColor: 'rgba(148,204,171,0.18)', bgcolor: 'rgba(13,38,24,0.75)' },
                         }}>
                           <Box sx={{ width: 3, borderRadius: 99, alignSelf: 'stretch', bgcolor: cat.color, flexShrink: 0, minHeight: 32 }} />

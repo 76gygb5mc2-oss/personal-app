@@ -139,7 +139,7 @@ export default function LoginPage({ onLogin }) {
   const inputSx = {
     mb: 2,
     '& .MuiOutlinedInput-root': {
-      borderRadius: 2, bgcolor: 'rgba(13,38,24,0.7)', color: D.text1,
+      borderRadius: 2, bgcolor: D.bg2, color: D.text1,
       '& fieldset': { borderColor: 'rgba(255,255,255,0.12)' },
       '&:hover fieldset': { borderColor: D.text2 },
       '&.Mui-focused fieldset': { borderColor: D.text2, borderWidth: 2 },
@@ -197,7 +197,7 @@ export default function LoginPage({ onLogin }) {
                 sx={{
                   flex: 1, py: 1, borderRadius: 1.5, cursor: 'pointer', textAlign: 'center',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.8,
-                  bgcolor: mode === m.key ? 'rgba(71,133,89,0.25)' : 'transparent',
+                  bgcolor: mode === m.key ? 'rgba(255,255,255,0.08)' : 'transparent',
                   border: `1px solid ${mode === m.key ? 'rgba(255,255,255,0.18)' : 'transparent'}`,
                   transition: 'all 0.2s',
                 }}>
@@ -250,7 +250,7 @@ export default function LoginPage({ onLogin }) {
                       key={i}
                       sx={{
                         width: 52, height: 56, borderRadius: 2,
-                        bgcolor: 'rgba(13,38,24,0.7)',
+                        bgcolor: D.bg2,
                         border: `2px solid ${form.pin.length > i ? D.text2 : 'rgba(255,255,255,0.12)'}`,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         fontSize: '1.4rem', color: D.text1, fontWeight: 800,
@@ -270,11 +270,11 @@ export default function LoginPage({ onLogin }) {
                       if (form.pin.length < 4) set('pin', form.pin + k);
                     }} sx={{
                       py: 1.5, borderRadius: 2, textAlign: 'center', cursor: k === '' ? 'default' : 'pointer',
-                      bgcolor: k === '' ? 'transparent' : 'rgba(71,133,89,0.1)',
+                      bgcolor: k === '' ? 'transparent' : 'rgba(255,255,255,0.04)',
                       border: `1px solid ${k === '' ? 'transparent' : 'rgba(255,255,255,0.10)'}`,
                       color: D.text1, fontWeight: 700, fontSize: '1rem',
                       transition: 'all 0.15s',
-                      '&:hover': k !== '' ? { bgcolor: 'rgba(71,133,89,0.25)', borderColor: 'rgba(148,204,171,0.35)' } : {},
+                      '&:hover': k !== '' ? { bgcolor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(148,204,171,0.35)' } : {},
                     }}>{k}</Box>
                   ))}
                 </Box>

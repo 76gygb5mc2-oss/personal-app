@@ -1,16 +1,14 @@
 /**
  * SpotlightCard — inspired by aceternity/spotlight from 21st.dev
- * Mouse-tracking spotlight glow effect for section headers/hero areas
- * Converted to React + inline styles for Sirawdink OS
+ * Dark minimal — white spotlight follows mouse
  */
 import React, { useRef, useState } from 'react';
-import { D } from '../../theme';
+import { D, FONTS } from '../../theme';
 
 export default function SpotlightCard({
   children,
   style = {},
-  spotlightColor = D.text2,
-  spotlightSize = 350,
+  spotlightSize = 300,
 }) {
   const containerRef = useRef(null);
   const [pos, setPos] = useState({ x: 0, y: 0, opacity: 0 });
@@ -30,26 +28,20 @@ export default function SpotlightCard({
       style={{
         position: 'relative',
         overflow: 'hidden',
-        borderRadius: 20,
-        background: 'rgba(13,38,24,0.72)',
-        border: '1px solid rgba(148,204,171,0.12)',
-        backdropFilter: 'blur(20px)',
+        borderRadius: 14,
+        background: D.bg2,
+        border: `1px solid ${D.border1}`,
+        fontFamily: FONTS.sans,
         ...style,
       }}
     >
-      {/* Spotlight gradient */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          zIndex: 0,
-          opacity: pos.opacity,
-          transition: 'opacity 0.3s ease',
-          background: `radial-gradient(${spotlightSize}px circle at ${pos.x}px ${pos.y}px, ${spotlightColor}18, transparent 60%)`,
-        }}
-      />
-      {/* Content */}
+      {/* White spotlight */}
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
+        opacity: pos.opacity,
+        transition: 'opacity 0.4s ease',
+        background: `radial-gradient(${spotlightSize}px circle at ${pos.x}px ${pos.y}px, rgba(255,255,255,0.05), transparent 60%)`,
+      }} />
       <div style={{ position: 'relative', zIndex: 1 }}>
         {children}
       </div>

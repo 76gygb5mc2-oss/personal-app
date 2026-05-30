@@ -329,8 +329,8 @@ function ExerciseCard({ exercise, index }) {
   return (
     <Box sx={{
       display: 'flex', gap: 2, p: 2.5, borderRadius: 2,
-      bgcolor: done ? '#0f2b1a' : 'rgba(71,133,89,0.08)',
-      border: `1px solid ${done ? D.bg2 : 'rgba(71,133,89,0.18)'}`,
+      bgcolor: done ? '#0f2b1a' : 'rgba(255,255,255,0.04)',
+      border: `1px solid ${done ? D.bg2 : 'rgba(255,255,255,0.08)'}`,
       mb: 1.5, transition: 'all 0.2s'
     }}>
       <Box sx={{
@@ -363,7 +363,7 @@ function ExerciseCard({ exercise, index }) {
       <Checkbox
         checked={done}
         onChange={() => setDone(!done)}
-        sx={{ color: 'rgba(71,133,89,0.18)', '&.Mui-checked': { color: D.bg4 }, alignSelf: 'flex-start', mt: -0.5 }}
+        sx={{ color: 'rgba(255,255,255,0.08)', '&.Mui-checked': { color: D.bg4 }, alignSelf: 'flex-start', mt: -0.5 }}
       />
     </Box>
   );
@@ -410,14 +410,14 @@ export default function Health() {
               onClick={() => setDayIndex(i)}
               size="small"
               sx={{
-                bgcolor: i === dayIndex ? D.bg2 : 'rgba(71,133,89,0.08)',
+                bgcolor: i === dayIndex ? D.bg2 : 'rgba(255,255,255,0.04)',
                 color: i === dayIndex ? D.text1 : `rgba(255,255,255,0.5)`,
-                border: `1px solid ${i === dayIndex ? '#3b82f6' : 'rgba(71,133,89,0.18)'}`,
+                border: `1px solid ${i === dayIndex ? '#3b82f6' : 'rgba(255,255,255,0.08)'}`,
                 borderRadius: 1.5,
                 fontSize: '0.65rem',
                 fontWeight: 700,
                 width: 34, height: 34,
-                '&:hover': { bgcolor: 'rgba(71,133,89,0.18)' }
+                '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' }
               }}
             >
               {d.day.slice(0, 2)}
@@ -427,7 +427,7 @@ export default function Health() {
       </Box>
 
       {/* Day Overview */}
-      <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
+      <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 3, mb: 3 }}>
         <CardContent sx={{ p: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Typography variant="h2" component="span">{today.icon}</Typography>
@@ -436,9 +436,9 @@ export default function Health() {
                 {today.day} — {today.focus}
               </Typography>
               <Box sx={{ display: 'flex', gap: 1.5, mt: 1, flexWrap: 'wrap' }}>
-                <Chip icon={<TimerIcon sx={{ fontSize: 14 }} />} label={today.workout.totalTime} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: `rgba(255,255,255,0.4)` }} />
-                <Chip icon={<LocalFireDepartmentIcon sx={{ fontSize: 14 }} />} label={today.workout.calories} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: '#f97316' }} />
-                <Chip icon={<RestaurantIcon sx={{ fontSize: 14 }} />} label={today.meal.name} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: D.text3 }} />
+                <Chip icon={<TimerIcon sx={{ fontSize: 14 }} />} label={today.workout.totalTime} size="small" sx={{ bgcolor: 'rgba(255,255,255,0.04)', color: `rgba(255,255,255,0.4)` }} />
+                <Chip icon={<LocalFireDepartmentIcon sx={{ fontSize: 14 }} />} label={today.workout.calories} size="small" sx={{ bgcolor: 'rgba(255,255,255,0.04)', color: '#f97316' }} />
+                <Chip icon={<RestaurantIcon sx={{ fontSize: 14 }} />} label={today.meal.name} size="small" sx={{ bgcolor: 'rgba(255,255,255,0.04)', color: D.text3 }} />
               </Box>
             </Box>
           </Box>
@@ -446,7 +446,7 @@ export default function Health() {
       </Card>
 
       {/* Tabs */}
-      <Box sx={{ borderBottom: '1px solid rgba(71,133,89,0.08)', mb: 3 }}>
+      <Box sx={{ borderBottom: '1px solid rgba(255,255,255,0.04)', mb: 3 }}>
         <Tabs
           value={tab}
           onChange={(_, v) => setTab(v)}
@@ -461,8 +461,8 @@ export default function Health() {
       {/* WORKOUT TAB */}
       {tab === 0 && (
         <Box>
-          <Box sx={{ bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2, mb: 3, border: '1px solid rgba(71,133,89,0.18)' }}>
-            <Typography variant="overline" sx={{ color: '#f59e0b', letterSpacing: 2 }}>🔥 WARM UP</Typography>
+          <Box sx={{ bgcolor: 'rgba(255,255,255,0.04)', borderRadius: 2, p: 2, mb: 3, border: '1px solid rgba(255,255,255,0.08)' }}>
+            <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.6)', letterSpacing: 2 }}>🔥 WARM UP</Typography>
             <Typography sx={{ color: D.text1, mt: 0.5 }}>{today.workout.warmup}</Typography>
           </Box>
 
@@ -471,7 +471,7 @@ export default function Health() {
             <ExerciseCard key={i} exercise={ex} index={i} />
           ))}
 
-          <Box sx={{ bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2, mt: 3, border: '1px solid rgba(71,133,89,0.18)' }}>
+          <Box sx={{ bgcolor: 'rgba(255,255,255,0.04)', borderRadius: 2, p: 2, mt: 3, border: '1px solid rgba(255,255,255,0.08)' }}>
             <Typography variant="overline" sx={{ color: D.bg4, letterSpacing: 2 }}>🧊 COOL DOWN</Typography>
             <Typography sx={{ color: D.text1, mt: 0.5 }}>{today.workout.cooldown}</Typography>
           </Box>
@@ -491,24 +491,24 @@ export default function Health() {
       {/* MEAL TAB */}
       {tab === 1 && (
         <Box>
-          <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
+          <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 3, mb: 3 }}>
             <CardContent sx={{ p: 3 }}>
               <Typography variant="h5" fontWeight={700} sx={{ color: D.text1, mb: 1 }}>
                 🍽 {today.meal.name}
               </Typography>
               <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap', mb: 3 }}>
                 <Chip label={`${today.meal.calories}`} sx={{ bgcolor: D.bg2, color: D.text1, fontWeight: 700 }} />
-                <Chip label={`Protein: ${today.meal.macros.protein}`} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: D.text2 }} />
-                <Chip label={`Carbs: ${today.meal.macros.carbs}`} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: '#f59e0b' }} />
-                <Chip label={`Fat: ${today.meal.macros.fat}`} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: '#f97316' }} />
-                <Chip icon={<TimerIcon sx={{ fontSize: 14 }} />} label={today.meal.prepTime} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: `rgba(255,255,255,0.4)` }} />
+                <Chip label={`Protein: ${today.meal.macros.protein}`} sx={{ bgcolor: 'rgba(255,255,255,0.04)', color: D.text2 }} />
+                <Chip label={`Carbs: ${today.meal.macros.carbs}`} sx={{ bgcolor: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.6)' }} />
+                <Chip label={`Fat: ${today.meal.macros.fat}`} sx={{ bgcolor: 'rgba(255,255,255,0.04)', color: '#f97316' }} />
+                <Chip icon={<TimerIcon sx={{ fontSize: 14 }} />} label={today.meal.prepTime} sx={{ bgcolor: 'rgba(255,255,255,0.04)', color: `rgba(255,255,255,0.4)` }} />
               </Box>
 
               {/* Ingredients */}
               <Typography variant="h6" fontWeight={700} sx={{ color: D.text1, mb: 2 }}>
                 🛒 Ingredients
               </Typography>
-              <Box sx={{ bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2, mb: 3 }}>
+              <Box sx={{ bgcolor: 'rgba(255,255,255,0.04)', borderRadius: 2, p: 2, mb: 3 }}>
                 {today.meal.ingredients.map((ing, i) => (
                   <Box key={i} sx={{ display: 'flex', gap: 1.5, mb: 1, alignItems: 'flex-start' }}>
                     <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: '#3b82f6', mt: 1, minWidth: 6 }} />
@@ -527,8 +527,8 @@ export default function Health() {
                   onClick={() => setExpandedMealStep(expandedMealStep === i ? null : i)}
                   sx={{
                     display: 'flex', gap: 2, p: 2, borderRadius: 2, mb: 1.5,
-                    bgcolor: expandedMealStep === i ? 'rgba(255,255,255,0.04)' : 'rgba(71,133,89,0.08)',
-                    border: `1px solid ${expandedMealStep === i ? D.text3 : 'rgba(71,133,89,0.18)'}`,
+                    bgcolor: expandedMealStep === i ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.04)',
+                    border: `1px solid ${expandedMealStep === i ? D.text3 : 'rgba(255,255,255,0.08)'}`,
                     cursor: 'pointer', transition: 'all 0.2s',
                     '&:hover': { bgcolor: 'rgba(255,255,255,0.04)' }
                   }}
@@ -553,7 +553,7 @@ export default function Health() {
 
               {/* Meal Prep Tip */}
               <Box sx={{ bgcolor: '#1c1810', borderRadius: 2, p: 2, border: '1px solid #78350f' }}>
-                <Typography variant="overline" sx={{ color: '#f59e0b', letterSpacing: 2 }}>⏱ MEAL PREP TIP</Typography>
+                <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.6)', letterSpacing: 2 }}>⏱ MEAL PREP TIP</Typography>
                 <Typography sx={{ color: '#fcd34d', mt: 0.5, lineHeight: 1.7 }}>{today.meal.mealPrepTip}</Typography>
               </Box>
             </CardContent>
@@ -565,7 +565,7 @@ export default function Health() {
       {tab === 2 && (
         <Box>
           {/* Water Tracker */}
-          <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
+          <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 3, mb: 3 }}>
             <CardContent sx={{ p: 3 }}>
               <Typography variant="h6" fontWeight={700} sx={{ color: D.text1, mb: 1 }}>
                 💧 Water Tracker
@@ -576,7 +576,7 @@ export default function Health() {
               <LinearProgress
                 variant="determinate"
                 value={(waterCount / WATER_GOAL) * 100}
-                sx={{ height: 10, borderRadius: 5, bgcolor: 'rgba(71,133,89,0.08)', '& .MuiLinearProgress-bar': { bgcolor: '#38bdf8' }, mb: 2 }}
+                sx={{ height: 10, borderRadius: 5, bgcolor: 'rgba(255,255,255,0.04)', '& .MuiLinearProgress-bar': { bgcolor: '#38bdf8' }, mb: 2 }}
               />
               <Typography sx={{ color: '#38bdf8', fontWeight: 700, mb: 3 }}>
                 {waterCount} / {WATER_GOAL} glasses {waterCount >= WATER_GOAL ? '🎉 Goal reached!' : ''}
@@ -593,7 +593,7 @@ export default function Health() {
                 <Button
                   variant="outlined"
                   onClick={() => setWaterCount(Math.max(waterCount - 1, 0))}
-                  sx={{ borderColor: 'rgba(71,133,89,0.18)', color: `rgba(255,255,255,0.4)`, textTransform: 'none' }}
+                  sx={{ borderColor: 'rgba(255,255,255,0.08)', color: `rgba(255,255,255,0.4)`, textTransform: 'none' }}
                 >
                   Undo
                 </Button>
@@ -602,7 +602,7 @@ export default function Health() {
           </Card>
 
           {/* Daily Checklist */}
-          <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3 }}>
+          <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 3 }}>
             <CardContent sx={{ p: 3 }}>
               <Typography variant="h6" fontWeight={700} sx={{ color: D.text1, mb: 2 }}>
                 ✅ Daily Health Checklist
@@ -628,12 +628,12 @@ export default function Health() {
                       borderRadius: 2, cursor: 'pointer',
                       bgcolor: checked ? '#0f2b1a' : 'transparent',
                       border: `1px solid ${checked ? D.bg2 : 'transparent'}`,
-                      mb: 1, transition: 'all 0.2s', '&:hover': { bgcolor: 'rgba(71,133,89,0.08)' }
+                      mb: 1, transition: 'all 0.2s', '&:hover': { bgcolor: 'rgba(255,255,255,0.04)' }
                     }}
                   >
                     <Checkbox
                       checked={checked}
-                      sx={{ color: 'rgba(71,133,89,0.18)', '&.Mui-checked': { color: D.bg4 }, p: 0.5 }}
+                      sx={{ color: 'rgba(255,255,255,0.08)', '&.Mui-checked': { color: D.bg4 }, p: 0.5 }}
                     />
                     <Box>
                       <Typography fontWeight={600} sx={{ color: checked ? D.text2 : D.bg0, textDecoration: checked ? 'line-through' : 'none' }}>

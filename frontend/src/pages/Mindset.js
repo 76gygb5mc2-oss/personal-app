@@ -74,7 +74,7 @@ export default function Mindset() {
         <Box sx={{ background: D.gradHero, p: 3 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 2 }}>
             <Box>
-              <Chip label={content.category} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.3)', color: '#a8d8b8', fontWeight: 700, mb: 1 }} />
+              <Chip label={content.category} size="small" sx={{ bgcolor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.7)', fontWeight: 700, mb: 1 }} />
               <Typography variant="h5" fontWeight={800} sx={{ color: '#ffffff', lineHeight: 1.3 }}>
                 {content.title}
               </Typography>
@@ -83,17 +83,17 @@ export default function Mindset() {
               {dailyPrinciples.map((_, i) => (
                 <Box key={i} onClick={() => { setIdx(i); setExpanded('principle'); setReflected(false); }}
                   sx={{ width: 28, height: 28, borderRadius: '50%', cursor: 'pointer',
-                    bgcolor: i === idx ? '#ffffff' : 'rgba(245,240,232,0.2)',
-                    border: `2px solid ${i === idx ? 'rgba(255,255,255,0.5)' : 'rgba(245,240,232,0.3)'}`,
+                    bgcolor: i === idx ? '#ffffff' : 'rgba(255,255,255,0.15)',
+                    border: `2px solid ${i === idx ? D.border3 : D.border1}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    transition: 'all 0.2s', '&:hover': { bgcolor: 'rgba(71,133,89,0.5)' }
+                    transition: 'all 0.2s', '&:hover': { bgcolor: 'rgba(255,255,255,0.12)' }
                   }}>
                   <Typography sx={{ color: '#ffffff', fontSize: '0.65rem', fontWeight: 700 }}>{i + 1}</Typography>
                 </Box>
               ))}
             </Box>
           </Box>
-          <Typography variant="body2" sx={{ color: 'rgba(245,240,232,0.7)', mt: 1.5, fontStyle: 'italic' }}>
+          <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)', mt: 1.5, fontStyle: 'italic' }}>
             {content.quote}
           </Typography>
         </Box>
@@ -102,7 +102,7 @@ export default function Mindset() {
           {sections.map(s => (
             <Accordion key={s.key} expanded={expanded === s.key}
               onChange={() => setExpanded(expanded === s.key ? null : s.key)}
-              sx={{ bgcolor: 'rgba(71,133,89,0.1)', mb: 1, border: `1px solid ${'rgba(255,255,255,0.08)'}` }}>
+              sx={{ bgcolor: 'rgba(255,255,255,0.04)', mb: 1, border: `1px solid ${'rgba(255,255,255,0.08)'}` }}>
               <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: D.text3 }} />}>
                 <Typography fontWeight={700} sx={{ color: D.text1 }}>{s.label}</Typography>
               </AccordionSummary>

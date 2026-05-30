@@ -89,7 +89,7 @@ function PinLock({ onUnlock }) {
         <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 1.2 }}>
           {[1,2,3,4,5,6,7,8,9,'',0,'⌫'].map((k, i) => (
             <Box key={i} onClick={() => { if (k === '') return; if (k === '⌫') setPin(p => p.slice(0,-1)); else addDigit(String(k)); }}
-              sx={{ py: 1.8, borderRadius: 2.5, textAlign: 'center', cursor: k === '' || locked ? 'default' : 'pointer', bgcolor: k === '' ? 'transparent' : 'rgba(71,133,89,0.1)', border: `1px solid ${k === '' ? 'transparent' : 'rgba(255,255,255,0.10)'}`, color: D.text1, fontWeight: 700, fontSize: '1.2rem', opacity: locked && k !== '' ? 0.4 : 1, transition: 'all 0.15s', '&:hover': k !== '' && !locked ? { bgcolor: 'rgba(71,133,89,0.25)', transform: 'scale(1.05)' } : {}, userSelect: 'none' }}>{k}</Box>
+              sx={{ py: 1.8, borderRadius: 2.5, textAlign: 'center', cursor: k === '' || locked ? 'default' : 'pointer', bgcolor: k === '' ? 'transparent' : 'rgba(255,255,255,0.04)', border: `1px solid ${k === '' ? 'transparent' : 'rgba(255,255,255,0.10)'}`, color: D.text1, fontWeight: 700, fontSize: '1.2rem', opacity: locked && k !== '' ? 0.4 : 1, transition: 'all 0.15s', '&:hover': k !== '' && !locked ? { bgcolor: 'rgba(71,133,89,0.25)', transform: 'scale(1.05)' } : {}, userSelect: 'none' }}>{k}</Box>
           ))}
         </Box>
       </Box>
@@ -100,7 +100,7 @@ function PinLock({ onUnlock }) {
 /* ── Helpers ─────────────────────────────────────────────── */
 const DEBT_TYPES = ['Credit Card', 'Student Loan', 'Auto Loan', 'Personal Loan', 'Medical', 'Mortgage', 'Collection', 'Other'];
 const DEBT_ICONS = { 'Credit Card': '💳', 'Student Loan': '🎓', 'Auto Loan': '🚗', 'Personal Loan': '💵', 'Medical': '🏥', 'Mortgage': '🏠', 'Collection': '⚠️', 'Other': '📋' };
-const STATUS_COLORS = { 'Current': D.bg4, 'Late 30': '#f59e0b', 'Late 60': '#fb923c', 'Late 90+': '#ef4444', 'Collection': '#dc2626', 'Charge-off': '#7f1d1d', 'Paid Off': D.text2 };
+const STATUS_COLORS = { 'Current': D.bg4, 'Late 30': 'rgba(255,255,255,0.6)', 'Late 60': '#fb923c', 'Late 90+': '#ef4444', 'Collection': '#dc2626', 'Charge-off': '#7f1d1d', 'Paid Off': D.text2 };
 const BUREAUS = ['Experian', 'Equifax', 'TransUnion'];
 const BUREAU_COLORS = { Experian: '#3b82f6', Equifax: '#ef4444', TransUnion: '#8b5cf6' };
 
@@ -108,7 +108,7 @@ const scoreLabel = (s) => {
   if (s >= 800) return { label: 'Exceptional', color: '#22c55e' };
   if (s >= 740) return { label: 'Very Good', color: D.bg4 };
   if (s >= 670) return { label: 'Good', color: '#84cc16' };
-  if (s >= 580) return { label: 'Fair', color: '#f59e0b' };
+  if (s >= 580) return { label: 'Fair', color: 'rgba(255,255,255,0.6)' };
   return { label: 'Poor', color: '#ef4444' };
 };
 
@@ -218,11 +218,11 @@ function DebtAI({ debts, creditScores, creditReport }) {
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: 'repeat(2,1fr)', md: 'repeat(4,1fr)' }, gap: 1.5 }}>
             {[
               { label: 'Total Debt', value: `$${fmt(analysis.totalDebt)}`, color: '#ef4444', icon: '💸' },
-              { label: 'Min. Payments/mo', value: `$${fmt(analysis.minPayments)}`, color: '#f59e0b', icon: '📅' },
+              { label: 'Min. Payments/mo', value: `$${fmt(analysis.minPayments)}`, color: 'rgba(255,255,255,0.6)', icon: '📅' },
               { label: 'Card Utilization', value: `${analysis.utilization.toFixed(1)}%`, color: analysis.utilization > 30 ? '#ef4444' : D.bg4, icon: '📊' },
               { label: 'Avg Credit Score', value: analysis.avgScore > 0 ? Math.round(analysis.avgScore) : 'N/A', color: analysis.avgScore > 0 ? scoreLabel(analysis.avgScore).color : D.text3, icon: '⭐' },
             ].map(m => (
-              <Box key={m.label} sx={{ p: 2, borderRadius: 3, bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.08)', textAlign: 'center' }}>
+              <Box key={m.label} sx={{ p: 2, borderRadius: 3, bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.05)', textAlign: 'center' }}>
                 <Typography sx={{ fontSize: '1.3rem', mb: 0.3 }}>{m.icon}</Typography>
                 <Typography sx={{ color: D.text3, fontSize: '0.66rem', textTransform: 'uppercase', letterSpacing: 1 }}>{m.label}</Typography>
                 <Typography sx={{ fontWeight: 800, fontSize: '1.1rem', color: m.color, mt: 0.3 }}>{m.value}</Typography>
@@ -232,14 +232,14 @@ function DebtAI({ debts, creditScores, creditReport }) {
 
           {/* Risk alerts */}
           {analysis.alerts.length > 0 && (
-            <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
+            <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3 }}>
               <CardContent sx={{ p: 2.5 }}>
                 <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>🚨 Risk Alerts</Typography>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.2 }}>
                   {analysis.alerts.map((a, i) => (
                     <Box key={i} sx={{
                       p: 1.8, borderRadius: 2, display: 'flex', gap: 1.5, alignItems: 'flex-start',
-                      bgcolor: a.level === 'critical' ? 'rgba(239,68,68,0.1)' : a.level === 'high' ? 'rgba(245,158,11,0.08)' : 'rgba(71,133,89,0.1)',
+                      bgcolor: a.level === 'critical' ? 'rgba(239,68,68,0.1)' : a.level === 'high' ? 'rgba(245,158,11,0.08)' : 'rgba(255,255,255,0.04)',
                       border: `1px solid ${a.level === 'critical' ? 'rgba(239,68,68,0.25)' : a.level === 'high' ? 'rgba(245,158,11,0.2)' : 'rgba(255,255,255,0.06)'}`,
                     }}>
                       <Typography sx={{ fontSize: '1rem', flexShrink: 0 }}>{a.icon}</Typography>
@@ -253,12 +253,12 @@ function DebtAI({ debts, creditScores, creditReport }) {
 
           {/* Recommendations */}
           {analysis.recommendations.length > 0 && (
-            <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
+            <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3 }}>
               <CardContent sx={{ p: 2.5 }}>
                 <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>💡 Recommendations</Typography>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.2 }}>
                   {analysis.recommendations.map((r, i) => (
-                    <Box key={i} sx={{ p: 1.8, borderRadius: 2, display: 'flex', gap: 1.5, bgcolor: 'rgba(71,133,89,0.08)', border: '1px solid rgba(148,204,171,0.1)' }}>
+                    <Box key={i} sx={{ p: 1.8, borderRadius: 2, display: 'flex', gap: 1.5, bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
                       <Typography sx={{ fontSize: '1rem', flexShrink: 0 }}>{r.icon}</Typography>
                       <Typography sx={{ color: D.text1, fontSize: '0.83rem', lineHeight: 1.5 }}>{r.text}</Typography>
                     </Box>
@@ -336,7 +336,7 @@ function DebtDashboard({ pin, username }) {
   const startEdit = (d) => { setNewDebt({ ...d }); setEditingId(d.id); setTab(1); };
 
   const inputSx = {
-    '& .MuiOutlinedInput-root': { bgcolor: 'rgba(13,38,24,0.6)', color: D.text1, '& fieldset': { borderColor: 'rgba(255,255,255,0.10)' }, '&:hover fieldset': { borderColor: D.text2 }, '&.Mui-focused fieldset': { borderColor: D.text2, borderWidth: 2 } },
+    '& .MuiOutlinedInput-root': { bgcolor: D.bg2, color: D.text1, '& fieldset': { borderColor: 'rgba(255,255,255,0.10)' }, '&:hover fieldset': { borderColor: D.text2 }, '&.Mui-focused fieldset': { borderColor: D.text2, borderWidth: 2 } },
     '& .MuiInputLabel-root': { color: D.text3 },
     '& .MuiInputLabel-root.Mui-focused': { color: D.text2 },
     '& .MuiInputBase-input': { color: D.text1 },
@@ -365,11 +365,11 @@ function DebtDashboard({ pin, username }) {
       <Box sx={{ display: 'grid', gridTemplateColumns: { xs: 'repeat(2,1fr)', md: 'repeat(4,1fr)' }, gap: 1.5, mb: 3 }}>
         {[
           { label: 'Total Debt', value: `$${fmt(totalDebt)}`, color: totalDebt > 0 ? '#ef4444' : D.bg4, icon: '💸' },
-          { label: 'Monthly Minimums', value: `$${fmt(totalMin)}`, color: '#f59e0b', icon: '📅' },
+          { label: 'Monthly Minimums', value: `$${fmt(totalMin)}`, color: 'rgba(255,255,255,0.6)', icon: '📅' },
           { label: 'Card Utilization', value: `${utilization.toFixed(1)}%`, color: utilization > 30 ? '#ef4444' : D.bg4, icon: '📊' },
           { label: 'Avg Credit Score', value: avgScore > 0 ? `${Math.round(avgScore)} ${scoreLabel(avgScore).label}` : 'Not set', color: avgScore > 0 ? scoreLabel(avgScore).color : D.text3, icon: '⭐' },
         ].map(m => (
-          <Box key={m.label} sx={{ p: 2.5, borderRadius: 3, bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.08)' }}>
+          <Box key={m.label} sx={{ p: 2.5, borderRadius: 3, bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.05)' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
               <Typography sx={{ fontSize: '1.1rem' }}>{m.icon}</Typography>
               <Typography sx={{ color: D.text3, fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: 1 }}>{m.label}</Typography>
@@ -391,7 +391,7 @@ function DebtDashboard({ pin, username }) {
 
       {/* ── TAB 1: ADD/EDIT DEBT ── */}
       {tab === 1 && (
-        <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
+        <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3 }}>
           <CardContent sx={{ p: 3 }}>
             <Typography fontWeight={700} sx={{ color: D.text1, mb: 2.5 }}>{editingId ? '✏️ Edit Debt' : '➕ Add Debt'}</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 600 }}>
@@ -437,7 +437,7 @@ function DebtDashboard({ pin, username }) {
             const statusColor = STATUS_COLORS[d.status] || D.text3;
             const urgent = days !== null && days <= 7 && days >= 0;
             return (
-              <Card key={d.id} sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: `1px solid ${d.status === 'Collection' || d.status === 'Charge-off' ? 'rgba(239,68,68,0.3)' : urgent ? 'rgba(245,158,11,0.3)' : 'rgba(148,204,171,0.1)'}`, borderRadius: 3 }}>
+              <Card key={d.id} sx={{ bgcolor: D.bg2, border: `1px solid ${d.status === 'Collection' || d.status === 'Charge-off' ? 'rgba(239,68,68,0.3)' : urgent ? 'rgba(245,158,11,0.3)' : 'rgba(255,255,255,0.06)'}`, borderRadius: 3 }}>
                 <CardContent sx={{ p: 2.5 }}>
                   <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
                     <Typography sx={{ fontSize: '1.5rem', flexShrink: 0 }}>{DEBT_ICONS[d.type] || '📋'}</Typography>
@@ -446,7 +446,7 @@ function DebtDashboard({ pin, username }) {
                         <Box>
                           <Typography fontWeight={800} sx={{ color: D.text1 }}>{d.name}</Typography>
                           <Box sx={{ display: 'flex', gap: 0.8, mt: 0.4, flexWrap: 'wrap' }}>
-                            <Chip label={d.type} size="small" sx={{ bgcolor: 'rgba(148,204,171,0.08)', color: D.text3, fontSize: '0.65rem', height: 18 }} />
+                            <Chip label={d.type} size="small" sx={{ bgcolor: 'rgba(255,255,255,0.05)', color: D.text3, fontSize: '0.65rem', height: 18 }} />
                             <Chip label={d.status} size="small" sx={{ bgcolor: statusColor + '20', color: statusColor, fontSize: '0.65rem', height: 18, border: `1px solid ${statusColor}40` }} />
                             {urgent && <Chip label={`Due in ${days}d`} size="small" sx={{ bgcolor: 'rgba(245,158,11,0.2)', color: '#fbbf24', fontSize: '0.65rem', height: 18 }} />}
                             {days !== null && days < 0 && <Chip label="OVERDUE" size="small" sx={{ bgcolor: 'rgba(239,68,68,0.2)', color: '#f87171', fontSize: '0.65rem', height: 18 }} />}
@@ -466,7 +466,7 @@ function DebtDashboard({ pin, username }) {
                             <Typography sx={{ color: D.text3, fontSize: '0.72rem' }}>${fmt(d.balance)} / ${fmt(d.limit)}</Typography>
                           </Box>
                           <LinearProgress variant="determinate" value={Math.min(util, 100)}
-                            sx={{ height: 5, borderRadius: 3, bgcolor: 'rgba(148,204,171,0.08)', '& .MuiLinearProgress-bar': { bgcolor: util > 50 ? '#ef4444' : util > 30 ? '#f59e0b' : D.bg4, borderRadius: 3 } }} />
+                            sx={{ height: 5, borderRadius: 3, bgcolor: 'rgba(255,255,255,0.05)', '& .MuiLinearProgress-bar': { bgcolor: util > 50 ? '#ef4444' : util > 30 ? 'rgba(255,255,255,0.6)' : D.bg4, borderRadius: 3 } }} />
                         </Box>
                       )}
 
@@ -497,7 +497,7 @@ function DebtDashboard({ pin, username }) {
           {creditScores.map((cs, i) => {
             const sl = cs.score > 0 ? scoreLabel(cs.score) : null;
             return (
-              <Card key={cs.bureau} sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: `1px solid ${BUREAU_COLORS[cs.bureau]}30`, borderRadius: 3 }}>
+              <Card key={cs.bureau} sx={{ bgcolor: D.bg2, border: `1px solid ${BUREAU_COLORS[cs.bureau]}30`, borderRadius: 3 }}>
                 <CardContent sx={{ p: 2.5 }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
                     <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: BUREAU_COLORS[cs.bureau], flexShrink: 0 }} />
@@ -528,7 +528,7 @@ function DebtDashboard({ pin, username }) {
                   {cs.score > 0 && (
                     <Box sx={{ mt: 2 }}>
                       <LinearProgress variant="determinate" value={Math.max(0, ((cs.score - 300) / 550) * 100)}
-                        sx={{ height: 6, borderRadius: 3, bgcolor: 'rgba(148,204,171,0.08)', '& .MuiLinearProgress-bar': { bgcolor: sl?.color || D.bg4, borderRadius: 3 } }} />
+                        sx={{ height: 6, borderRadius: 3, bgcolor: 'rgba(255,255,255,0.05)', '& .MuiLinearProgress-bar': { bgcolor: sl?.color || D.bg4, borderRadius: 3 } }} />
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 0.5 }}>
                         <Typography sx={{ color: 'rgba(255,255,255,0.20)', fontSize: '0.65rem' }}>300 (Poor)</Typography>
                         <Typography sx={{ color: 'rgba(255,255,255,0.20)', fontSize: '0.65rem' }}>850 (Exceptional)</Typography>
@@ -550,7 +550,7 @@ function DebtDashboard({ pin, username }) {
           </Alert>
 
           {/* Add report item */}
-          <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3, mb: 3 }}>
+          <Card sx={{ bgcolor: D.bg2, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 3, mb: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
               <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>Log Report Item</Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -571,7 +571,7 @@ function DebtDashboard({ pin, username }) {
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                   {['Needs Attention', 'Resolved'].map(f => (
                     <Box key={f} onClick={() => setNewItem(n => ({ ...n, flagged: f === 'Needs Attention' }))}
-                      sx={{ px: 2, py: 0.8, borderRadius: 99, cursor: 'pointer', fontWeight: 600, fontSize: '0.82rem', bgcolor: (newItem.flagged ? f === 'Needs Attention' : f === 'Resolved') ? 'rgba(71,133,89,0.25)' : 'rgba(13,38,24,0.5)', color: (newItem.flagged ? f === 'Needs Attention' : f === 'Resolved') ? D.text2 : D.text3, border: `1px solid ${(newItem.flagged ? f === 'Needs Attention' : f === 'Resolved') ? 'rgba(255,255,255,0.18)' : 'rgba(148,204,171,0.1)'}`, transition: 'all 0.15s' }}>
+                      sx={{ px: 2, py: 0.8, borderRadius: 99, cursor: 'pointer', fontWeight: 600, fontSize: '0.82rem', bgcolor: (newItem.flagged ? f === 'Needs Attention' : f === 'Resolved') ? 'rgba(71,133,89,0.25)' : 'rgba(13,38,24,0.5)', color: (newItem.flagged ? f === 'Needs Attention' : f === 'Resolved') ? D.text2 : D.text3, border: `1px solid ${(newItem.flagged ? f === 'Needs Attention' : f === 'Resolved') ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.06)'}`, transition: 'all 0.15s' }}>
                       {f === 'Needs Attention' ? '🚨 ' : '✅ '}{f}
                     </Box>
                   ))}
@@ -596,11 +596,11 @@ function DebtDashboard({ pin, username }) {
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
                   <Box sx={{ width: 10, height: 10, borderRadius: '50%', bgcolor: BUREAU_COLORS[bureau] }} />
                   <Typography fontWeight={700} sx={{ color: D.text1 }}>{bureau}</Typography>
-                  <Chip label={`${items.length} items`} size="small" sx={{ bgcolor: 'rgba(148,204,171,0.08)', color: D.text3, fontSize: '0.65rem', height: 18 }} />
+                  <Chip label={`${items.length} items`} size="small" sx={{ bgcolor: 'rgba(255,255,255,0.05)', color: D.text3, fontSize: '0.65rem', height: 18 }} />
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                   {items.map(item => (
-                    <Box key={item.id} sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5, p: 2, borderRadius: 2.5, bgcolor: 'rgba(13,38,24,0.6)', border: `1px solid ${item.flagged ? 'rgba(239,68,68,0.2)' : 'rgba(255,255,255,0.05)'}` }}>
+                    <Box key={item.id} sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5, p: 2, borderRadius: 2.5, bgcolor: D.bg2, border: `1px solid ${item.flagged ? 'rgba(239,68,68,0.2)' : 'rgba(255,255,255,0.05)'}` }}>
                       {item.flagged ? <ErrorOutlineIcon sx={{ color: '#f87171', fontSize: 18, mt: 0.2, flexShrink: 0 }} /> : <CheckCircleIcon sx={{ color: D.bg4, fontSize: 18, mt: 0.2, flexShrink: 0 }} />}
                       <Box sx={{ flex: 1 }}>
                         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 0.4 }}>
@@ -645,7 +645,7 @@ function DebtDashboard({ pin, username }) {
               ]
             },
             {
-              phase: 'Phase 2', label: 'Next Paycheck (2–4 weeks)', color: '#f59e0b', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.2)',
+              phase: 'Phase 2', label: 'Next Paycheck (2–4 weeks)', color: 'rgba(255,255,255,0.6)', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.2)',
               cost: '$200', scoreBoost: '+20–35 additional pts',
               items: [
                 { name: 'Kikoff Lending LLC', amount: '$385', offer: '$200', action: 'Email support@kikoff.com', detail: 'Offer $200 settlement + deletion. Fintech — flexible.' },
@@ -659,7 +659,7 @@ function DebtDashboard({ pin, username }) {
               ]
             },
             {
-              phase: 'Phase 4', label: 'Big One (3–6 months)', color: D.bg4, bg: 'rgba(71,133,89,0.1)', border: 'rgba(71,133,89,0.25)',
+              phase: 'Phase 4', label: 'Big One (3–6 months)', color: D.bg4, bg: 'rgba(255,255,255,0.04)', border: 'rgba(71,133,89,0.25)',
               cost: '~$2,000', scoreBoost: '+40–70 additional pts',
               items: [
                 { name: 'American Express', amount: '$4,323', offer: '$1,729–2,000', action: 'Call (800) 874-2717', detail: 'Start at 40% ($1,729). Expect to settle ~$2,000. BIGGEST score boost.' },
@@ -682,7 +682,7 @@ function DebtDashboard({ pin, username }) {
                   </Box>
                 </Box>
                 {phase.items.map((item, j) => (
-                  <Box key={j} sx={{ p: 2, borderRadius: 2, bgcolor: 'rgba(13,38,24,0.5)', border: '1px solid rgba(148,204,171,0.08)', mb: j < phase.items.length - 1 ? 1.5 : 0 }}>
+                  <Box key={j} sx={{ p: 2, borderRadius: 2, bgcolor: 'rgba(13,38,24,0.5)', border: '1px solid rgba(255,255,255,0.05)', mb: j < phase.items.length - 1 ? 1.5 : 0 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1, mb: 0.8 }}>
                       <Typography fontWeight={700} sx={{ color: D.text1, fontSize: '0.9rem' }}>{item.name}</Typography>
                       <Box sx={{ display: 'flex', gap: 1 }}>
@@ -705,7 +705,7 @@ function DebtDashboard({ pin, username }) {
               <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 2 }}>
                 {[
                   { label: 'Full amount owed', value: '$5,928', color: '#ef4444' },
-                  { label: 'Negotiated total', value: '~$2,900', color: '#f59e0b' },
+                  { label: 'Negotiated total', value: '~$2,900', color: 'rgba(255,255,255,0.6)' },
                   { label: 'Money saved', value: '~$3,028', color: D.bg4 },
                 ].map(m => (
                   <Box key={m.label} sx={{ textAlign: 'center', p: 1.5, borderRadius: 2, bgcolor: 'rgba(13,38,24,0.5)' }}>
@@ -714,13 +714,13 @@ function DebtDashboard({ pin, username }) {
                   </Box>
                 ))}
               </Box>
-              <Divider sx={{ my: 2, borderColor: 'rgba(148,204,171,0.1)' }} />
+              <Divider sx={{ my: 2, borderColor: 'rgba(255,255,255,0.06)' }} />
               <Typography sx={{ color: D.text1, fontWeight: 700, mb: 1 }}>🎯 Estimated Score Gain After All Phases</Typography>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
                 <Typography sx={{ color: D.text3, fontSize: '0.82rem', width: 120 }}>Potential boost:</Typography>
                 <Typography sx={{ color: D.text2, fontWeight: 800, fontSize: '1.1rem' }}>+110 to +190 points</Typography>
               </Box>
-              <LinearProgress variant="determinate" value={75} sx={{ height: 8, borderRadius: 4, bgcolor: 'rgba(148,204,171,0.08)', '& .MuiLinearProgress-bar': { bgcolor: D.bg4, borderRadius: 4 } }} />
+              <LinearProgress variant="determinate" value={75} sx={{ height: 8, borderRadius: 4, bgcolor: 'rgba(255,255,255,0.05)', '& .MuiLinearProgress-bar': { bgcolor: D.bg4, borderRadius: 4 } }} />
               <Typography sx={{ color: 'rgba(232,245,238,0.4)', fontSize: '0.72rem', mt: 0.8 }}>
                 If starting at ~580 → estimated 690–770 after all phases complete 🦊
               </Typography>

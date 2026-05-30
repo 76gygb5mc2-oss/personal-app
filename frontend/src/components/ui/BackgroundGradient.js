@@ -1,16 +1,16 @@
 /**
  * BackgroundGradient — inspired by aceternity/background-gradient from 21st.dev
- * Animated conic gradient border that cycles — converted for React + green forest theme
+ * Dark minimal — subtle white animated gradient border
  */
 import React, { useRef, useEffect } from 'react';
-import { D } from '../../theme';
+import { D, FONTS } from '../../theme';
 
 export default function BackgroundGradient({
   children,
   animate = true,
   style = {},
   innerStyle = {},
-  borderWidth = 2,
+  borderWidth = 1,
 }) {
   const gradRef = useRef(null);
   const rafRef = useRef(null);
@@ -18,18 +18,11 @@ export default function BackgroundGradient({
 
   useEffect(() => {
     if (!animate || !gradRef.current) return;
-
     const tick = () => {
-      posRef.current = (posRef.current + 0.3) % 360;
+      posRef.current = (posRef.current + 0.4) % 360;
       if (gradRef.current) {
-        gradRef.current.style.background = `
-          radial-gradient(circle farthest-side at 0% 100%, ${D.text2}88, transparent),
-          radial-gradient(circle farthest-side at 100% 0%, ${D.bg3}88, transparent),
-          radial-gradient(circle farthest-side at 100% 100%, ${G.sage}66, transparent),
-          radial-gradient(circle farthest-side at 0% 0%, ${D.bg2}88, #0d2618)
-        `;
-        gradRef.current.style.backgroundSize = '400% 400%';
         const pct = Math.abs(Math.sin((posRef.current * Math.PI) / 180)) * 100;
+        gradRef.current.style.backgroundSize = '400% 400%';
         gradRef.current.style.backgroundPosition = `${pct}% ${pct}%`;
       }
       rafRef.current = requestAnimationFrame(tick);
@@ -39,51 +32,23 @@ export default function BackgroundGradient({
   }, [animate]);
 
   return (
-    <div style={{ position: 'relative', padding: borderWidth, borderRadius: 20, ...style }}>
-      {/* Animated gradient layer */}
-      <div
-        ref={gradRef}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          borderRadius: 'inherit',
-          opacity: 0.7,
-          filter: 'blur(12px)',
-          zIndex: 0,
-          transition: 'opacity 0.5s',
-          background: `radial-gradient(circle farthest-side at 0% 100%, ${D.text2}88, transparent)`,
-        }}
-      />
-      {/* Second layer (non-blurred for sharp border) */}
-      <div
-        ref={gradRef}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          borderRadius: 'inherit',
-          zIndex: 1,
-          background: `radial-gradient(circle farthest-side at 0% 100%, ${D.text2}88, transparent),
-            radial-gradient(circle farthest-side at 100% 0%, ${D.bg3}88, transparent),
-            radial-gradient(circle farthest-side at 100% 100%, ${G.sage}66, transparent),
-            radial-gradient(circle farthest-side at 0% 0%, ${D.bg2}88, #0d2618)`,
-          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-          WebkitMaskComposite: 'xor',
-          maskComposite: 'exclude',
-          padding: borderWidth,
-        }}
-      />
-      {/* Content */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 2,
-          borderRadius: 18,
-          background: 'rgba(13,38,24,0.85)',
-          backdropFilter: 'blur(20px)',
-          overflow: 'hidden',
-          ...innerStyle,
-        }}
-      >
+    <div style={{ position: 'relative', padding: borderWidth, borderRadius: 14, ...style }}>
+      <div ref={gradRef} style={{
+        position: 'absolute', inset: 0, borderRadius: 'inherit', zIndex: 1,
+        background: `radial-gradient(circle farthest-side at 0% 100%, rgba(255,255,255,0.12), transparent),
+          radial-gradient(circle farthest-side at 100% 0%, rgba(255,255,255,0.07), transparent),
+          radial-gradient(circle farthest-side at 100% 100%, rgba(255,255,255,0.10), transparent),
+          radial-gradient(circle farthest-side at 0% 0%, rgba(255,255,255,0.05), #0e0e0e)`,
+        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+        WebkitMaskComposite: 'xor',
+        maskComposite: 'exclude',
+        padding: borderWidth,
+      }} />
+      <div style={{
+        position: 'relative', zIndex: 2, borderRadius: 13,
+        background: D.bg2, overflow: 'hidden',
+        fontFamily: FONTS.sans, ...innerStyle,
+      }}>
         {children}
       </div>
     </div>

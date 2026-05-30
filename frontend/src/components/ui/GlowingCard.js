@@ -1,18 +1,17 @@
 /**
  * GlowingCard — inspired by aceternity/glowing-effect from 21st.dev
- * Converted to React + inline styles for Sirawdink OS (green forest theme)
+ * Dark minimal — white conic glow on mouse proximity
  */
 import React, { useRef, useState, useCallback, useEffect } from 'react';
-import { D } from '../../theme';
+import { D, FONTS } from '../../theme';
 
 export default function GlowingCard({
   children,
   onClick,
   style = {},
   disabled = false,
-  borderWidth = 1.5,
-  spread = 80,
-  glowColor = D.text2,
+  borderWidth = 1,
+  spread = 60,
 }) {
   const containerRef = useRef(null);
   const lastPos = useRef({ x: 0, y: 0 });
@@ -23,7 +22,6 @@ export default function GlowingCard({
   const handleMove = useCallback((e) => {
     if (disabled || !containerRef.current) return;
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
-
     rafRef.current = requestAnimationFrame(() => {
       const el = containerRef.current;
       if (!el) return;
@@ -36,13 +34,10 @@ export default function GlowingCard({
       const cy = top + height / 2;
       const dist = Math.hypot(mx - cx, my - cy);
       const inactiveR = 0.5 * Math.min(width, height) * 0.7;
-
       if (dist < inactiveR) { setActive(false); return; }
 
-      const isActive =
-        mx > left - 0 && mx < left + width + 0 &&
-        my > top - 0 && my < top + height + 0;
-
+      const isActive = mx > left - 10 && mx < left + width + 10 &&
+                       my > top - 10 && my < top + height + 10;
       setActive(isActive);
       if (!isActive) return;
 
@@ -53,16 +48,15 @@ export default function GlowingCard({
 
   useEffect(() => {
     if (disabled) return;
-    const onMove = (e) => handleMove(e);
-    document.body.addEventListener('pointermove', onMove, { passive: true });
+    document.body.addEventListener('pointermove', handleMove, { passive: true });
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      document.body.removeEventListener('pointermove', onMove);
+      document.body.removeEventListener('pointermove', handleMove);
     };
   }, [handleMove, disabled]);
 
   const glowBorder = active
-    ? `conic-gradient(from ${angle - spread}deg at 50% 50%, transparent 0deg, ${glowColor}cc ${spread}deg, ${glowColor} ${spread * 1.2}deg, ${glowColor}cc ${spread * 1.5}deg, transparent ${spread * 2}deg)`
+    ? `conic-gradient(from ${angle - spread}deg at 50% 50%, transparent 0deg, rgba(255,255,255,0.5) ${spread}deg, rgba(255,255,255,0.8) ${spread * 1.1}deg, rgba(255,255,255,0.5) ${spread * 1.3}deg, transparent ${spread * 2}deg)`
     : 'transparent';
 
   return (
@@ -71,42 +65,36 @@ export default function GlowingCard({
       onClick={onClick}
       style={{
         position: 'relative',
-        borderRadius: 16,
-        padding: borderWidth,
-        background: active ? glowBorder : `1px solid rgba(148,204,171,0.12)`,
+        borderRadius: 14,
+        padding: active ? borderWidth : 1,
+        background: active ? glowBorder : `1px solid ${D.border1}`,
         cursor: onClick ? 'pointer' : 'default',
-        transition: 'all 0.3s ease',
+        transition: 'padding 0.1s',
+        fontFamily: FONTS.sans,
         ...style,
       }}
     >
-      {/* Glow border overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          borderRadius: 'inherit',
-          padding: borderWidth,
-          background: glowBorder,
-          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-          WebkitMaskComposite: 'xor',
-          maskComposite: 'exclude',
-          opacity: active ? 1 : 0,
-          transition: 'opacity 0.3s ease',
-          pointerEvents: 'none',
-        }}
-      />
+      {/* Glow conic border */}
+      <div style={{
+        position: 'absolute', inset: 0, borderRadius: 'inherit',
+        padding: borderWidth,
+        background: glowBorder,
+        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+        WebkitMaskComposite: 'xor',
+        maskComposite: 'exclude',
+        opacity: active ? 1 : 0,
+        transition: 'opacity 0.3s ease',
+        pointerEvents: 'none',
+      }} />
       {/* Inner card */}
-      <div
-        style={{
-          borderRadius: 14,
-          background: 'rgba(13,38,24,0.72)',
-          backdropFilter: 'blur(20px)',
-          border: `1px solid rgba(148,204,171,${active ? 0.2 : 0.1})`,
-          overflow: 'hidden',
-          transition: 'border-color 0.3s',
-          height: '100%',
-        }}
-      >
+      <div style={{
+        borderRadius: 13,
+        background: D.bg2,
+        border: `1px solid ${active ? D.border2 : D.border1}`,
+        overflow: 'hidden',
+        height: '100%',
+        transition: 'border-color 0.3s',
+      }}>
         {children}
       </div>
     </div>

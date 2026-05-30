@@ -123,7 +123,7 @@ export default function BestIdea() {
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Box sx={{ mb: 4 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 0.5 }}>
-          <EmojiEventsIcon sx={{ color: '#f59e0b', fontSize: 32 }} />
+          <EmojiEventsIcon sx={{ color: 'rgba(255,255,255,0.6)', fontSize: 32 }} />
           <Typography variant="h4" fontWeight={700} sx={{ color: D.text1 }}>
             Best Business Ideas
           </Typography>
@@ -141,8 +141,8 @@ export default function BestIdea() {
             onClick={() => { setSelected(i); setExpandedSection('why'); }}
             sx={{
               flex: 1, minWidth: 200, p: 2.5, borderRadius: 2, cursor: 'pointer',
-              bgcolor: selected === i ? D.text1 : 'rgba(71,133,89,0.08)',
-              border: `2px solid ${selected === i ? '#3b82f6' : 'rgba(71,133,89,0.18)'}`,
+              bgcolor: selected === i ? D.bg4 : D.bg2,
+              border: `2px solid ${selected === i ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.08)'}`,
               transition: 'all 0.2s', '&:hover': { borderColor: D.text3 }
             }}
           >
@@ -157,7 +157,7 @@ export default function BestIdea() {
       </Box>
 
       {/* Main Card */}
-      <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
+      <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.04)', borderRadius: 3, mb: 3 }}>
         <CardContent sx={{ p: 4 }}>
           <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', mb: 3, flexWrap: 'wrap', gap: 2 }}>
             <Box>
@@ -176,22 +176,22 @@ export default function BestIdea() {
               { label: 'Investment', value: idea.investmentRequired, color: D.bg4 },
               { label: 'Revenue Timeline', value: idea.revenueTimeline.split('|')[0].trim() + ' → ' + idea.revenueTimeline.split('|')[3]?.trim(), color: D.text3 },
             ].map((s) => (
-              <Box key={s.label} sx={{ flex: 1, minWidth: 200, bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2.5 }}>
+              <Box key={s.label} sx={{ flex: 1, minWidth: 200, bgcolor: 'rgba(255,255,255,0.04)', borderRadius: 2, p: 2.5 }}>
                 <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.4)`, textTransform: 'uppercase', letterSpacing: 1 }}>{s.label}</Typography>
                 <Typography fontWeight={700} sx={{ color: s.color, mt: 0.5 }}>{s.value}</Typography>
               </Box>
             ))}
-            <Box sx={{ flex: 1, minWidth: 200, bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2.5 }}>
+            <Box sx={{ flex: 1, minWidth: 200, bgcolor: 'rgba(255,255,255,0.04)', borderRadius: 2, p: 2.5 }}>
               <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.4)`, textTransform: 'uppercase', letterSpacing: 1 }}>Success Rate</Typography>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mt: 1 }}>
-                <LinearProgress variant="determinate" value={idea.successRate} sx={{ flex: 1, height: 8, borderRadius: 4, bgcolor: 'rgba(71,133,89,0.18)', '& .MuiLinearProgress-bar': { bgcolor: D.bg4 } }} />
+                <LinearProgress variant="determinate" value={idea.successRate} sx={{ flex: 1, height: 8, borderRadius: 4, bgcolor: 'rgba(255,255,255,0.08)', '& .MuiLinearProgress-bar': { bgcolor: D.bg4 } }} />
                 <Typography fontWeight={700} sx={{ color: D.bg4 }}>{idea.successRate}%</Typography>
               </Box>
               <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.5)`, fontSize: '0.7rem' }}>{idea.successNote}</Typography>
             </Box>
           </Box>
 
-          <Divider sx={{ borderColor: 'rgba(71,133,89,0.08)', mb: 3 }} />
+          <Divider sx={{ borderColor: 'rgba(255,255,255,0.04)', mb: 3 }} />
 
           {/* Deep Sections */}
           {[
@@ -220,7 +220,7 @@ export default function BestIdea() {
               content: (
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                   {idea.bestNiches.map((n, i) => (
-                    <Box key={i} sx={{ p: 2, bgcolor: 'rgba(255,255,255,0.04)', borderRadius: 2, border: '1px solid rgba(71,133,89,0.08)' }}>
+                    <Box key={i} sx={{ p: 2, bgcolor: 'rgba(255,255,255,0.04)', borderRadius: 2, border: '1px solid rgba(255,255,255,0.04)' }}>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
                         <Chip label={n.niche} size="small" sx={{ bgcolor: D.bg2, color: D.text1, fontWeight: 600 }} />
                         <Typography variant="caption" sx={{ color: D.bg4, fontWeight: 700 }}>{n.income}</Typography>
@@ -271,7 +271,7 @@ export default function BestIdea() {
               key={section.key}
               expanded={expandedSection === section.key}
               onChange={() => setExpandedSection(expandedSection === section.key ? null : section.key)}
-              sx={{ bgcolor: 'rgba(71,133,89,0.08)', border: '1px solid rgba(71,133,89,0.18)', borderRadius: '8px !important', mb: 1, '&:before': { display: 'none' } }}
+              sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px !important', mb: 1, '&:before': { display: 'none' } }}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: `rgba(255,255,255,0.4)` }} />}>
                 <Typography fontWeight={600} sx={{ color: D.text1 }}>{section.label}</Typography>
