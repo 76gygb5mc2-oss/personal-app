@@ -27,7 +27,12 @@ def create_app(config_name=None):
     # Initialize extensions
     db.init_app(app)
     migrate.init_app(app, db)
-    CORS(app, origins=["http://localhost:3000", "http://localhost:3001", "*"])
+    cors_origins = [
+        os.getenv('FRONTEND_URL', 'http://localhost:3000'),
+        'http://localhost:3000',
+        'http://localhost:3001',
+    ]
+    CORS(app, origins=cors_origins)
     jwt.init_app(app)
     limiter.init_app(app)
 

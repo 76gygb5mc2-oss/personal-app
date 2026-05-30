@@ -13,8 +13,8 @@ class Config:
 
     # JWT Configuration
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', SECRET_KEY)
-    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=24)
-    JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
+    JWT_ACCESS_TOKEN_EXPIRES=timedelta(hours=24)
+    JWT_REFRESH_TOKEN_EXPIRES=timedelta(days=7)
 
     # CORS
     CORS_ORIGINS = os.getenv('FRONTEND_URL', 'http://localhost:3000')
