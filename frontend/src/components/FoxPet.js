@@ -145,7 +145,7 @@ export default function FoxPet() {
         // shadow legs (darker)
         ctx.lineWidth = 4.5;
         ctx.lineCap = 'round';
-        ctx.strokeStyle = '#1a3d2b';
+        ctx.strokeStyle = '#0e0e0e';
         ctx.beginPath(); ctx.moveTo(-7, -7); ctx.lineTo(-7 - legSwing * 0.5, 2); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(-3, -7); ctx.lineTo(-3 + legSwing * 0.5, 2); ctx.stroke();
         // front legs
@@ -157,7 +157,7 @@ export default function FoxPet() {
         ctx.beginPath(); ctx.moveTo(-6, -8); ctx.lineTo(-6 - legSwing * 0.5, 1); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(7, -11); ctx.lineTo(7 + legSwing, 1); ctx.stroke();
       } else {
-        ctx.lineWidth = 4.5; ctx.lineCap = 'round'; ctx.strokeStyle = '#1a3d2b';
+        ctx.lineWidth = 4.5; ctx.lineCap = 'round'; ctx.strokeStyle = '#0e0e0e';
         ctx.beginPath(); ctx.moveTo(-5, -7); ctx.lineTo(-9, 1); ctx.lineTo(1, 1); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(5, -7); ctx.lineTo(9, 1); ctx.lineTo(17, 1); ctx.stroke();
       }
@@ -200,10 +200,10 @@ export default function FoxPet() {
       if (scared) {
         ctx.beginPath();
         ctx.moveTo(-6, -8); ctx.lineTo(-12, -14); ctx.lineTo(-2, -10);
-        ctx.fillStyle = '#1a3d2b'; ctx.fill();
+        ctx.fillStyle = '#0e0e0e'; ctx.fill();
         ctx.beginPath();
         ctx.moveTo(5, -8); ctx.lineTo(14, -13); ctx.lineTo(12, -9);
-        ctx.fillStyle = '#1a3d2b'; ctx.fill();
+        ctx.fillStyle = '#0e0e0e'; ctx.fill();
       }
 
       // face mask — foam
@@ -222,9 +222,9 @@ export default function FoxPet() {
 
         // pupils — dark forest
         ctx.beginPath(); ctx.arc(-3 + (scared ? 1 : 0), -2, 2, 0, Math.PI * 2);
-        ctx.fillStyle = '#0d2618'; ctx.fill();
+        ctx.fillStyle = '#080808'; ctx.fill();
         ctx.beginPath(); ctx.arc(4.5 + (scared ? 1 : 0), -2, 2, 0, Math.PI * 2);
-        ctx.fillStyle = '#0d2618'; ctx.fill();
+        ctx.fillStyle = '#080808'; ctx.fill();
 
         // shine — mint
         ctx.beginPath(); ctx.arc(-2.2, -2.8, 0.9, 0, Math.PI * 2);
@@ -241,14 +241,14 @@ export default function FoxPet() {
       } else {
         // blink
         ctx.beginPath(); ctx.moveTo(-5.5, -2); ctx.lineTo(-0.5, -2);
-        ctx.lineWidth = 2; ctx.strokeStyle = '#0d2618'; ctx.lineCap = 'round'; ctx.stroke();
+        ctx.lineWidth = 2; ctx.strokeStyle = '#080808'; ctx.lineCap = 'round'; ctx.stroke();
         ctx.beginPath(); ctx.moveTo(2, -2); ctx.lineTo(7, -2); ctx.stroke();
       }
 
       // nose — dark forest
       ctx.beginPath();
       ctx.ellipse(8, 2.5, 2.8, 2, 0, 0, Math.PI * 2);
-      ctx.fillStyle = '#0d2618'; ctx.fill();
+      ctx.fillStyle = '#080808'; ctx.fill();
       // nose shine
       ctx.beginPath(); ctx.arc(7.2, 1.8, 0.7, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(149,204,171,0.6)'; ctx.fill();
@@ -256,7 +256,7 @@ export default function FoxPet() {
       // mouth
       ctx.beginPath();
       ctx.moveTo(5.5, 5); ctx.quadraticCurveTo(8, 8.5, 10.5, 5);
-      ctx.lineWidth = 1.4; ctx.strokeStyle = '#0d2618';
+      ctx.lineWidth = 1.4; ctx.strokeStyle = '#080808';
       ctx.lineCap = 'round'; ctx.stroke();
 
       // cheek blush — sage
@@ -412,7 +412,7 @@ export default function FoxPet() {
           color: '#95ccab',
           fontWeight: 800,
           pointerEvents: 'none',
-          boxShadow: '0 0 12px rgba(148,204,171,0.2)',
+          boxShadow: '0 0 12px rgba(255,255,255,0.12)',
           animation: 'foxPop 0.2s ease',
           '@keyframes foxPop': {
             from: { opacity: 0, transform: 'translateY(6px) scale(0.9)' },

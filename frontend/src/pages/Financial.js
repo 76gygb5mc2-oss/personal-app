@@ -1,4 +1,4 @@
-import { G } from '../theme';
+import { D, FONTS } from '../theme';
 import React, { useState, useEffect } from 'react';
 import {
   Container, Typography, Box, Card, CardContent, TextField,
@@ -62,20 +62,20 @@ function PinLock({ onUnlock }) {
 
   return (
     <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Box sx={{ p: 5, borderRadius: 5, textAlign: 'center', maxWidth: 340, width: '100%', mx: 3, bgcolor: 'rgba(13,38,24,0.85)', backdropFilter: 'blur(24px)', border: '1px solid rgba(148,204,171,0.15)', boxShadow: '0 24px 60px rgba(0,0,0,0.5)', animation: shake ? 'shake 0.5s ease' : 'none', '@keyframes shake': { '0%,100%': { transform: 'translateX(0)' }, '20%': { transform: 'translateX(-10px)' }, '40%': { transform: 'translateX(10px)' }, '60%': { transform: 'translateX(-8px)' }, '80%': { transform: 'translateX(8px)' } } }}>
-        <Box sx={{ width: 64, height: 64, borderRadius: 3, mx: 'auto', mb: 2.5, background: `linear-gradient(135deg, ${G.fern} 0%, ${G.forest} 100%)`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 0 30px rgba(71,133,89,0.4)`, border: '1px solid rgba(148,204,171,0.2)' }}>
-          {locked ? <ShieldIcon sx={{ color: '#f87171', fontSize: 30 }} /> : <LockIcon sx={{ color: G.mint, fontSize: 30 }} />}
+      <Box sx={{ p: 5, borderRadius: 5, textAlign: 'center', maxWidth: 340, width: '100%', mx: 3, bgcolor: 'rgba(14,14,14,0.98)', backdropFilter: 'blur(24px)', border: '1px solid rgba(255,255,255,0.10)', boxShadow: '0 24px 60px rgba(0,0,0,0.5)', animation: shake ? 'shake 0.5s ease' : 'none', '@keyframes shake': { '0%,100%': { transform: 'translateX(0)' }, '20%': { transform: 'translateX(-10px)' }, '40%': { transform: 'translateX(10px)' }, '60%': { transform: 'translateX(-8px)' }, '80%': { transform: 'translateX(8px)' } } }}>
+        <Box sx={{ width: 64, height: 64, borderRadius: 3, mx: 'auto', mb: 2.5, background: `linear-gradient(135deg, ${D.bg3} 0%, ${D.bg0} 100%)`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 0 30px rgba(71,133,89,0.4)`, border: '1px solid rgba(255,255,255,0.12)' }}>
+          {locked ? <ShieldIcon sx={{ color: '#f87171', fontSize: 30 }} /> : <LockIcon sx={{ color: D.text2, fontSize: 30 }} />}
         </Box>
-        <Typography variant="h5" fontWeight={800} sx={{ color: G.foam, mb: 0.5 }}>Work Tracker</Typography>
-        <Typography sx={{ color: G.sage, fontSize: '0.85rem', mb: 3.5 }}>{locked ? `Locked — ${timer}s` : 'Enter your 4-digit PIN'}</Typography>
+        <Typography variant="h5" fontWeight={800} sx={{ color: D.text1, mb: 0.5 }}>Work Tracker</Typography>
+        <Typography sx={{ color: D.text3, fontSize: '0.85rem', mb: 3.5 }}>{locked ? `Locked — ${timer}s` : 'Enter your 4-digit PIN'}</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 3 }}>
-          {[0,1,2,3].map(i => <Box key={i} sx={{ width: 18, height: 18, borderRadius: '50%', border: `2px solid ${pin.length > i ? G.mint : 'rgba(148,204,171,0.3)'}`, bgcolor: pin.length > i ? G.mint : 'transparent', transition: 'all 0.15s', boxShadow: pin.length > i ? `0 0 8px ${G.mint}` : 'none' }} />)}
+          {[0,1,2,3].map(i => <Box key={i} sx={{ width: 18, height: 18, borderRadius: '50%', border: `2px solid ${pin.length > i ? D.text2 : 'rgba(255,255,255,0.18)'}`, bgcolor: pin.length > i ? D.text2 : 'transparent', transition: 'all 0.15s', boxShadow: pin.length > i ? `0 0 8px ${D.text2}` : 'none' }} />)}
         </Box>
         {error && <Alert severity="error" sx={{ mb: 2.5, bgcolor: 'rgba(100,20,20,0.5)', color: '#f87171', border: '1px solid rgba(248,113,113,0.25)', fontSize: '0.82rem', py: 0.5 }}>{error}</Alert>}
         <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 1.2 }}>
           {[1,2,3,4,5,6,7,8,9,'',0,'⌫'].map((k, i) => (
             <Box key={i} onClick={() => { if (k === '') return; if (k === '⌫') setPin(p => p.slice(0,-1)); else addDigit(String(k)); }}
-              sx={{ py: 1.8, borderRadius: 2.5, textAlign: 'center', cursor: k === '' || locked ? 'default' : 'pointer', bgcolor: k === '' ? 'transparent' : 'rgba(71,133,89,0.1)', border: `1px solid ${k === '' ? 'transparent' : 'rgba(148,204,171,0.15)'}`, color: G.foam, fontWeight: 700, fontSize: '1.2rem', opacity: locked && k !== '' ? 0.4 : 1, transition: 'all 0.15s', '&:hover': k !== '' && !locked ? { bgcolor: 'rgba(71,133,89,0.25)', transform: 'scale(1.05)' } : {}, userSelect: 'none' }}>{k}</Box>
+              sx={{ py: 1.8, borderRadius: 2.5, textAlign: 'center', cursor: k === '' || locked ? 'default' : 'pointer', bgcolor: k === '' ? 'transparent' : 'rgba(71,133,89,0.1)', border: `1px solid ${k === '' ? 'transparent' : 'rgba(255,255,255,0.10)'}`, color: D.text1, fontWeight: 700, fontSize: '1.2rem', opacity: locked && k !== '' ? 0.4 : 1, transition: 'all 0.15s', '&:hover': k !== '' && !locked ? { bgcolor: 'rgba(71,133,89,0.25)', transform: 'scale(1.05)' } : {}, userSelect: 'none' }}>{k}</Box>
           ))}
         </Box>
       </Box>
@@ -213,21 +213,21 @@ function WeeklyReview({ week, pay, expenses, wage, savings }) {
   return (
     <Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
-        <SmartToyIcon sx={{ color: G.mint, fontSize: 26 }} />
+        <SmartToyIcon sx={{ color: D.text2, fontSize: 26 }} />
         <Box>
-          <Typography variant="h6" fontWeight={800} sx={{ color: G.foam }}>Weekly Review</Typography>
-          <Typography sx={{ color: G.sage, fontSize: '0.78rem' }}>AI analysis of your work week & finances</Typography>
+          <Typography variant="h6" fontWeight={800} sx={{ color: D.text1 }}>Weekly Review</Typography>
+          <Typography sx={{ color: D.text3, fontSize: '0.78rem' }}>AI analysis of your work week & finances</Typography>
         </Box>
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
         {notes.map((n, i) => (
           <Box key={i} sx={{
             p: 2, borderRadius: 2.5, display: 'flex', gap: 1.5, alignItems: 'flex-start',
-            bgcolor: n.type === 'error' ? 'rgba(239,68,68,0.08)' : n.type === 'warning' ? 'rgba(245,158,11,0.08)' : n.type === 'success' ? 'rgba(71,133,89,0.12)' : 'rgba(148,204,171,0.06)',
-            border: `1px solid ${n.type === 'error' ? 'rgba(239,68,68,0.2)' : n.type === 'warning' ? 'rgba(245,158,11,0.2)' : n.type === 'success' ? 'rgba(71,133,89,0.2)' : 'rgba(148,204,171,0.1)'}`,
+            bgcolor: n.type === 'error' ? 'rgba(239,68,68,0.08)' : n.type === 'warning' ? 'rgba(245,158,11,0.08)' : n.type === 'success' ? 'rgba(255,255,255,0.04)' : 'rgba(148,204,171,0.06)',
+            border: `1px solid ${n.type === 'error' ? 'rgba(239,68,68,0.2)' : n.type === 'warning' ? 'rgba(245,158,11,0.2)' : n.type === 'success' ? 'rgba(255,255,255,0.06)' : 'rgba(148,204,171,0.1)'}`,
           }}>
             <Typography sx={{ fontSize: '1.1rem', flexShrink: 0, mt: 0.1 }}>{n.icon}</Typography>
-            <Typography sx={{ color: G.foam, fontSize: '0.85rem', lineHeight: 1.6 }}>{n.text}</Typography>
+            <Typography sx={{ color: D.text1, fontSize: '0.85rem', lineHeight: 1.6 }}>{n.text}</Typography>
           </Box>
         ))}
       </Box>
@@ -367,11 +367,11 @@ function WorkTracker({ pin, username }) {
   };
 
   const inputSx = {
-    '& .MuiOutlinedInput-root': { bgcolor: 'rgba(13,38,24,0.6)', color: G.foam, '& fieldset': { borderColor: 'rgba(148,204,171,0.15)' }, '&:hover fieldset': { borderColor: G.mint }, '&.Mui-focused fieldset': { borderColor: G.mint, borderWidth: 2 } },
-    '& .MuiInputLabel-root': { color: G.sage },
-    '& .MuiInputLabel-root.Mui-focused': { color: G.mint },
-    '& .MuiInputBase-input': { color: G.foam },
-    '& .MuiSelect-icon': { color: G.sage },
+    '& .MuiOutlinedInput-root': { bgcolor: 'rgba(13,38,24,0.6)', color: D.text1, '& fieldset': { borderColor: 'rgba(255,255,255,0.10)' }, '&:hover fieldset': { borderColor: D.text2 }, '&.Mui-focused fieldset': { borderColor: D.text2, borderWidth: 2 } },
+    '& .MuiInputLabel-root': { color: D.text3 },
+    '& .MuiInputLabel-root.Mui-focused': { color: D.text2 },
+    '& .MuiInputBase-input': { color: D.text1 },
+    '& .MuiSelect-icon': { color: D.text3 },
   };
 
   return (
@@ -379,26 +379,26 @@ function WorkTracker({ pin, username }) {
       {/* Header */}
       <Box sx={{ mb: 3 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 0.5 }}>
-          <Typography variant="h4" fontWeight={800} sx={{ color: G.foam }}>⏱ Work Tracker</Typography>
-          <Chip icon={<LockIcon sx={{ fontSize: '14px !important' }} />} label="Encrypted" size="small" sx={{ bgcolor: 'rgba(71,133,89,0.15)', color: G.mint, border: '1px solid rgba(148,204,171,0.2)', fontSize: '0.7rem' }} />
+          <Typography variant="h4" fontWeight={800} sx={{ color: D.text1 }}>⏱ Work Tracker</Typography>
+          <Chip icon={<LockIcon sx={{ fontSize: '14px !important' }} />} label="Encrypted" size="small" sx={{ bgcolor: 'rgba(255,255,255,0.05)', color: D.text2, border: '1px solid rgba(255,255,255,0.12)', fontSize: '0.7rem' }} />
         </Box>
-        <Typography variant="body2" sx={{ color: G.sage }}>Your personal paycheck & expense tracker</Typography>
+        <Typography variant="body2" sx={{ color: D.text3 }}>Your personal paycheck & expense tracker</Typography>
       </Box>
 
       {/* Wage setting */}
       <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3, mb: 3 }}>
         <CardContent sx={{ p: 2.5 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
-            <AttachMoneyIcon sx={{ color: G.mint }} />
-            <Typography fontWeight={700} sx={{ color: G.foam }}>Hourly Wage</Typography>
+            <AttachMoneyIcon sx={{ color: D.text2 }} />
+            <Typography fontWeight={700} sx={{ color: D.text1 }}>Hourly Wage</Typography>
             <TextField size="small" type="number" placeholder="e.g. 18.50"
               value={wageInput} onChange={e => setWageInput(e.target.value)}
-              InputProps={{ startAdornment: <InputAdornment position="start"><Typography sx={{ color: G.sage }}>$</Typography></InputAdornment> }}
+              InputProps={{ startAdornment: <InputAdornment position="start"><Typography sx={{ color: D.text3 }}>$</Typography></InputAdornment> }}
               sx={{ ...inputSx, width: 150 }} />
             <Button variant="contained" size="small" startIcon={<SaveIcon />}
               onClick={() => setWage(parseFloat(wageInput) || 0)}
-              sx={{ bgcolor: G.pine, '&:hover': { bgcolor: G.fern }, fontWeight: 700 }}>Save Wage</Button>
-            {wage > 0 && <Chip label={`$${wage}/hr`} sx={{ bgcolor: 'rgba(71,133,89,0.2)', color: G.mint, fontWeight: 700 }} />}
+              sx={{ bgcolor: D.bg2, '&:hover': { bgcolor: D.bg3 }, fontWeight: 700 }}>Save Wage</Button>
+            {wage > 0 && <Chip label={`$${wage}/hr`} sx={{ bgcolor: 'rgba(255,255,255,0.06)', color: D.text2, fontWeight: 700 }} />}
           </Box>
         </CardContent>
       </Card>
@@ -406,35 +406,35 @@ function WorkTracker({ pin, username }) {
       {/* Dashboard summary */}
       <Box sx={{ display: 'grid', gridTemplateColumns: { xs: 'repeat(2,1fr)', md: 'repeat(3,1fr)', lg: 'repeat(6,1fr)' }, gap: 1.5, mb: 3 }}>
         {[
-          { label: 'Total Hours', value: fmtHrs(week.total), color: G.mint, icon: '⏱' },
-          { label: 'Overtime', value: week.overtime > 0 ? fmtHrs(week.overtime) : 'None', color: week.overtime > 0 ? '#f59e0b' : G.sage, icon: '🔥' },
-          { label: 'Gross Pay', value: `$${fmt(pay.gross)}`, color: G.mid, icon: '💵' },
-          { label: 'Est. Take-Home', value: `$${fmt(pay.net)}`, color: G.mint, icon: '🏦' },
+          { label: 'Total Hours', value: fmtHrs(week.total), color: D.text2, icon: '⏱' },
+          { label: 'Overtime', value: week.overtime > 0 ? fmtHrs(week.overtime) : 'None', color: week.overtime > 0 ? '#f59e0b' : D.text3, icon: '🔥' },
+          { label: 'Gross Pay', value: `$${fmt(pay.gross)}`, color: D.bg4, icon: '💵' },
+          { label: 'Est. Take-Home', value: `$${fmt(pay.net)}`, color: D.text2, icon: '🏦' },
           { label: 'Expenses', value: `$${fmt(totalExpenses)}`, color: totalExpenses > pay.net ? '#ef4444' : '#f59e0b', icon: '💸' },
-          { label: 'Remaining', value: `${remaining >= 0 ? '+' : ''}$${fmt(remaining)}`, color: remaining >= 0 ? G.mid : '#ef4444', icon: remaining >= 0 ? '✅' : '🚨' },
+          { label: 'Remaining', value: `${remaining >= 0 ? '+' : ''}$${fmt(remaining)}`, color: remaining >= 0 ? D.bg4 : '#ef4444', icon: remaining >= 0 ? '✅' : '🚨' },
         ].map(m => (
           <Box key={m.label} sx={{ p: 2, borderRadius: 3, bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.08)', textAlign: 'center' }}>
             <Typography sx={{ fontSize: '1.3rem', mb: 0.3 }}>{m.icon}</Typography>
-            <Typography sx={{ fontSize: '0.62rem', color: G.sage, textTransform: 'uppercase', letterSpacing: 1 }}>{m.label}</Typography>
+            <Typography sx={{ fontSize: '0.62rem', color: D.text3, textTransform: 'uppercase', letterSpacing: 1 }}>{m.label}</Typography>
             <Typography sx={{ fontWeight: 800, fontSize: '0.95rem', color: m.color, mt: 0.3 }}>{m.value}</Typography>
           </Box>
         ))}
       </Box>
 
       {/* Tabs */}
-      <Tabs value={tab} onChange={(_, v) => setTab(v)} variant="scrollable" scrollButtons="auto" sx={{ mb: 3, '& .MuiTabs-indicator': { bgcolor: G.mint } }}>
-        <Tab label="📅 Schedule" sx={{ color: G.sage, '&.Mui-selected': { color: G.mint }, textTransform: 'none', fontWeight: 600 }} />
-        <Tab label="💸 Expenses" sx={{ color: G.sage, '&.Mui-selected': { color: G.mint }, textTransform: 'none', fontWeight: 600 }} />
-        <Tab label="📊 Pay Details" sx={{ color: G.sage, '&.Mui-selected': { color: G.mint }, textTransform: 'none', fontWeight: 600 }} />
-        <Tab label="🤖 Weekly Review" sx={{ color: G.sage, '&.Mui-selected': { color: G.mint }, textTransform: 'none', fontWeight: 600 }} />
-        <Tab label="📜 History" sx={{ color: G.sage, '&.Mui-selected': { color: G.mint }, textTransform: 'none', fontWeight: 600 }} />
+      <Tabs value={tab} onChange={(_, v) => setTab(v)} variant="scrollable" scrollButtons="auto" sx={{ mb: 3, '& .MuiTabs-indicator': { bgcolor: D.text2 } }}>
+        <Tab label="📅 Schedule" sx={{ color: D.text3, '&.Mui-selected': { color: D.text2 }, textTransform: 'none', fontWeight: 600 }} />
+        <Tab label="💸 Expenses" sx={{ color: D.text3, '&.Mui-selected': { color: D.text2 }, textTransform: 'none', fontWeight: 600 }} />
+        <Tab label="📊 Pay Details" sx={{ color: D.text3, '&.Mui-selected': { color: D.text2 }, textTransform: 'none', fontWeight: 600 }} />
+        <Tab label="🤖 Weekly Review" sx={{ color: D.text3, '&.Mui-selected': { color: D.text2 }, textTransform: 'none', fontWeight: 600 }} />
+        <Tab label="📜 History" sx={{ color: D.text3, '&.Mui-selected': { color: D.text2 }, textTransform: 'none', fontWeight: 600 }} />
       </Tabs>
 
       {/* ── TAB 0: SCHEDULE ── */}
       {tab === 0 && (
         <Box>
           {savedAlert && (
-            <Alert severity="success" sx={{ mb: 2, bgcolor: 'rgba(45,106,79,0.2)', color: G.mint, border: '1px solid rgba(148,204,171,0.3)' }}>
+            <Alert severity="success" sx={{ mb: 2, bgcolor: 'rgba(45,106,79,0.2)', color: D.text2, border: '1px solid rgba(255,255,255,0.18)' }}>
               {savedAlert}
             </Alert>
           )}
@@ -442,15 +442,15 @@ function WorkTracker({ pin, username }) {
           {/* Action buttons */}
           <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap', mb: 2 }}>
             <Button variant="contained" startIcon={<LockIcon />} onClick={lockSchedule}
-              sx={{ bgcolor: G.pine, '&:hover': { bgcolor: G.fern }, textTransform: 'none', fontWeight: 700 }}>
+              sx={{ bgcolor: D.bg2, '&:hover': { bgcolor: D.bg3 }, textTransform: 'none', fontWeight: 700 }}>
               Lock as Default
             </Button>
             <Button variant="outlined" onClick={loadLockedSchedule} disabled={!lockedSchedule}
-              sx={{ borderColor: G.sage, color: G.sage, '&:hover': { borderColor: G.mint, color: G.mint }, textTransform: 'none', fontWeight: 600 }}>
+              sx={{ borderColor: D.text3, color: D.text3, '&:hover': { borderColor: D.text2, color: D.text2 }, textTransform: 'none', fontWeight: 600 }}>
               Load Default
             </Button>
             <Button variant="contained" startIcon={<SaveIcon />} onClick={saveCurrentWeek}
-              sx={{ bgcolor: '#065f46', '&:hover': { bgcolor: G.pine }, textTransform: 'none', fontWeight: 700 }}>
+              sx={{ bgcolor: '#065f46', '&:hover': { bgcolor: D.bg2 }, textTransform: 'none', fontWeight: 700 }}>
               Save This Week
             </Button>
           </Box>
@@ -461,7 +461,7 @@ function WorkTracker({ pin, username }) {
             </Alert>
           )}
 
-          <Typography sx={{ color: G.sage, fontSize: '0.82rem', mb: 2 }}>
+          <Typography sx={{ color: D.text3, fontSize: '0.82rem', mb: 2 }}>
             Edit your schedule below. Lock it as your default template, then save each week to history.
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
@@ -471,23 +471,23 @@ function WorkTracker({ pin, username }) {
               const night = !d.off && isNightShift(d.start, d.end);
               const long = isLongShift(hrs);
               return (
-                <Card key={day} sx={{ bgcolor: d.off ? 'rgba(13,38,24,0.4)' : 'rgba(13,38,24,0.7)', border: `1px solid ${d.off ? 'rgba(148,204,171,0.06)' : night ? 'rgba(139,92,246,0.25)' : 'rgba(148,204,171,0.12)'}`, borderRadius: 3, opacity: d.off ? 0.6 : 1 }}>
+                <Card key={day} sx={{ bgcolor: d.off ? 'rgba(13,38,24,0.4)' : 'rgba(13,38,24,0.7)', border: `1px solid ${d.off ? 'rgba(148,204,171,0.06)' : night ? 'rgba(139,92,246,0.25)' : 'rgba(255,255,255,0.08)'}`, borderRadius: 3, opacity: d.off ? 0.6 : 1 }}>
                   <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
                       {/* Day label */}
                       <Box sx={{ width: 100, flexShrink: 0 }}>
-                        <Typography fontWeight={800} sx={{ color: G.foam, fontSize: '0.95rem' }}>{day}</Typography>
+                        <Typography fontWeight={800} sx={{ color: D.text1, fontSize: '0.95rem' }}>{day}</Typography>
                         <Box sx={{ display: 'flex', gap: 0.5, mt: 0.3 }}>
                           {night && !d.off && <Chip label="Night" size="small" icon={<NightlightIcon sx={{ fontSize: '10px !important' }} />} sx={{ bgcolor: 'rgba(139,92,246,0.2)', color: '#c4b5fd', fontSize: '0.6rem', height: 18 }} />}
                           {long && !d.off && <Chip label="Long" size="small" icon={<AccessTimeIcon sx={{ fontSize: '10px !important' }} />} sx={{ bgcolor: 'rgba(245,158,11,0.2)', color: '#fbbf24', fontSize: '0.6rem', height: 18 }} />}
-                          {d.off && <Chip label="Day Off" size="small" sx={{ bgcolor: 'rgba(148,204,171,0.08)', color: G.sage, fontSize: '0.6rem', height: 18 }} />}
+                          {d.off && <Chip label="Day Off" size="small" sx={{ bgcolor: 'rgba(148,204,171,0.08)', color: D.text3, fontSize: '0.6rem', height: 18 }} />}
                         </Box>
                       </Box>
 
                       {/* Off toggle */}
                       <FormControlLabel
-                        control={<Switch checked={!d.off} onChange={e => updateDay(day, 'off', !e.target.checked)} size="small" sx={{ '& .MuiSwitch-switchBase.Mui-checked': { color: G.mint }, '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': { bgcolor: G.fern } }} />}
-                        label={<Typography sx={{ color: G.sage, fontSize: '0.78rem' }}>Working</Typography>}
+                        control={<Switch checked={!d.off} onChange={e => updateDay(day, 'off', !e.target.checked)} size="small" sx={{ '& .MuiSwitch-switchBase.Mui-checked': { color: D.text2 }, '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': { bgcolor: D.bg3 } }} />}
+                        label={<Typography sx={{ color: D.text3, fontSize: '0.78rem' }}>Working</Typography>}
                         sx={{ mx: 0 }}
                       />
 
@@ -503,8 +503,8 @@ function WorkTracker({ pin, username }) {
                             onChange={e => updateDay(day, 'break', parseInt(e.target.value) || 0)}
                             sx={{ ...inputSx, width: 110 }} />
                           <Box sx={{ ml: 'auto', textAlign: 'right' }}>
-                            <Typography sx={{ fontWeight: 800, color: night ? '#c4b5fd' : G.mint, fontSize: '1rem' }}>{fmtHrs(hrs)}</Typography>
-                            {wage > 0 && <Typography sx={{ color: G.sage, fontSize: '0.72rem' }}>${fmt(hrs * wage)}</Typography>}
+                            <Typography sx={{ fontWeight: 800, color: night ? '#c4b5fd' : D.text2, fontSize: '1rem' }}>{fmtHrs(hrs)}</Typography>
+                            {wage > 0 && <Typography sx={{ color: D.text3, fontSize: '0.72rem' }}>${fmt(hrs * wage)}</Typography>}
                           </Box>
                         </>
                       )}
@@ -516,16 +516,16 @@ function WorkTracker({ pin, username }) {
           </Box>
 
           {/* Week summary */}
-          <Card sx={{ mt: 3, bgcolor: 'rgba(45,106,79,0.15)', border: '1px solid rgba(148,204,171,0.2)', borderRadius: 3 }}>
+          <Card sx={{ mt: 3, bgcolor: 'rgba(45,106,79,0.15)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
-              <Typography fontWeight={700} sx={{ color: G.foam, mb: 2 }}>📊 This Week Summary</Typography>
+              <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>📊 This Week Summary</Typography>
               <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
-                <Box><Typography sx={{ color: G.sage, fontSize: '0.75rem' }}>TOTAL</Typography><Typography sx={{ color: G.mint, fontWeight: 800, fontSize: '1.1rem' }}>{fmtHrs(week.total)}</Typography></Box>
-                <Box><Typography sx={{ color: G.sage, fontSize: '0.75rem' }}>DAY SHIFTS</Typography><Typography sx={{ color: G.foam, fontWeight: 700 }}>{fmtHrs(week.dayHrs)}</Typography></Box>
-                <Box><Typography sx={{ color: G.sage, fontSize: '0.75rem' }}>NIGHT SHIFTS</Typography><Typography sx={{ color: '#c4b5fd', fontWeight: 700 }}>{fmtHrs(week.nightHrs)}</Typography></Box>
-                <Box><Typography sx={{ color: G.sage, fontSize: '0.75rem' }}>LONG SHIFTS</Typography><Typography sx={{ color: '#fbbf24', fontWeight: 700 }}>{week.longShifts} shift{week.longShifts !== 1 ? 's' : ''}</Typography></Box>
-                <Box><Typography sx={{ color: G.sage, fontSize: '0.75rem' }}>OVERTIME</Typography><Typography sx={{ color: week.overtime > 0 ? '#f59e0b' : G.sage, fontWeight: 700 }}>{week.overtime > 0 ? fmtHrs(week.overtime) : 'None'}</Typography></Box>
-                <Box><Typography sx={{ color: G.sage, fontSize: '0.75rem' }}>DAYS WORKED</Typography><Typography sx={{ color: G.foam, fontWeight: 700 }}>{week.days.filter(d => !d.off).length} / 7</Typography></Box>
+                <Box><Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>TOTAL</Typography><Typography sx={{ color: D.text2, fontWeight: 800, fontSize: '1.1rem' }}>{fmtHrs(week.total)}</Typography></Box>
+                <Box><Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>DAY SHIFTS</Typography><Typography sx={{ color: D.text1, fontWeight: 700 }}>{fmtHrs(week.dayHrs)}</Typography></Box>
+                <Box><Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>NIGHT SHIFTS</Typography><Typography sx={{ color: '#c4b5fd', fontWeight: 700 }}>{fmtHrs(week.nightHrs)}</Typography></Box>
+                <Box><Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>LONG SHIFTS</Typography><Typography sx={{ color: '#fbbf24', fontWeight: 700 }}>{week.longShifts} shift{week.longShifts !== 1 ? 's' : ''}</Typography></Box>
+                <Box><Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>OVERTIME</Typography><Typography sx={{ color: week.overtime > 0 ? '#f59e0b' : D.text3, fontWeight: 700 }}>{week.overtime > 0 ? fmtHrs(week.overtime) : 'None'}</Typography></Box>
+                <Box><Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>DAYS WORKED</Typography><Typography sx={{ color: D.text1, fontWeight: 700 }}>{week.days.filter(d => !d.off).length} / 7</Typography></Box>
               </Box>
             </CardContent>
           </Card>
@@ -538,7 +538,7 @@ function WorkTracker({ pin, username }) {
           {/* Add expense */}
           <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3, mb: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
-              <Typography fontWeight={700} sx={{ color: G.foam, mb: 2 }}>Add Expense</Typography>
+              <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>Add Expense</Typography>
               <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'flex-end' }}>
                 <TextField select label="Category" value={newExp.category}
                   onChange={e => setNewExp(n => ({ ...n, category: e.target.value }))}
@@ -547,7 +547,7 @@ function WorkTracker({ pin, username }) {
                 </TextField>
                 <TextField label="Amount ($)" type="number" value={newExp.amount}
                   onChange={e => setNewExp(n => ({ ...n, amount: e.target.value }))}
-                  InputProps={{ startAdornment: <InputAdornment position="start"><Typography sx={{ color: G.sage }}>$</Typography></InputAdornment> }}
+                  InputProps={{ startAdornment: <InputAdornment position="start"><Typography sx={{ color: D.text3 }}>$</Typography></InputAdornment> }}
                   sx={{ ...inputSx, width: 150 }} />
                 <TextField label="Note (optional)" value={newExp.note}
                   onChange={e => setNewExp(n => ({ ...n, note: e.target.value }))}
@@ -555,7 +555,7 @@ function WorkTracker({ pin, username }) {
                   sx={{ ...inputSx, flex: 1, minWidth: 180 }} />
                 <Button variant="contained" startIcon={<AddIcon />} onClick={addExpense}
                   disabled={!newExp.amount}
-                  sx={{ bgcolor: G.pine, '&:hover': { bgcolor: G.fern }, fontWeight: 700, py: 1.8 }}>
+                  sx={{ bgcolor: D.bg2, '&:hover': { bgcolor: D.bg3 }, fontWeight: 700, py: 1.8 }}>
                   Add
                 </Button>
               </Box>
@@ -566,11 +566,11 @@ function WorkTracker({ pin, username }) {
           <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3, mb: 3 }}>
             <CardContent sx={{ p: 0 }}>
               <Box sx={{ p: 2.5, pb: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography fontWeight={700} sx={{ color: G.foam }}>Weekly Expenses ({expenses.length})</Typography>
+                <Typography fontWeight={700} sx={{ color: D.text1 }}>Weekly Expenses ({expenses.length})</Typography>
                 {expenses.length > 0 && <Button size="small" onClick={() => setExpenses([])} sx={{ color: '#f87171', fontSize: '0.75rem' }}>Clear All</Button>}
               </Box>
               {expenses.length === 0 ? (
-                <Box sx={{ textAlign: 'center', py: 4 }}><Typography sx={{ color: G.sage }}>No expenses yet. Add gas, food, bills, etc.</Typography></Box>
+                <Box sx={{ textAlign: 'center', py: 4 }}><Typography sx={{ color: D.text3 }}>No expenses yet. Add gas, food, bills, etc.</Typography></Box>
               ) : (
                 <List sx={{ p: 0 }}>
                   {expenses.map((exp, i) => (
@@ -584,8 +584,8 @@ function WorkTracker({ pin, username }) {
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1 }}>
                           <Typography sx={{ fontSize: '1.3rem' }}>{EXPENSE_ICONS[exp.category] || '📦'}</Typography>
                           <Box sx={{ flex: 1 }}>
-                            <Typography fontWeight={600} sx={{ color: G.foam, fontSize: '0.9rem' }}>{exp.category}</Typography>
-                            {exp.note && <Typography variant="caption" sx={{ color: G.sage }}>{exp.note}</Typography>}
+                            <Typography fontWeight={600} sx={{ color: D.text1, fontSize: '0.9rem' }}>{exp.category}</Typography>
+                            {exp.note && <Typography variant="caption" sx={{ color: D.text3 }}>{exp.note}</Typography>}
                           </Box>
                           <Typography fontWeight={800} sx={{ color: '#f87171', mr: 4 }}>-${fmt(exp.amount)}</Typography>
                         </Box>
@@ -601,31 +601,31 @@ function WorkTracker({ pin, username }) {
           {expenses.length > 0 && (
             <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3, mb: 3 }}>
               <CardContent sx={{ p: 2.5 }}>
-                <Typography fontWeight={700} sx={{ color: G.foam, mb: 2 }}>Breakdown</Typography>
+                <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>Breakdown</Typography>
                 {EXPENSE_CATEGORIES.filter(c => expenses.some(e => e.category === c)).map(cat => {
                   const amt = expenses.filter(e => e.category === cat).reduce((s, e) => s + e.amount, 0);
                   const pct = pay.net > 0 ? (amt / pay.net) * 100 : 0;
                   return (
                     <Box key={cat} sx={{ mb: 1.5 }}>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.4 }}>
-                        <Typography sx={{ color: G.sage, fontSize: '0.83rem' }}>{EXPENSE_ICONS[cat]} {cat}</Typography>
+                        <Typography sx={{ color: D.text3, fontSize: '0.83rem' }}>{EXPENSE_ICONS[cat]} {cat}</Typography>
                         <Box sx={{ display: 'flex', gap: 2 }}>
-                          <Typography sx={{ color: G.foam, fontWeight: 700, fontSize: '0.85rem' }}>${fmt(amt)}</Typography>
-                          <Typography sx={{ color: 'rgba(232,245,238,0.3)', fontSize: '0.78rem' }}>{pct.toFixed(1)}%</Typography>
+                          <Typography sx={{ color: D.text1, fontWeight: 700, fontSize: '0.85rem' }}>${fmt(amt)}</Typography>
+                          <Typography sx={{ color: 'rgba(255,255,255,0.20)', fontSize: '0.78rem' }}>{pct.toFixed(1)}%</Typography>
                         </Box>
                       </Box>
-                      <LinearProgress variant="determinate" value={Math.min(pct * 2, 100)} sx={{ height: 4, borderRadius: 2, bgcolor: 'rgba(148,204,171,0.08)', '& .MuiLinearProgress-bar': { bgcolor: cat === 'Savings' ? G.mid : '#ef4444', borderRadius: 2 } }} />
+                      <LinearProgress variant="determinate" value={Math.min(pct * 2, 100)} sx={{ height: 4, borderRadius: 2, bgcolor: 'rgba(148,204,171,0.08)', '& .MuiLinearProgress-bar': { bgcolor: cat === 'Savings' ? D.bg4 : '#ef4444', borderRadius: 2 } }} />
                     </Box>
                   );
                 })}
                 <Divider sx={{ my: 2, borderColor: 'rgba(148,204,171,0.1)' }} />
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography fontWeight={700} sx={{ color: G.foam }}>Total Expenses</Typography>
+                  <Typography fontWeight={700} sx={{ color: D.text1 }}>Total Expenses</Typography>
                   <Typography fontWeight={800} sx={{ color: '#f87171', fontSize: '1.1rem' }}>${fmt(totalExpenses)}</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
-                  <Typography fontWeight={700} sx={{ color: G.foam }}>Remaining</Typography>
-                  <Typography fontWeight={800} sx={{ color: remaining >= 0 ? G.mid : '#ef4444', fontSize: '1.1rem' }}>{remaining >= 0 ? '+' : ''}${fmt(remaining)}</Typography>
+                  <Typography fontWeight={700} sx={{ color: D.text1 }}>Remaining</Typography>
+                  <Typography fontWeight={800} sx={{ color: remaining >= 0 ? D.bg4 : '#ef4444', fontSize: '1.1rem' }}>{remaining >= 0 ? '+' : ''}${fmt(remaining)}</Typography>
                 </Box>
               </CardContent>
             </Card>
@@ -634,28 +634,28 @@ function WorkTracker({ pin, username }) {
           {/* Savings goal */}
           <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
-              <Typography fontWeight={700} sx={{ color: G.foam, mb: 2 }}>🎯 Savings Goal</Typography>
+              <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>🎯 Savings Goal</Typography>
               <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
                 <TextField size="small" label="Goal ($)" type="number" value={savings.goalInput}
                   onChange={e => setSavings(s => ({ ...s, goalInput: e.target.value }))}
                   onBlur={() => setSavings(s => ({ ...s, goal: parseFloat(s.goalInput) || s.goal }))}
-                  InputProps={{ startAdornment: <InputAdornment position="start"><Typography sx={{ color: G.sage }}>$</Typography></InputAdornment> }}
+                  InputProps={{ startAdornment: <InputAdornment position="start"><Typography sx={{ color: D.text3 }}>$</Typography></InputAdornment> }}
                   sx={{ ...inputSx, width: 160 }} />
                 <TextField size="small" label="Saved So Far ($)" type="number" value={savings.currentInput}
                   onChange={e => setSavings(s => ({ ...s, currentInput: e.target.value }))}
                   onBlur={() => setSavings(s => ({ ...s, current: parseFloat(s.currentInput) || s.current }))}
-                  InputProps={{ startAdornment: <InputAdornment position="start"><Typography sx={{ color: G.sage }}>$</Typography></InputAdornment> }}
+                  InputProps={{ startAdornment: <InputAdornment position="start"><Typography sx={{ color: D.text3 }}>$</Typography></InputAdornment> }}
                   sx={{ ...inputSx, width: 180 }} />
               </Box>
               {savings.goal > 0 && (
                 <>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                    <Typography sx={{ color: G.sage, fontSize: '0.82rem' }}>Progress</Typography>
-                    <Typography sx={{ color: G.mint, fontWeight: 700, fontSize: '0.85rem' }}>${savings.current.toLocaleString()} / ${savings.goal.toLocaleString()}</Typography>
+                    <Typography sx={{ color: D.text3, fontSize: '0.82rem' }}>Progress</Typography>
+                    <Typography sx={{ color: D.text2, fontWeight: 700, fontSize: '0.85rem' }}>${savings.current.toLocaleString()} / ${savings.goal.toLocaleString()}</Typography>
                   </Box>
                   <LinearProgress variant="determinate" value={Math.min((savings.current / savings.goal) * 100, 100)}
-                    sx={{ height: 8, borderRadius: 4, bgcolor: 'rgba(148,204,171,0.08)', '& .MuiLinearProgress-bar': { bgcolor: G.mid, borderRadius: 4 } }} />
-                  <Typography sx={{ color: G.sage, fontSize: '0.75rem', mt: 0.5 }}>
+                    sx={{ height: 8, borderRadius: 4, bgcolor: 'rgba(148,204,171,0.08)', '& .MuiLinearProgress-bar': { bgcolor: D.bg4, borderRadius: 4 } }} />
+                  <Typography sx={{ color: D.text3, fontSize: '0.75rem', mt: 0.5 }}>
                     {((savings.current / savings.goal) * 100).toFixed(1)}% complete · ${Math.max(0, savings.goal - savings.current).toLocaleString()} to go
                   </Typography>
                 </>
@@ -677,20 +677,20 @@ function WorkTracker({ pin, username }) {
           {/* Pay breakdown */}
           <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
-              <Typography fontWeight={700} sx={{ color: G.foam, mb: 2 }}>💵 Pay Breakdown</Typography>
+              <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>💵 Pay Breakdown</Typography>
               {[
-                { label: 'Regular Hours', value: fmtHrs(week.regularHrs), sub: `${week.regularHrs.toFixed(1)} hrs × $${wage}/hr`, amount: week.regularHrs * wage, color: G.foam },
+                { label: 'Regular Hours', value: fmtHrs(week.regularHrs), sub: `${week.regularHrs.toFixed(1)} hrs × $${wage}/hr`, amount: week.regularHrs * wage, color: D.text1 },
                 { label: 'Overtime Hours', value: fmtHrs(week.overtime), sub: `${week.overtime.toFixed(1)} hrs × $${(wage * 1.5).toFixed(2)}/hr (1.5x)`, amount: week.overtime * wage * 1.5, color: '#f59e0b' },
-                { label: 'Gross Weekly Pay', value: `$${fmt(pay.gross)}`, sub: 'Before taxes', amount: null, color: G.mid, bold: true },
+                { label: 'Gross Weekly Pay', value: `$${fmt(pay.gross)}`, sub: 'Before taxes', amount: null, color: D.bg4, bold: true },
                 { label: `Est. Tax (~${(pay.taxRate * 100).toFixed(0)}%)`, value: `-$${fmt(pay.estimatedTax)}`, sub: 'Approximate withholding', amount: null, color: '#f87171' },
-                { label: 'Est. Take-Home', value: `$${fmt(pay.net)}`, sub: 'After estimated taxes', amount: null, color: G.mint, bold: true },
+                { label: 'Est. Take-Home', value: `$${fmt(pay.net)}`, sub: 'After estimated taxes', amount: null, color: D.text2, bold: true },
               ].map((row, i) => (
                 <Box key={i}>
                   {i > 0 && <Divider sx={{ my: 1.5, borderColor: 'rgba(148,204,171,0.08)' }} />}
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Box>
-                      <Typography sx={{ color: row.bold ? G.foam : G.sage, fontWeight: row.bold ? 700 : 400, fontSize: '0.88rem' }}>{row.label}</Typography>
-                      <Typography sx={{ color: 'rgba(232,245,238,0.3)', fontSize: '0.72rem' }}>{row.sub}</Typography>
+                      <Typography sx={{ color: row.bold ? D.text1 : D.text3, fontWeight: row.bold ? 700 : 400, fontSize: '0.88rem' }}>{row.label}</Typography>
+                      <Typography sx={{ color: 'rgba(255,255,255,0.20)', fontSize: '0.72rem' }}>{row.sub}</Typography>
                     </Box>
                     <Typography sx={{ color: row.color, fontWeight: row.bold ? 800 : 600, fontSize: row.bold ? '1.1rem' : '0.95rem' }}>{row.value}</Typography>
                   </Box>
@@ -702,7 +702,7 @@ function WorkTracker({ pin, username }) {
           {/* Projections */}
           <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
-              <Typography fontWeight={700} sx={{ color: G.foam, mb: 2 }}>📈 Pay Projections</Typography>
+              <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>📈 Pay Projections</Typography>
               <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 2 }}>
                 {[
                   { label: 'Weekly', gross: pay.gross, net: pay.net },
@@ -710,11 +710,11 @@ function WorkTracker({ pin, username }) {
                   { label: 'Monthly (×4.33)', gross: pay.monthly, net: pay.net * 4.33 },
                 ].map(p => (
                   <Box key={p.label} sx={{ p: 2, borderRadius: 2, bgcolor: 'rgba(71,133,89,0.08)', border: '1px solid rgba(148,204,171,0.08)', textAlign: 'center' }}>
-                    <Typography sx={{ color: G.sage, fontSize: '0.72rem', mb: 1 }}>{p.label}</Typography>
-                    <Typography sx={{ color: G.mid, fontWeight: 800, fontSize: '1.1rem' }}>${Math.round(p.gross).toLocaleString()}</Typography>
-                    <Typography sx={{ color: G.sage, fontSize: '0.7rem' }}>gross</Typography>
-                    <Typography sx={{ color: G.mint, fontWeight: 700, mt: 0.5 }}>${Math.round(p.net).toLocaleString()}</Typography>
-                    <Typography sx={{ color: G.sage, fontSize: '0.7rem' }}>take-home</Typography>
+                    <Typography sx={{ color: D.text3, fontSize: '0.72rem', mb: 1 }}>{p.label}</Typography>
+                    <Typography sx={{ color: D.bg4, fontWeight: 800, fontSize: '1.1rem' }}>${Math.round(p.gross).toLocaleString()}</Typography>
+                    <Typography sx={{ color: D.text3, fontSize: '0.7rem' }}>gross</Typography>
+                    <Typography sx={{ color: D.text2, fontWeight: 700, mt: 0.5 }}>${Math.round(p.net).toLocaleString()}</Typography>
+                    <Typography sx={{ color: D.text3, fontSize: '0.7rem' }}>take-home</Typography>
                   </Box>
                 ))}
               </Box>
@@ -724,23 +724,23 @@ function WorkTracker({ pin, username }) {
           {/* Shift summary */}
           <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
-              <Typography fontWeight={700} sx={{ color: G.foam, mb: 2 }}>🗓 Shift Details</Typography>
+              <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>🗓 Shift Details</Typography>
               {week.days.filter(d => !d.off).map(d => (
                 <Box key={d.day} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1, borderBottom: '1px solid rgba(148,204,171,0.06)' }}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                     {d.night ? <NightlightIcon sx={{ color: '#c4b5fd', fontSize: 16 }} /> : <WbSunnyIcon sx={{ color: '#fbbf24', fontSize: 16 }} />}
                     <Box>
-                      <Typography sx={{ color: G.foam, fontWeight: 600, fontSize: '0.88rem' }}>{d.day}</Typography>
-                      <Typography sx={{ color: G.sage, fontSize: '0.72rem' }}>{d.start} – {d.end}{d.break > 0 ? ` (${d.break}m break)` : ''}</Typography>
+                      <Typography sx={{ color: D.text1, fontWeight: 600, fontSize: '0.88rem' }}>{d.day}</Typography>
+                      <Typography sx={{ color: D.text3, fontSize: '0.72rem' }}>{d.start} – {d.end}{d.break > 0 ? ` (${d.break}m break)` : ''}</Typography>
                     </Box>
                   </Box>
                   <Box sx={{ textAlign: 'right' }}>
-                    <Typography sx={{ color: d.night ? '#c4b5fd' : G.mint, fontWeight: 700 }}>{fmtHrs(d.hours)}</Typography>
-                    {wage > 0 && <Typography sx={{ color: G.sage, fontSize: '0.72rem' }}>${fmt(d.hours * wage)}</Typography>}
+                    <Typography sx={{ color: d.night ? '#c4b5fd' : D.text2, fontWeight: 700 }}>{fmtHrs(d.hours)}</Typography>
+                    {wage > 0 && <Typography sx={{ color: D.text3, fontSize: '0.72rem' }}>${fmt(d.hours * wage)}</Typography>}
                   </Box>
                 </Box>
               ))}
-              {week.days.filter(d => !d.off).length === 0 && <Typography sx={{ color: G.sage, textAlign: 'center', py: 2 }}>No shifts this week</Typography>}
+              {week.days.filter(d => !d.off).length === 0 && <Typography sx={{ color: D.text3, textAlign: 'center', py: 2 }}>No shifts this week</Typography>}
             </CardContent>
           </Card>
         </Box>
@@ -752,11 +752,11 @@ function WorkTracker({ pin, username }) {
           <WeeklyReview week={week} pay={pay} expenses={expenses} wage={wage} savings={savings} />
           <Card sx={{ mt: 3, bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', borderRadius: 3 }}>
             <CardContent sx={{ p: 2.5 }}>
-              <Typography fontWeight={700} sx={{ color: G.foam, mb: 2 }}>📝 Save This Week</Typography>
+              <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>📝 Save This Week</Typography>
               <TextField fullWidth multiline rows={2} placeholder="Any notes about this week? (missed hours, unusual shifts, etc.)"
                 value={weekNote} onChange={e => setWeekNote(e.target.value)} sx={{ ...inputSx, mb: 2 }} />
               <Button variant="contained" startIcon={<SaveIcon />} onClick={saveWeek}
-                sx={{ bgcolor: G.pine, '&:hover': { bgcolor: G.fern }, fontWeight: 700 }}>
+                sx={{ bgcolor: D.bg2, '&:hover': { bgcolor: D.bg3 }, fontWeight: 700 }}>
                 Save Week to History
               </Button>
             </CardContent>
@@ -768,24 +768,24 @@ function WorkTracker({ pin, username }) {
       {tab === 4 && (
         <Box>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-            <Typography sx={{ color: G.sage, fontSize: '0.82rem' }}>Up to 24 saved weeks</Typography>
+            <Typography sx={{ color: D.text3, fontSize: '0.82rem' }}>Up to 24 saved weeks</Typography>
             <Button variant="outlined" size="small" startIcon={<AddIcon />} onClick={() => setAddingPast(v => !v)}
-              sx={{ borderColor: G.sage, color: G.sage, '&:hover': { borderColor: G.mint, color: G.mint }, textTransform: 'none', fontWeight: 600 }}>
+              sx={{ borderColor: D.text3, color: D.text3, '&:hover': { borderColor: D.text2, color: D.text2 }, textTransform: 'none', fontWeight: 600 }}>
               Add Previous Week
             </Button>
           </Box>
 
           {savedAlert && (
-            <Alert severity="success" sx={{ mb: 2, bgcolor: 'rgba(45,106,79,0.2)', color: G.mint, border: '1px solid rgba(148,204,171,0.3)' }}>
+            <Alert severity="success" sx={{ mb: 2, bgcolor: 'rgba(45,106,79,0.2)', color: D.text2, border: '1px solid rgba(255,255,255,0.18)' }}>
               {savedAlert}
             </Alert>
           )}
 
           {/* Add past week form */}
           {addingPast && (
-            <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.2)', borderRadius: 3, mb: 3 }}>
+            <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 3, mb: 3 }}>
               <CardContent sx={{ p: 2.5 }}>
-                <Typography fontWeight={700} sx={{ color: G.foam, mb: 2 }}>📅 Add Previous Week</Typography>
+                <Typography fontWeight={700} sx={{ color: D.text1, mb: 2 }}>📅 Add Previous Week</Typography>
                 <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'flex-end' }}>
                   <TextField size="small" label="Week Date" type="date" value={pastEntry.date}
                     onChange={e => setPastEntry(p => ({ ...p, date: e.target.value }))}
@@ -798,7 +798,7 @@ function WorkTracker({ pin, username }) {
                   <TextField size="small" label="Gross Pay ($)" type="number" placeholder="optional"
                     value={pastEntry.gross}
                     onChange={e => setPastEntry(p => ({ ...p, gross: e.target.value }))}
-                    InputProps={{ startAdornment: <InputAdornment position="start"><Typography sx={{ color: G.sage }}>$</Typography></InputAdornment> }}
+                    InputProps={{ startAdornment: <InputAdornment position="start"><Typography sx={{ color: D.text3 }}>$</Typography></InputAdornment> }}
                     sx={{ ...inputSx, width: 160 }} />
                   <TextField size="small" label="Note (optional)" value={pastEntry.note}
                     onChange={e => setPastEntry(p => ({ ...p, note: e.target.value }))}
@@ -806,12 +806,12 @@ function WorkTracker({ pin, username }) {
                     sx={{ ...inputSx, flex: 1, minWidth: 180 }} />
                   <Button variant="contained" startIcon={<SaveIcon />} onClick={addPastWeek}
                     disabled={!pastEntry.date || !pastEntry.hours}
-                    sx={{ bgcolor: G.pine, '&:hover': { bgcolor: G.fern }, fontWeight: 700, py: 1 }}>
+                    sx={{ bgcolor: D.bg2, '&:hover': { bgcolor: D.bg3 }, fontWeight: 700, py: 1 }}>
                     Add
                   </Button>
-                  <Button onClick={() => setAddingPast(false)} sx={{ color: G.sage, textTransform: 'none' }}>Cancel</Button>
+                  <Button onClick={() => setAddingPast(false)} sx={{ color: D.text3, textTransform: 'none' }}>Cancel</Button>
                 </Box>
-                <Typography sx={{ color: G.sage, fontSize: '0.75rem', mt: 1 }}>
+                <Typography sx={{ color: D.text3, fontSize: '0.75rem', mt: 1 }}>
                   💡 If gross pay is left blank, it'll be calculated from your hours × current wage.
                 </Typography>
               </CardContent>
@@ -820,7 +820,7 @@ function WorkTracker({ pin, username }) {
 
           {weekHistory.length === 0 ? (
             <Box sx={{ textAlign: 'center', py: 6 }}>
-              <Typography sx={{ color: G.sage }}>No history yet. Save a week from the Schedule tab or add a previous week above.</Typography>
+              <Typography sx={{ color: D.text3 }}>No history yet. Save a week from the Schedule tab or add a previous week above.</Typography>
             </Box>
           ) : (
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
@@ -830,21 +830,21 @@ function WorkTracker({ pin, username }) {
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
                       <Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                          <Typography fontWeight={700} sx={{ color: G.foam }}>Week of {w.date}</Typography>
+                          <Typography fontWeight={700} sx={{ color: D.text1 }}>Week of {w.date}</Typography>
                           {w.isPast && <Chip label="Past" size="small" sx={{ bgcolor: 'rgba(59,130,246,0.15)', color: '#93c5fd', fontSize: '0.65rem', height: 18 }} />}
                         </Box>
-                        {w.note && <Typography sx={{ color: G.sage, fontSize: '0.8rem', mt: 0.3 }}>📝 {w.note}</Typography>}
+                        {w.note && <Typography sx={{ color: D.text3, fontSize: '0.8rem', mt: 0.3 }}>📝 {w.note}</Typography>}
                       </Box>
                       <IconButton size="small" onClick={() => setWeekHistory(prev => prev.filter((_, j) => j !== i))} sx={{ color: 'rgba(232,245,238,0.2)', '&:hover': { color: '#ef4444' } }}>
                         <DeleteIcon fontSize="small" />
                       </IconButton>
                     </Box>
                     <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
-                      <Box><Typography sx={{ color: G.sage, fontSize: '0.7rem' }}>HOURS</Typography><Typography sx={{ color: G.mint, fontWeight: 700 }}>{fmtHrs(w.totalHours)}</Typography></Box>
-                      <Box><Typography sx={{ color: G.sage, fontSize: '0.7rem' }}>GROSS</Typography><Typography sx={{ color: G.mid, fontWeight: 700 }}>${fmt(w.gross)}</Typography></Box>
-                      <Box><Typography sx={{ color: G.sage, fontSize: '0.7rem' }}>TAKE-HOME</Typography><Typography sx={{ color: G.foam, fontWeight: 700 }}>${fmt(w.net)}</Typography></Box>
-                      <Box><Typography sx={{ color: G.sage, fontSize: '0.7rem' }}>EXPENSES</Typography><Typography sx={{ color: '#f87171', fontWeight: 700 }}>${fmt(w.expenses)}</Typography></Box>
-                      <Box><Typography sx={{ color: G.sage, fontSize: '0.7rem' }}>REMAINING</Typography><Typography sx={{ color: w.remaining >= 0 ? G.mid : '#ef4444', fontWeight: 700 }}>{w.remaining >= 0 ? '+' : ''}${fmt(w.remaining)}</Typography></Box>
+                      <Box><Typography sx={{ color: D.text3, fontSize: '0.7rem' }}>HOURS</Typography><Typography sx={{ color: D.text2, fontWeight: 700 }}>{fmtHrs(w.totalHours)}</Typography></Box>
+                      <Box><Typography sx={{ color: D.text3, fontSize: '0.7rem' }}>GROSS</Typography><Typography sx={{ color: D.bg4, fontWeight: 700 }}>${fmt(w.gross)}</Typography></Box>
+                      <Box><Typography sx={{ color: D.text3, fontSize: '0.7rem' }}>TAKE-HOME</Typography><Typography sx={{ color: D.text1, fontWeight: 700 }}>${fmt(w.net)}</Typography></Box>
+                      <Box><Typography sx={{ color: D.text3, fontSize: '0.7rem' }}>EXPENSES</Typography><Typography sx={{ color: '#f87171', fontWeight: 700 }}>${fmt(w.expenses)}</Typography></Box>
+                      <Box><Typography sx={{ color: D.text3, fontSize: '0.7rem' }}>REMAINING</Typography><Typography sx={{ color: w.remaining >= 0 ? D.bg4 : '#ef4444', fontWeight: 700 }}>{w.remaining >= 0 ? '+' : ''}${fmt(w.remaining)}</Typography></Box>
                     </Box>
                   </CardContent>
                 </Card>

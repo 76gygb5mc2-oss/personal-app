@@ -1,4 +1,4 @@
-import { G } from '../theme';
+import { D, FONTS } from '../theme';
 import React, { useState } from 'react';
 import {
   Container, Typography, Box, Card, CardContent, TextField,
@@ -24,7 +24,7 @@ const courses = [
     title: "Business Fundamentals",
     description: "Master the core principles that every entrepreneur needs to succeed",
     icon: "💼",
-    color: "G.pine",
+    color: "D.bg2",
     lessons: [
       {
         title: "What is a Business Model?",
@@ -218,8 +218,8 @@ function QuizQuestion({ question, onAnswer, answered, isCorrect, feedback }) {
   };
 
   return (
-    <Box sx={{ mb: 3, p: 3, bgcolor: 'rgba(71,133,89,0.12)', borderRadius: 2, border: '1px solid rgba(71,133,89,0.08)' }}>
-      <Typography fontWeight={600} sx={{ color: G.foam, mb: 2 }}>
+    <Box sx={{ mb: 3, p: 3, bgcolor: 'rgba(255,255,255,0.04)', borderRadius: 2, border: '1px solid rgba(71,133,89,0.08)' }}>
+      <Typography fontWeight={600} sx={{ color: D.text1, mb: 2 }}>
         ❓ {question.q}
       </Typography>
 
@@ -236,10 +236,10 @@ function QuizQuestion({ question, onAnswer, answered, isCorrect, feedback }) {
               mb: 2,
               '& .MuiOutlinedInput-root': {
                 bgcolor: 'rgba(71,133,89,0.08)',
-                color: G.foam,
+                color: D.text1,
                 '& fieldset': { borderColor: 'rgba(71,133,89,0.18)' },
-                '&:hover fieldset': { borderColor: 'G.textMid' },
-                '&.Mui-focused fieldset': { borderColor: G.sage },
+                '&:hover fieldset': { borderColor: `rgba(255,255,255,0.5)` },
+                '&.Mui-focused fieldset': { borderColor: D.text3 },
               }
             }}
           />
@@ -248,17 +248,17 @@ function QuizQuestion({ question, onAnswer, answered, isCorrect, feedback }) {
               variant="contained"
               onClick={handleSubmit}
               disabled={answer.trim().length < 10}
-              sx={{ bgcolor: G.pine, '&:hover': { bgcolor: G.fern }, textTransform: 'none', fontWeight: 600 }}
+              sx={{ bgcolor: D.bg2, '&:hover': { bgcolor: D.bg3 }, textTransform: 'none', fontWeight: 600 }}
               endIcon={<ArrowForwardIcon />}
             >
               Submit Answer
             </Button>
-            <Typography variant="caption" sx={{ color: 'G.textMid' }}>
+            <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.5)` }}>
               {answer.length < 10 ? `${10 - answer.length} more chars needed` : '✓ Ready to submit'}
             </Typography>
           </Box>
           {question.hint && (
-            <Typography variant="caption" sx={{ color: 'G.textMid', mt: 1, display: 'block' }}>
+            <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.5)`, mt: 1, display: 'block' }}>
               💡 Hint: {question.hint}
             </Typography>
           )}
@@ -267,19 +267,19 @@ function QuizQuestion({ question, onAnswer, answered, isCorrect, feedback }) {
         <Box>
           <Box sx={{ display: 'flex', gap: 1, mb: 2, alignItems: 'center' }}>
             {isCorrect
-              ? <CheckCircleIcon sx={{ color: G.mid }} />
+              ? <CheckCircleIcon sx={{ color: D.bg4 }} />
               : <CancelIcon sx={{ color: '#ef4444' }} />}
-            <Typography fontWeight={700} sx={{ color: isCorrect ? G.mid : '#ef4444' }}>
+            <Typography fontWeight={700} sx={{ color: isCorrect ? D.bg4 : '#ef4444' }}>
               {isCorrect ? 'Great answer! You got it.' : 'Not quite — here\'s what was missing:'}
             </Typography>
           </Box>
           <Box sx={{ bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2, mb: 2 }}>
-            <Typography variant="caption" sx={{ color: 'G.textLight', textTransform: 'uppercase', letterSpacing: 1 }}>Your answer</Typography>
-            <Typography sx={{ color: 'G.textLight', mt: 0.5 }}>{feedback.userAnswer}</Typography>
+            <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.4)`, textTransform: 'uppercase', letterSpacing: 1 }}>Your answer</Typography>
+            <Typography sx={{ color: `rgba(255,255,255,0.4)`, mt: 0.5 }}>{feedback.userAnswer}</Typography>
           </Box>
           {!isCorrect && (
-            <Box sx={{ bgcolor: 'rgba(45,106,79,0.12)', borderRadius: 2, p: 2, border: '1px solid G.pine' }}>
-              <Typography variant="caption" sx={{ color: G.mint, textTransform: 'uppercase', letterSpacing: 1 }}>Sample Answer</Typography>
+            <Box sx={{ bgcolor: 'rgba(45,106,79,0.12)', borderRadius: 2, p: 2, border: '1px solid D.bg2' }}>
+              <Typography variant="caption" sx={{ color: D.text2, textTransform: 'uppercase', letterSpacing: 1 }}>Sample Answer</Typography>
               <Typography sx={{ color: '#86efac', mt: 0.5 }}>{question.sampleAnswer}</Typography>
             </Box>
           )}
@@ -336,26 +336,26 @@ export default function Learning() {
   if (selectedLesson) {
     return (
       <Container maxWidth="lg" sx={{ py: 4 }}>
-        <Button onClick={backToCourses} sx={{ color: 'G.textLight', mb: 3, textTransform: 'none' }}>
+        <Button onClick={backToCourses} sx={{ color: `rgba(255,255,255,0.4)`, mb: 3, textTransform: 'none' }}>
           ← Back to Courses
         </Button>
 
         <Box sx={{ mb: 1 }}>
-          <Chip label={selectedCourse.title} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: 'G.textLight', mb: 1 }} />
-          <Typography variant="h4" fontWeight={700} sx={{ color: G.foam }}>
+          <Chip label={selectedCourse.title} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: `rgba(255,255,255,0.4)`, mb: 1 }} />
+          <Typography variant="h4" fontWeight={700} sx={{ color: D.text1 }}>
             {selectedLesson.title}
           </Typography>
         </Box>
 
         {/* Lesson Content */}
-        <Card sx={{ bgcolor: 'rgba(71,133,89,0.12)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 4, mt: 3 }}>
+        <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 4, mt: 3 }}>
           <CardContent sx={{ p: 4 }}>
-            <Typography variant="overline" sx={{ color: G.sage, letterSpacing: 2 }}>📖 LESSON</Typography>
+            <Typography variant="overline" sx={{ color: D.text3, letterSpacing: 2 }}>📖 LESSON</Typography>
             <Box sx={{ mt: 2 }}>
               {selectedLesson.content.split('\n\n').map((para, i) => (
                 <Typography key={i} sx={{
-                  color: 'G.textDark', lineHeight: 1.9, mb: 2,
-                  '& strong': { color: G.foam, fontWeight: 700 }
+                  color: D.text1, lineHeight: 1.9, mb: 2,
+                  '& strong': { color: D.text1, fontWeight: 700 }
                 }}>
                   {para.split(/\*\*(.*?)\*\*/g).map((part, pi) =>
                     pi % 2 === 1
@@ -369,10 +369,10 @@ export default function Learning() {
         </Card>
 
         {/* Questions */}
-        <Typography variant="h5" fontWeight={700} sx={{ color: G.foam, mb: 3 }}>
+        <Typography variant="h5" fontWeight={700} sx={{ color: D.text1, mb: 3 }}>
           🧠 Test Your Understanding
         </Typography>
-        <Typography variant="body2" sx={{ color: 'G.textLight', mb: 3 }}>
+        <Typography variant="body2" sx={{ color: `rgba(255,255,255,0.4)`, mb: 3 }}>
           Answer in your own words — no copy-paste, no one-word answers. This is how you actually learn.
         </Typography>
 
@@ -392,19 +392,19 @@ export default function Learning() {
         })}
 
         {lessonComplete && (
-          <Card sx={{ bgcolor: score === selectedLesson.questions.length ? '#0f2b1a' : '#1e1b0f', border: `1px solid ${score === selectedLesson.questions.length ? G.pine : '#78350f'}`, borderRadius: 3, mt: 2 }}>
+          <Card sx={{ bgcolor: score === selectedLesson.questions.length ? '#0f2b1a' : '#1e1b0f', border: `1px solid ${score === selectedLesson.questions.length ? D.bg2 : '#78350f'}`, borderRadius: 3, mt: 2 }}>
             <CardContent sx={{ p: 3, textAlign: 'center' }}>
-              <EmojiEventsIcon sx={{ fontSize: 48, color: score === selectedLesson.questions.length ? G.mid : '#f59e0b', mb: 1 }} />
-              <Typography variant="h5" fontWeight={700} sx={{ color: G.foam, mb: 1 }}>
+              <EmojiEventsIcon sx={{ fontSize: 48, color: score === selectedLesson.questions.length ? D.bg4 : '#f59e0b', mb: 1 }} />
+              <Typography variant="h5" fontWeight={700} sx={{ color: D.text1, mb: 1 }}>
                 {score === selectedLesson.questions.length ? 'Perfect Score! 🎉' : 'Lesson Complete'}
               </Typography>
-              <Typography sx={{ color: 'G.textLight' }}>
+              <Typography sx={{ color: `rgba(255,255,255,0.4)` }}>
                 {score} / {selectedLesson.questions.length} correct — {Math.round((score / selectedLesson.questions.length) * 100)}%
               </Typography>
               <Button
                 variant="contained"
                 onClick={backToCourses}
-                sx={{ mt: 3, bgcolor: G.pine, textTransform: 'none', fontWeight: 600 }}
+                sx={{ mt: 3, bgcolor: D.bg2, textTransform: 'none', fontWeight: 600 }}
               >
                 Back to Courses
               </Button>
@@ -418,10 +418,10 @@ export default function Learning() {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" fontWeight={700} sx={{ color: G.foam }}>
+        <Typography variant="h4" fontWeight={700} sx={{ color: D.text1 }}>
           📚 Learning
         </Typography>
-        <Typography variant="body2" sx={{ color: 'G.textLight', mt: 0.5 }}>
+        <Typography variant="body2" sx={{ color: `rgba(255,255,255,0.4)`, mt: 0.5 }}>
           Read the lesson → Answer questions → Get instant feedback. Active learning, not passive reading.
         </Typography>
       </Box>
@@ -437,17 +437,17 @@ export default function Learning() {
       }}>
         <Box sx={{
           position: 'absolute', top: -14, left: 24,
-          bgcolor: G.pine, borderRadius: 2, px: 2, py: 0.5,
+          bgcolor: D.bg2, borderRadius: 2, px: 2, py: 0.5,
           display: 'flex', alignItems: 'center', gap: 1,
         }}>
-          <SchoolIcon sx={{ fontSize: 16, color: G.foam }} />
-          <Typography variant="caption" fontWeight={700} sx={{ color: G.foam, letterSpacing: 1, textTransform: 'uppercase' }}>
+          <SchoolIcon sx={{ fontSize: 16, color: D.text1 }} />
+          <Typography variant="caption" fontWeight={700} sx={{ color: D.text1, letterSpacing: 1, textTransform: 'uppercase' }}>
             Personal Tutor
           </Typography>
         </Box>
 
         <CardContent sx={{ p: 4, pt: 4.5 }}>
-          <Typography variant="h5" fontWeight={700} sx={{ color: G.foam, mb: 0.5 }}>
+          <Typography variant="h5" fontWeight={700} sx={{ color: D.text1, mb: 0.5 }}>
             🎓 Your AI Tutor, Examiner & Learning Manager
           </Typography>
           <Typography variant="body2" sx={{ color: 'rgba(200,230,210,0.7)', mb: 3 }}>
@@ -456,28 +456,28 @@ export default function Learning() {
 
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, mb: 3 }}>
             {[
-              { icon: <AutoStoriesIcon sx={{ fontSize: 20, color: G.mid }} />, label: 'Analyze & build a learning roadmap', desc: 'Every book is broken into structured lessons with clear objectives.' },
-              { icon: <PsychologyIcon sx={{ fontSize: 20, color: G.mid }} />, label: 'Teach one lesson at a time', desc: 'Simple explanations + real-world examples. I wait for you before moving on.' },
-              { icon: <TrackChangesIcon sx={{ fontSize: 20, color: G.mid }} />, label: 'Test with 3 question types', desc: 'Comprehension, application, and critical-thinking — graded 0–100 with full feedback.' },
-              { icon: <StarIcon sx={{ fontSize: 20, color: G.mid }} />, label: 'Track your mastery', desc: 'Progress, scores, weak topics, and spaced repetition. Mastery = 85%+ consistently.' },
+              { icon: <AutoStoriesIcon sx={{ fontSize: 20, color: D.bg4 }} />, label: 'Analyze & build a learning roadmap', desc: 'Every book is broken into structured lessons with clear objectives.' },
+              { icon: <PsychologyIcon sx={{ fontSize: 20, color: D.bg4 }} />, label: 'Teach one lesson at a time', desc: 'Simple explanations + real-world examples. I wait for you before moving on.' },
+              { icon: <TrackChangesIcon sx={{ fontSize: 20, color: D.bg4 }} />, label: 'Test with 3 question types', desc: 'Comprehension, application, and critical-thinking — graded 0–100 with full feedback.' },
+              { icon: <StarIcon sx={{ fontSize: 20, color: D.bg4 }} />, label: 'Track your mastery', desc: 'Progress, scores, weak topics, and spaced repetition. Mastery = 85%+ consistently.' },
             ].map((item, i) => (
               <Box key={i} sx={{
                 display: 'flex', alignItems: 'flex-start', gap: 2,
                 p: 2, borderRadius: 2, bgcolor: 'rgba(71,133,89,0.08)',
-                border: '1px solid rgba(71,133,89,0.12)',
+                border: '1px solid rgba(255,255,255,0.04)',
               }}>
                 <Box sx={{ mt: 0.2 }}>{item.icon}</Box>
                 <Box>
-                  <Typography fontWeight={600} sx={{ color: G.foam, fontSize: '0.9rem' }}>{item.label}</Typography>
+                  <Typography fontWeight={600} sx={{ color: D.text1, fontSize: '0.9rem' }}>{item.label}</Typography>
                   <Typography variant="caption" sx={{ color: 'rgba(200,230,210,0.6)' }}>{item.desc}</Typography>
                 </Box>
               </Box>
             ))}
           </Box>
 
-          <Accordion sx={{ bgcolor: 'rgba(71,133,89,0.08)', border: '1px solid rgba(71,133,89,0.15)', borderRadius: '8px !important', mb: 2, '&:before': { display: 'none' } }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: G.sage }} />}>
-              <Typography fontWeight={600} sx={{ color: G.foam, fontSize: '0.9rem' }}>
+          <Accordion sx={{ bgcolor: 'rgba(71,133,89,0.08)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '8px !important', mb: 2, '&:before': { display: 'none' } }}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: D.text3 }} />}>
+              <Typography fontWeight={600} sx={{ color: D.text1, fontSize: '0.9rem' }}>
                 📊 What I track for you
               </Typography>
             </AccordionSummary>
@@ -489,7 +489,7 @@ export default function Learning() {
                   'Mastery percentage','Spaced repetition reviews','Difficulty progression',
                 ].map((item) => (
                   <Chip key={item} label={item} size="small"
-                    sx={{ bgcolor: 'rgba(71,133,89,0.15)', color: G.mint, border: '1px solid rgba(71,133,89,0.25)', fontSize: '0.75rem' }}
+                    sx={{ bgcolor: 'rgba(255,255,255,0.05)', color: D.text2, border: '1px solid rgba(71,133,89,0.25)', fontSize: '0.75rem' }}
                   />
                 ))}
               </Box>
@@ -515,7 +515,7 @@ export default function Learning() {
             <Button
               variant="contained"
               startIcon={<AutoStoriesIcon />}
-              sx={{ bgcolor: G.pine, '&:hover': { bgcolor: G.fern }, textTransform: 'none', fontWeight: 600, borderRadius: 2 }}
+              sx={{ bgcolor: D.bg2, '&:hover': { bgcolor: D.bg3 }, textTransform: 'none', fontWeight: 600, borderRadius: 2 }}
               onClick={() => alert('Send a book or PDF in the chat to get started!')}
             >
               Upload a Book to Start
@@ -528,18 +528,18 @@ export default function Learning() {
       </Card>
 
       {/* ── COURSES ── */}
-      <Typography variant="h6" fontWeight={700} sx={{ color: G.foam, mb: 2 }}>📖 Courses</Typography>
+      <Typography variant="h6" fontWeight={700} sx={{ color: D.text1, mb: 2 }}>📖 Courses</Typography>
 
       {courses.map((course) => (
-        <Card key={course.id} sx={{ bgcolor: 'rgba(71,133,89,0.12)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
+        <Card key={course.id} sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
           <CardContent sx={{ p: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
               <Typography variant="h3" component="span">{course.icon}</Typography>
               <Box>
-                <Typography variant="h5" fontWeight={700} sx={{ color: G.foam }}>
+                <Typography variant="h5" fontWeight={700} sx={{ color: D.text1 }}>
                   {course.title}
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'G.textLight' }}>{course.description}</Typography>
+                <Typography variant="body2" sx={{ color: `rgba(255,255,255,0.4)` }}>{course.description}</Typography>
               </Box>
             </Box>
             <Divider sx={{ borderColor: 'rgba(71,133,89,0.08)', mb: 2 }} />
@@ -552,16 +552,16 @@ export default function Learning() {
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                     p: 2, borderRadius: 2, bgcolor: 'rgba(71,133,89,0.08)', border: '1px solid rgba(71,133,89,0.18)',
                     cursor: 'pointer', transition: 'all 0.2s',
-                    '&:hover': { bgcolor: 'rgba(71,133,89,0.12)', borderColor: G.sage, transform: 'translateX(4px)' }
+                    '&:hover': { bgcolor: 'rgba(255,255,255,0.04)', borderColor: D.text3, transform: 'translateX(4px)' }
                   }}
                 >
                   <Box>
-                    <Typography fontWeight={600} sx={{ color: G.foam }}>{lesson.title}</Typography>
-                    <Typography variant="caption" sx={{ color: 'G.textMid' }}>
+                    <Typography fontWeight={600} sx={{ color: D.text1 }}>{lesson.title}</Typography>
+                    <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.5)` }}>
                       {lesson.questions.length} questions
                     </Typography>
                   </Box>
-                  <ArrowForwardIcon sx={{ color: 'G.textMid' }} />
+                  <ArrowForwardIcon sx={{ color: `rgba(255,255,255,0.5)` }} />
                 </Box>
               ))}
             </Box>

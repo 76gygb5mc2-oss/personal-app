@@ -3,7 +3,7 @@ import { Container, Typography, Box, Card, CardContent, TextField, Button, Chip 
 import SendIcon from '@mui/icons-material/Send';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import PersonIcon from '@mui/icons-material/Person';
-import { G } from '../theme';
+import { D, FONTS } from '../theme';
 
 const STARTER_PROMPTS = [
   "What's the best business to start with $0?",
@@ -64,37 +64,37 @@ export default function AIAdvisor() {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" fontWeight={800} sx={{ color: G.foam }}>🤖 AI Advisor</Typography>
-        <Typography sx={{ color: G.sage, mt: 0.5 }}>Your personal strategist — ask anything, get direct answers</Typography>
+        <Typography variant="h4" fontWeight={800} sx={{ color: D.text1 }}>🤖 AI Advisor</Typography>
+        <Typography sx={{ color: D.text3, mt: 0.5 }}>Your personal strategist — ask anything, get direct answers</Typography>
       </Box>
 
       {/* Starter prompts */}
       <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 3 }}>
         {STARTER_PROMPTS.map(p => (
           <Chip key={p} label={p} onClick={() => send(p)} clickable
-            sx={{ bgcolor: 'rgba(71,133,89,0.1)', border: `1px solid ${G.cardBorder}`, color: G.foam, fontWeight: 500,
-              '&:hover': { bgcolor: `rgba(71,133,89,0.12)`, borderColor: G.green } }} />
+            sx={{ bgcolor: 'rgba(71,133,89,0.1)', border: `1px solid ${'rgba(255,255,255,0.08)'}`, color: D.text1, fontWeight: 500,
+              '&:hover': { bgcolor: `rgba(255,255,255,0.04)`, borderColor: '#ffffff' } }} />
         ))}
       </Box>
 
       {/* Chat window */}
-      <Card sx={{ borderRadius: 3, border: `1px solid ${G.cardBorder}`, mb: 2, minHeight: 420 }}>
+      <Card sx={{ borderRadius: 3, border: `1px solid ${'rgba(255,255,255,0.08)'}`, mb: 2, minHeight: 420 }}>
         <Box sx={{ p: 3, display: 'flex', flexDirection: 'column', gap: 2, minHeight: 420, maxHeight: 520, overflowY: 'auto' }}>
           {messages.map((m, i) => (
             <Box key={i} sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start',
               flexDirection: m.role === 'user' ? 'row-reverse' : 'row' }}>
               <Box sx={{ minWidth: 36, height: 36, borderRadius: '50%',
-                bgcolor: m.role === 'ai' ? G.green : G.purple,
+                bgcolor: m.role === 'ai' ? '#ffffff' : 'rgba(255,255,255,0.08)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {m.role === 'ai'
-                  ? <SmartToyIcon sx={{ color: G.pearl, fontSize: 18 }} />
-                  : <PersonIcon sx={{ color: G.pearl, fontSize: 18 }} />}
+                  ? <SmartToyIcon sx={{ color: '#ffffff', fontSize: 18 }} />
+                  : <PersonIcon sx={{ color: '#ffffff', fontSize: 18 }} />}
               </Box>
               <Box sx={{ maxWidth: '80%', p: 2.5, borderRadius: 3,
-                bgcolor: m.role === 'ai' ? G.pearl : G.purple,
-                border: `1px solid ${m.role === 'ai' ? G.cardBorder : 'transparent'}` }}>
+                bgcolor: m.role === 'ai' ? '#ffffff' : 'rgba(255,255,255,0.08)',
+                border: `1px solid ${m.role === 'ai' ? 'rgba(255,255,255,0.08)' : 'transparent'}` }}>
                 {m.text.split('\n\n').map((para, pi) => (
-                  <Typography key={pi} sx={{ color: m.role === 'ai' ? G.textDark : G.pearl, lineHeight: 1.8, mb: pi < m.text.split('\n\n').length - 1 ? 1 : 0 }}>
+                  <Typography key={pi} sx={{ color: m.role === 'ai' ? '#0a0a0a' : '#ffffff', lineHeight: 1.8, mb: pi < m.text.split('\n\n').length - 1 ? 1 : 0 }}>
                     {para.split(/\*\*(.*?)\*\*/g).map((part, idx) =>
                       idx % 2 === 1 ? <strong key={idx}>{part}</strong> : part
                     )}
@@ -105,13 +105,13 @@ export default function AIAdvisor() {
           ))}
           {loading && (
             <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
-              <Box sx={{ width: 36, height: 36, borderRadius: '50%', bgcolor: G.green, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <SmartToyIcon sx={{ color: G.pearl, fontSize: 18 }} />
+              <Box sx={{ width: 36, height: 36, borderRadius: '50%', bgcolor: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <SmartToyIcon sx={{ color: '#ffffff', fontSize: 18 }} />
               </Box>
-              <Box sx={{ p: 2, borderRadius: 3, bgcolor: 'rgba(71,133,89,0.1)', border: `1px solid ${G.cardBorder}` }}>
+              <Box sx={{ p: 2, borderRadius: 3, bgcolor: 'rgba(71,133,89,0.1)', border: `1px solid ${'rgba(255,255,255,0.08)'}` }}>
                 <Box sx={{ display: 'flex', gap: 0.5 }}>
                   {[0, 0.2, 0.4].map(d => (
-                    <Box key={d} sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: G.green,
+                    <Box key={d} sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#ffffff',
                       animation: 'pulse 1.2s ease-in-out infinite', animationDelay: `${d}s`,
                       '@keyframes pulse': { '0%,100%': { opacity: 0.3 }, '50%': { opacity: 1 } } }} />
                   ))}
@@ -127,12 +127,12 @@ export default function AIAdvisor() {
         <TextField fullWidth placeholder="Ask anything about business, mindset, finance, health..."
           value={input} onChange={e => setInput(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), send())}
-          sx={{ '& .MuiOutlinedInput-root': { borderRadius: 3, bgcolor: 'rgba(13,38,24,0.72)',
+          sx={{ '& .MuiOutlinedInput-root': { borderRadius: 3, bgcolor: 'rgba(20,20,20,0.95)',
             '& fieldset': { borderColor: 'rgba(148,204,171,0.18)' },
-            '&:hover fieldset': { borderColor: G.green },
-            '&.Mui-focused fieldset': { borderColor: G.green } } }} />
+            '&:hover fieldset': { borderColor: '#ffffff' },
+            '&.Mui-focused fieldset': { borderColor: '#ffffff' } } }} />
         <Button variant="contained" onClick={() => send()} disabled={!input.trim() || loading}
-          sx={{ px: 3, borderRadius: 3, bgcolor: G.green, '&:hover': { bgcolor: G.greenDark }, minWidth: 56 }}>
+          sx={{ px: 3, borderRadius: 3, bgcolor: '#ffffff', '&:hover': { bgcolor: '#111111' }, minWidth: 56 }}>
           <SendIcon />
         </Button>
       </Box>

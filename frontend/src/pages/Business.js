@@ -1,4 +1,4 @@
-import { G } from '../theme';
+import { D, FONTS } from '../theme';
 import React, { useState } from 'react';
 import {
   Container, Typography, Box, Card, CardContent, Chip,
@@ -151,65 +151,65 @@ export default function Business() {
     setExpandedSection('why');
   };
 
-  const difficultyColor = { Low: G.mid, 'Low–Medium': '#84cc16', Medium: '#eab308', High: '#ef4444' };
+  const difficultyColor = { Low: D.bg4, 'Low–Medium': '#84cc16', Medium: '#eab308', High: '#ef4444' };
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       {/* Header */}
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 4 }}>
         <Box>
-          <Typography variant="h4" fontWeight={700} sx={{ color: G.foam }}>
+          <Typography variant="h4" fontWeight={700} sx={{ color: D.text1 }}>
             💼 Business Ideas
           </Typography>
-          <Typography variant="body2" sx={{ color: 'G.textLight', mt: 0.5 }}>
+          <Typography variant="body2" sx={{ color: `rgba(255,255,255,0.4)`, mt: 0.5 }}>
             Deep-dive analysis — not just ideas, but full execution blueprints
           </Typography>
         </Box>
         <Tooltip title="See next idea">
           <IconButton onClick={nextIdea} sx={{ bgcolor: 'rgba(71,133,89,0.08)', border: '1px solid rgba(71,133,89,0.18)', '&:hover': { bgcolor: 'rgba(71,133,89,0.18)' } }}>
-            <RefreshIcon sx={{ color: 'G.textLight' }} />
+            <RefreshIcon sx={{ color: `rgba(255,255,255,0.4)` }} />
           </IconButton>
         </Tooltip>
       </Box>
 
       {/* Main Idea Card */}
-      <Card sx={{ bgcolor: 'rgba(71,133,89,0.12)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
+      <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
         <CardContent sx={{ p: 4 }}>
           {/* Top badges */}
           <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 3 }}>
-            <Chip label={idea.category} size="small" sx={{ bgcolor: G.pine, color: G.foam, fontWeight: 600 }} />
+            <Chip label={idea.category} size="small" sx={{ bgcolor: D.bg2, color: D.text1, fontWeight: 600 }} />
             <Chip
               label={`Difficulty: ${idea.difficulty}`}
               size="small"
-              sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: difficultyColor[idea.difficulty] || 'G.textLight', fontWeight: 600 }}
+              sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: difficultyColor[idea.difficulty] || `rgba(255,255,255,0.4)`, fontWeight: 600 }}
             />
             <Chip label={`Revenue in ${idea.timeToRevenue}`} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: '#a78bfa', fontWeight: 600 }} />
           </Box>
 
           {/* Title */}
           <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', mb: 1 }}>
-            <Typography variant="h5" fontWeight={700} sx={{ color: G.foam, flex: 1, pr: 2 }}>
+            <Typography variant="h5" fontWeight={700} sx={{ color: D.text1, flex: 1, pr: 2 }}>
               {idea.title}
             </Typography>
-            <IconButton onClick={() => setSaved(!saved)} size="small" sx={{ color: saved ? '#f59e0b' : 'G.textMid' }}>
+            <IconButton onClick={() => setSaved(!saved)} size="small" sx={{ color: saved ? '#f59e0b' : `rgba(255,255,255,0.5)` }}>
               {saved ? <BookmarkIcon /> : <BookmarkBorderIcon />}
             </IconButton>
           </Box>
-          <Typography variant="body1" sx={{ color: 'G.textLight', mb: 3, fontStyle: 'italic' }}>
+          <Typography variant="body1" sx={{ color: `rgba(255,255,255,0.4)`, mb: 3, fontStyle: 'italic' }}>
             {idea.tagline}
           </Typography>
 
           {/* Key Metrics */}
           <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 4 }}>
             {[
-              { icon: <AttachMoneyIcon sx={{ fontSize: 18 }} />, label: 'Startup Cost', value: idea.startupCost, color: G.mid },
-              { icon: <TrendingUpIcon sx={{ fontSize: 18 }} />, label: 'Monthly Potential', value: idea.potential, color: G.sage },
+              { icon: <AttachMoneyIcon sx={{ fontSize: 18 }} />, label: 'Startup Cost', value: idea.startupCost, color: D.bg4 },
+              { icon: <TrendingUpIcon sx={{ fontSize: 18 }} />, label: 'Monthly Potential', value: idea.potential, color: D.text3 },
               { icon: <LightbulbIcon sx={{ fontSize: 18 }} />, label: 'Time to Revenue', value: idea.timeToRevenue, color: '#f59e0b' },
             ].map((metric) => (
               <Box key={metric.label} sx={{ bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2, minWidth: 180, flex: 1 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5, color: metric.color }}>
                   {metric.icon}
-                  <Typography variant="caption" sx={{ color: 'G.textLight', textTransform: 'uppercase', letterSpacing: 1 }}>
+                  <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.4)`, textTransform: 'uppercase', letterSpacing: 1 }}>
                     {metric.label}
                   </Typography>
                 </Box>
@@ -228,13 +228,13 @@ export default function Business() {
               key: 'why',
               label: '🎯 Why This Works',
               icon: <LightbulbIcon />,
-              content: <Typography sx={{ color: 'G.textDark', lineHeight: 1.8 }}>{idea.why}</Typography>
+              content: <Typography sx={{ color: D.text1, lineHeight: 1.8 }}>{idea.why}</Typography>
             },
             {
               key: 'market',
               label: '📊 Market Opportunity',
               icon: <TrendingUpIcon />,
-              content: <Typography sx={{ color: 'G.textDark', lineHeight: 1.8 }}>{idea.market}</Typography>
+              content: <Typography sx={{ color: D.text1, lineHeight: 1.8 }}>{idea.market}</Typography>
             },
             {
               key: 'steps',
@@ -246,13 +246,13 @@ export default function Business() {
                     <Box key={i} sx={{ display: 'flex', gap: 2, mb: 2, alignItems: 'flex-start' }}>
                       <Box sx={{
                         minWidth: 28, height: 28, borderRadius: '50%',
-                        bgcolor: G.pine, color: G.foam,
+                        bgcolor: D.bg2, color: D.text1,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         fontSize: '0.75rem', fontWeight: 700, mt: 0.2
                       }}>
                         {i + 1}
                       </Box>
-                      <Typography sx={{ color: 'G.textDark', lineHeight: 1.7 }}>{step}</Typography>
+                      <Typography sx={{ color: D.text1, lineHeight: 1.7 }}>{step}</Typography>
                     </Box>
                   ))}
                 </Box>
@@ -262,13 +262,13 @@ export default function Business() {
               key: 'scaling',
               label: '📈 Scaling Path',
               icon: <TrendingUpIcon />,
-              content: <Typography sx={{ color: 'G.textDark', lineHeight: 1.8, whiteSpace: 'pre-line' }}>{idea.scalingPath}</Typography>
+              content: <Typography sx={{ color: D.text1, lineHeight: 1.8, whiteSpace: 'pre-line' }}>{idea.scalingPath}</Typography>
             },
             {
               key: 'diff',
               label: '⚡ Your Competitive Edge',
               icon: <CheckCircleIcon />,
-              content: <Typography sx={{ color: 'G.textDark', lineHeight: 1.8 }}>{idea.differentiator}</Typography>
+              content: <Typography sx={{ color: D.text1, lineHeight: 1.8 }}>{idea.differentiator}</Typography>
             },
             {
               key: 'risks',
@@ -279,7 +279,7 @@ export default function Business() {
                   {idea.risks.map((risk, i) => (
                     <Box key={i} sx={{ display: 'flex', gap: 1.5, mb: 1.5, alignItems: 'flex-start' }}>
                       <WarningIcon sx={{ color: '#f59e0b', fontSize: 18, mt: 0.3 }} />
-                      <Typography sx={{ color: 'G.textDark', lineHeight: 1.7 }}>{risk}</Typography>
+                      <Typography sx={{ color: D.text1, lineHeight: 1.7 }}>{risk}</Typography>
                     </Box>
                   ))}
                 </Box>
@@ -292,7 +292,7 @@ export default function Business() {
               content: (
                 <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
                   {idea.tools.map((tool, i) => (
-                    <Chip key={i} label={tool} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: 'G.textLight', border: '1px solid rgba(71,133,89,0.18)' }} />
+                    <Chip key={i} label={tool} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: `rgba(255,255,255,0.4)`, border: '1px solid rgba(71,133,89,0.18)' }} />
                   ))}
                 </Box>
               )
@@ -304,8 +304,8 @@ export default function Business() {
               onChange={() => setExpandedSection(expandedSection === section.key ? null : section.key)}
               sx={{ bgcolor: 'rgba(71,133,89,0.08)', border: '1px solid rgba(71,133,89,0.18)', borderRadius: '8px !important', mb: 1, '&:before': { display: 'none' } }}
             >
-              <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'G.textLight' }} />}>
-                <Typography fontWeight={600} sx={{ color: G.foam }}>{section.label}</Typography>
+              <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: `rgba(255,255,255,0.4)` }} />}>
+                <Typography fontWeight={600} sx={{ color: D.text1 }}>{section.label}</Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ pt: 0 }}>
                 {section.content}
@@ -317,13 +317,13 @@ export default function Business() {
 
       {/* Navigation */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="body2" sx={{ color: 'G.textMid' }}>
+        <Typography variant="body2" sx={{ color: `rgba(255,255,255,0.5)` }}>
           Idea {ideaIndex + 1} of {businessIdeas.length} • New idea added weekly
         </Typography>
         <Button
           variant="contained"
           onClick={nextIdea}
-          sx={{ bgcolor: G.pine, '&:hover': { bgcolor: G.fern }, textTransform: 'none', fontWeight: 600 }}
+          sx={{ bgcolor: D.bg2, '&:hover': { bgcolor: D.bg3 }, textTransform: 'none', fontWeight: 600 }}
           endIcon={<RefreshIcon />}
         >
           Next Idea

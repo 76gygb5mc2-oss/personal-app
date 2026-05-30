@@ -1,36 +1,48 @@
-// Green Forest Design System
-// All shades of green — dark forest → mid green → mint → sage
+// Dark Minimal Design System — Sirawdink OS
+// Inspired by Linear, Vercel, Raycast aesthetic
 
-export const G = {
-  // Core greens
-  forest:     '#1a3d2b',   // darkest — deep forest
-  forestMid:  '#1e4d35',   // dark forest
-  pine:       '#2d6a4f',   // pine tree
-  fern:       '#3a7d5c',   // fern
-  mid:        '#478559',   // mid green (Greenery base)
-  moss:       '#52946a',   // moss
-  leaf:       '#62a878',   // leaf
-  sage:       '#7ab893',   // sage
-  mint:       '#95ccab',   // mint
-  mist:       '#b4ddc5',   // misty green
-  pale:       '#d4eedd',   // pale green
-  foam:       '#e8f5ee',   // foam
-  cream:      '#f2faf5',   // near white green tint
+export const D = {
+  // Backgrounds
+  bg0:      '#080808',   // deepest black
+  bg1:      '#0e0e0e',   // page background
+  bg2:      '#141414',   // card background
+  bg3:      '#1a1a1a',   // elevated card
+  bg4:      '#222222',   // hover state
+  bg5:      '#2a2a2a',   // active/selected
+
+  // Borders
+  border0:  'rgba(255,255,255,0.04)',
+  border1:  'rgba(255,255,255,0.08)',
+  border2:  'rgba(255,255,255,0.12)',
+  border3:  'rgba(255,255,255,0.20)',
 
   // Text
-  textDark:   '#0d2618',   // very dark green text
-  textMid:    '#2d5040',   // mid tone text
-  textLight:  '#4a7060',   // light text
+  text1:    '#ffffff',        // primary
+  text2:    'rgba(255,255,255,0.7)',  // secondary
+  text3:    'rgba(255,255,255,0.4)',  // muted
+  text4:    'rgba(255,255,255,0.2)',  // disabled
 
-  // UI
-  border:     'rgba(71,133,89,0.18)',
-  borderMid:  'rgba(71,133,89,0.30)',
-  cardBg:     '#ffffff',
-  pageBg:     '#f2faf5',
+  // Accent — single white/subtle
+  accent:   '#ffffff',
+  accentDim: 'rgba(255,255,255,0.08)',
+
+  // Status colors (minimal)
+  success:  '#22c55e',
+  warning:  '#f59e0b',
+  error:    '#ef4444',
+  info:     '#3b82f6',
 
   // Gradients
-  sidebarGrad: 'linear-gradient(180deg, #1a3d2b 0%, #1e4d35 40%, #2d6a4f 100%)',
-  heroGrad:    'linear-gradient(135deg, #1a3d2b 0%, #2d6a4f 50%, #3a7d5c 100%)',
-  btnGrad:     'linear-gradient(135deg, #3a7d5c 0%, #2d6a4f 100%)',
-  cardAccent:  'linear-gradient(135deg, #478559 0%, #3a7d5c 100%)',
+  gradCard:  'linear-gradient(135deg, #141414 0%, #0e0e0e 100%)',
+  gradHero:  'linear-gradient(180deg, #141414 0%, #080808 100%)',
+  gradGlow:  'radial-gradient(ellipse at top, rgba(255,255,255,0.03) 0%, transparent 60%)',
+
+  // Sidebar
+  sidebarBg: '#0a0a0a',
+  sidebarBorder: 'rgba(255,255,255,0.06)',
+};
+
+export const FONTS = {
+  sans: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  mono: '"JetBrains Mono", "Fira Code", "Cascadia Code", monospace',
 };

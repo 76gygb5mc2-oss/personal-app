@@ -7,7 +7,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { G } from '../theme';
+import { D, FONTS } from '../theme';
 
 const STATIONS = [
   {
@@ -130,24 +130,24 @@ export default function LofiPlayer() {
               {visualizer.slice(0, 5).map((h, i) => (
                 <Box key={i} sx={{
                   width: 2.5, height: h, borderRadius: 2,
-                  bgcolor: G.mint, opacity: 0.8,
+                  bgcolor: D.text2, opacity: 0.8,
                   transition: 'height 0.18s ease',
                 }} />
               ))}
             </Box>
           ) : (
-            <MusicNoteIcon sx={{ fontSize: 16, color: G.sage }} />
+            <MusicNoteIcon sx={{ fontSize: 16, color: D.text3 }} />
           )}
-          <Typography sx={{ fontSize: '0.75rem', color: playing ? G.mint : G.sage, fontWeight: 600 }}>
+          <Typography sx={{ fontSize: '0.75rem', color: playing ? D.text2 : D.text3, fontWeight: 600 }}>
             {playing ? station.name : 'Lo-fi'}
           </Typography>
           <IconButton
             size="small"
             onClick={e => { e.stopPropagation(); togglePlay(); }}
-            sx={{ p: 0.4, color: playing ? G.mint : G.sage }}
+            sx={{ p: 0.4, color: playing ? D.text2 : D.text3 }}
           >
             {loading ? (
-              <Box sx={{ width: 14, height: 14, borderRadius: '50%', border: `2px solid ${G.mint}`, borderTopColor: 'transparent', animation: 'spin 0.8s linear infinite', '@keyframes spin': { to: { transform: 'rotate(360deg)' } } }} />
+              <Box sx={{ width: 14, height: 14, borderRadius: '50%', border: `2px solid ${D.text2}`, borderTopColor: 'transparent', animation: 'spin 0.8s linear infinite', '@keyframes spin': { to: { transform: 'rotate(360deg)' } } }} />
             ) : playing ? <PauseIcon sx={{ fontSize: 16 }} /> : <PlayArrowIcon sx={{ fontSize: 16 }} />}
           </IconButton>
         </Box>
@@ -160,15 +160,15 @@ export default function LofiPlayer() {
           width: 280,
           bgcolor: 'rgba(10,28,18,0.96)',
           backdropFilter: 'blur(28px)',
-          border: `1px solid rgba(148,204,171,0.2)`,
+          border: `1px solid rgba(255,255,255,0.12)`,
           borderRadius: 4,
           boxShadow: '0 8px 40px rgba(0,0,0,0.5), 0 0 30px rgba(148,204,171,0.08)',
           overflow: 'hidden',
         }}>
           {/* Header */}
           <Box sx={{ display: 'flex', alignItems: 'center', px: 2, pt: 1.5, pb: 1 }}>
-            <MusicNoteIcon sx={{ fontSize: 14, color: G.sage, mr: 0.8 }} />
-            <Typography sx={{ fontSize: '0.7rem', color: G.sage, letterSpacing: 2, textTransform: 'uppercase', flex: 1 }}>
+            <MusicNoteIcon sx={{ fontSize: 14, color: D.text3, mr: 0.8 }} />
+            <Typography sx={{ fontSize: '0.7rem', color: D.text3, letterSpacing: 2, textTransform: 'uppercase', flex: 1 }}>
               Lo-fi Radio
             </Typography>
             <IconButton size="small" onClick={() => setExpanded(false)} sx={{ color: 'rgba(232,245,238,0.3)', p: 0.3 }}>
@@ -181,7 +181,7 @@ export default function LofiPlayer() {
             {visualizer.map((h, i) => (
               <Box key={i} sx={{
                 width: '100%', maxWidth: 10, height: playing ? h * 2.8 : 4, borderRadius: 2,
-                bgcolor: playing ? G.mint : 'rgba(148,204,171,0.2)',
+                bgcolor: playing ? D.text2 : 'rgba(255,255,255,0.12)',
                 opacity: playing ? 0.7 + (i % 3) * 0.1 : 0.4,
                 transition: 'height 0.18s ease',
               }} />
@@ -190,10 +190,10 @@ export default function LofiPlayer() {
 
           {/* Station name */}
           <Box sx={{ px: 2.5, pb: 1 }}>
-            <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: G.foam, lineHeight: 1.2 }}>
+            <Typography sx={{ fontSize: '0.95rem', fontWeight: 700, color: D.text1, lineHeight: 1.2 }}>
               {station.emoji} {station.name}
             </Typography>
-            <Typography sx={{ fontSize: '0.72rem', color: G.sage, mt: 0.3 }}>
+            <Typography sx={{ fontSize: '0.72rem', color: D.text3, mt: 0.3 }}>
               {playing ? '▶ Streaming live' : loading ? '⟳ Loading...' : '⏸ Paused'}
             </Typography>
           </Box>
@@ -205,19 +205,19 @@ export default function LofiPlayer() {
                 sx={{
                   display: 'flex', alignItems: 'center', gap: 1,
                   py: 0.6, px: 1, borderRadius: 2, cursor: 'pointer',
-                  bgcolor: stationIdx === i ? 'rgba(71,133,89,0.2)' : 'transparent',
-                  border: `1px solid ${stationIdx === i ? 'rgba(148,204,171,0.2)' : 'transparent'}`,
+                  bgcolor: stationIdx === i ? 'rgba(255,255,255,0.06)' : 'transparent',
+                  border: `1px solid ${stationIdx === i ? 'rgba(255,255,255,0.12)' : 'transparent'}`,
                   mb: 0.3, transition: 'all 0.15s',
                   '&:hover': { bgcolor: 'rgba(71,133,89,0.1)' },
                 }}>
                 <Typography sx={{ fontSize: '0.85rem' }}>{s.emoji}</Typography>
-                <Typography sx={{ fontSize: '0.78rem', color: stationIdx === i ? G.mint : G.sage, fontWeight: stationIdx === i ? 700 : 400, flex: 1 }}>
+                <Typography sx={{ fontSize: '0.78rem', color: stationIdx === i ? D.text2 : D.text3, fontWeight: stationIdx === i ? 700 : 400, flex: 1 }}>
                   {s.name}
                 </Typography>
                 {stationIdx === i && playing && (
                   <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: '1.5px', height: 10 }}>
                     {[4,7,5].map((h, j) => (
-                      <Box key={j} sx={{ width: 2, height: h, borderRadius: 1, bgcolor: G.mint, animation: `bounce${j} 0.6s ease infinite alternate`, '@keyframes bounce0': { to: { height: 10 } }, '@keyframes bounce1': { to: { height: 6 } }, '@keyframes bounce2': { to: { height: 9 } } }} />
+                      <Box key={j} sx={{ width: 2, height: h, borderRadius: 1, bgcolor: D.text2, animation: `bounce${j} 0.6s ease infinite alternate`, '@keyframes bounce0': { to: { height: 10 } }, '@keyframes bounce1': { to: { height: 6 } }, '@keyframes bounce2': { to: { height: 9 } } }} />
                     ))}
                   </Box>
                 )}
@@ -228,20 +228,20 @@ export default function LofiPlayer() {
           {/* Controls */}
           <Box sx={{ display: 'flex', alignItems: 'center', px: 2, pb: 2, gap: 1 }}>
             <IconButton onClick={togglePlay} sx={{
-              color: G.foam, bgcolor: playing ? 'rgba(71,133,89,0.3)' : 'rgba(71,133,89,0.15)',
-              border: `1px solid rgba(148,204,171,0.2)`, borderRadius: 2, p: 0.8,
+              color: D.text1, bgcolor: playing ? 'rgba(71,133,89,0.3)' : 'rgba(71,133,89,0.15)',
+              border: `1px solid rgba(255,255,255,0.12)`, borderRadius: 2, p: 0.8,
               '&:hover': { bgcolor: 'rgba(71,133,89,0.4)' },
             }}>
               {loading ? (
-                <Box sx={{ width: 18, height: 18, borderRadius: '50%', border: `2px solid ${G.mint}`, borderTopColor: 'transparent', animation: 'spin 0.8s linear infinite' }} />
+                <Box sx={{ width: 18, height: 18, borderRadius: '50%', border: `2px solid ${D.text2}`, borderTopColor: 'transparent', animation: 'spin 0.8s linear infinite' }} />
               ) : playing ? <PauseIcon sx={{ fontSize: 20 }} /> : <PlayArrowIcon sx={{ fontSize: 20 }} />}
             </IconButton>
 
-            <IconButton onClick={nextStation} sx={{ color: G.sage, p: 0.6, '&:hover': { color: G.mint } }}>
+            <IconButton onClick={nextStation} sx={{ color: D.text3, p: 0.6, '&:hover': { color: D.text2 } }}>
               <SkipNextIcon sx={{ fontSize: 18 }} />
             </IconButton>
 
-            <IconButton onClick={() => setMuted(m => !m)} sx={{ color: muted ? 'rgba(232,245,238,0.2)' : G.sage, p: 0.6, '&:hover': { color: G.mint } }}>
+            <IconButton onClick={() => setMuted(m => !m)} sx={{ color: muted ? 'rgba(232,245,238,0.2)' : D.text3, p: 0.6, '&:hover': { color: D.text2 } }}>
               {muted ? <VolumeOffIcon sx={{ fontSize: 16 }} /> : <VolumeUpIcon sx={{ fontSize: 16 }} />}
             </IconButton>
 
@@ -250,9 +250,9 @@ export default function LofiPlayer() {
               onChange={(_, v) => { setVolume(v / 100); setMuted(false); }}
               size="small"
               sx={{
-                flex: 1, color: G.mid,
-                '& .MuiSlider-thumb': { width: 10, height: 10, bgcolor: G.mint },
-                '& .MuiSlider-track': { bgcolor: G.mid },
+                flex: 1, color: D.bg4,
+                '& .MuiSlider-thumb': { width: 10, height: 10, bgcolor: D.text2 },
+                '& .MuiSlider-track': { bgcolor: D.bg4 },
                 '& .MuiSlider-rail': { bgcolor: 'rgba(148,204,171,0.15)' },
               }}
             />

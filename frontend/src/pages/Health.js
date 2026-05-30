@@ -1,4 +1,4 @@
-import { G } from '../theme';
+import { D, FONTS } from '../theme';
 import React, { useState } from 'react';
 import {
   Container, Typography, Box, Card, CardContent, Chip,
@@ -330,32 +330,32 @@ function ExerciseCard({ exercise, index }) {
     <Box sx={{
       display: 'flex', gap: 2, p: 2.5, borderRadius: 2,
       bgcolor: done ? '#0f2b1a' : 'rgba(71,133,89,0.08)',
-      border: `1px solid ${done ? G.pine : 'rgba(71,133,89,0.18)'}`,
+      border: `1px solid ${done ? D.bg2 : 'rgba(71,133,89,0.18)'}`,
       mb: 1.5, transition: 'all 0.2s'
     }}>
       <Box sx={{
         minWidth: 32, height: 32, borderRadius: '50%',
-        bgcolor: done ? G.pine : G.pine,
+        bgcolor: done ? D.bg2 : D.bg2,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        color: done ? G.mint : G.foam, fontWeight: 700, fontSize: '0.8rem', mt: 0.3
+        color: done ? D.text2 : D.text1, fontWeight: 700, fontSize: '0.8rem', mt: 0.3
       }}>
         {done ? '✓' : index + 1}
       </Box>
       <Box sx={{ flex: 1 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          <Typography fontWeight={700} sx={{ color: done ? G.mint : G.forest }}>
+          <Typography fontWeight={700} sx={{ color: done ? D.text2 : D.bg0 }}>
             {exercise.name}
           </Typography>
-          <Chip label={exercise.sets} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.12)', color: 'G.textLight', fontSize: '0.7rem' }} />
+          <Chip label={exercise.sets} size="small" sx={{ bgcolor: 'rgba(255,255,255,0.04)', color: `rgba(255,255,255,0.4)`, fontSize: '0.7rem' }} />
         </Box>
-        <Typography variant="caption" sx={{ color: G.sage, display: 'block', mb: 0.5 }}>
+        <Typography variant="caption" sx={{ color: D.text3, display: 'block', mb: 0.5 }}>
           {exercise.muscles}
         </Typography>
-        <Typography variant="body2" sx={{ color: 'G.textLight', fontSize: '0.8rem' }}>
+        <Typography variant="body2" sx={{ color: `rgba(255,255,255,0.4)`, fontSize: '0.8rem' }}>
           {exercise.howTo}
         </Typography>
         {exercise.rest !== '—' && exercise.rest !== '0' && (
-          <Typography variant="caption" sx={{ color: 'G.textMid', mt: 0.5, display: 'flex', alignItems: 'center', gap: 0.5 }}>
+          <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.5)`, mt: 0.5, display: 'flex', alignItems: 'center', gap: 0.5 }}>
             <TimerIcon sx={{ fontSize: 12 }} /> Rest: {exercise.rest}
           </Typography>
         )}
@@ -363,7 +363,7 @@ function ExerciseCard({ exercise, index }) {
       <Checkbox
         checked={done}
         onChange={() => setDone(!done)}
-        sx={{ color: 'rgba(71,133,89,0.18)', '&.Mui-checked': { color: G.mid }, alignSelf: 'flex-start', mt: -0.5 }}
+        sx={{ color: 'rgba(71,133,89,0.18)', '&.Mui-checked': { color: D.bg4 }, alignSelf: 'flex-start', mt: -0.5 }}
       />
     </Box>
   );
@@ -396,10 +396,10 @@ export default function Health() {
       {/* Header */}
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
         <Box>
-          <Typography variant="h4" fontWeight={700} sx={{ color: G.foam }}>
+          <Typography variant="h4" fontWeight={700} sx={{ color: D.text1 }}>
             🏃 Health
           </Typography>
-          <Typography variant="body2" sx={{ color: 'G.textLight', mt: 0.5 }}>
+          <Typography variant="body2" sx={{ color: `rgba(255,255,255,0.4)`, mt: 0.5 }}>
             Daily workout + meal plan with full instructions
           </Typography>
         </Box>
@@ -410,8 +410,8 @@ export default function Health() {
               onClick={() => setDayIndex(i)}
               size="small"
               sx={{
-                bgcolor: i === dayIndex ? G.pine : 'rgba(71,133,89,0.08)',
-                color: i === dayIndex ? G.foam : 'G.textMid',
+                bgcolor: i === dayIndex ? D.bg2 : 'rgba(71,133,89,0.08)',
+                color: i === dayIndex ? D.text1 : `rgba(255,255,255,0.5)`,
                 border: `1px solid ${i === dayIndex ? '#3b82f6' : 'rgba(71,133,89,0.18)'}`,
                 borderRadius: 1.5,
                 fontSize: '0.65rem',
@@ -427,18 +427,18 @@ export default function Health() {
       </Box>
 
       {/* Day Overview */}
-      <Card sx={{ bgcolor: 'rgba(71,133,89,0.12)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
+      <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
         <CardContent sx={{ p: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Typography variant="h2" component="span">{today.icon}</Typography>
             <Box>
-              <Typography variant="h5" fontWeight={700} sx={{ color: G.foam }}>
+              <Typography variant="h5" fontWeight={700} sx={{ color: D.text1 }}>
                 {today.day} — {today.focus}
               </Typography>
               <Box sx={{ display: 'flex', gap: 1.5, mt: 1, flexWrap: 'wrap' }}>
-                <Chip icon={<TimerIcon sx={{ fontSize: 14 }} />} label={today.workout.totalTime} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: 'G.textLight' }} />
+                <Chip icon={<TimerIcon sx={{ fontSize: 14 }} />} label={today.workout.totalTime} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: `rgba(255,255,255,0.4)` }} />
                 <Chip icon={<LocalFireDepartmentIcon sx={{ fontSize: 14 }} />} label={today.workout.calories} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: '#f97316' }} />
-                <Chip icon={<RestaurantIcon sx={{ fontSize: 14 }} />} label={today.meal.name} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: G.sage }} />
+                <Chip icon={<RestaurantIcon sx={{ fontSize: 14 }} />} label={today.meal.name} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: D.text3 }} />
               </Box>
             </Box>
           </Box>
@@ -450,7 +450,7 @@ export default function Health() {
         <Tabs
           value={tab}
           onChange={(_, v) => setTab(v)}
-          sx={{ '& .MuiTab-root': { color: 'G.textLight', textTransform: 'none', fontWeight: 600 }, '& .Mui-selected': { color: G.sage }, '& .MuiTabs-indicator': { bgcolor: G.sage } }}
+          sx={{ '& .MuiTab-root': { color: `rgba(255,255,255,0.4)`, textTransform: 'none', fontWeight: 600 }, '& .Mui-selected': { color: D.text3 }, '& .MuiTabs-indicator': { bgcolor: D.text3 } }}
         >
           <Tab icon={<FitnessCenterIcon />} label="Workout" iconPosition="start" />
           <Tab icon={<RestaurantIcon />} label="Meal Plan" iconPosition="start" />
@@ -463,23 +463,23 @@ export default function Health() {
         <Box>
           <Box sx={{ bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2, mb: 3, border: '1px solid rgba(71,133,89,0.18)' }}>
             <Typography variant="overline" sx={{ color: '#f59e0b', letterSpacing: 2 }}>🔥 WARM UP</Typography>
-            <Typography sx={{ color: 'G.textDark', mt: 0.5 }}>{today.workout.warmup}</Typography>
+            <Typography sx={{ color: D.text1, mt: 0.5 }}>{today.workout.warmup}</Typography>
           </Box>
 
-          <Typography variant="h6" fontWeight={700} sx={{ color: G.foam, mb: 2 }}>Exercises</Typography>
+          <Typography variant="h6" fontWeight={700} sx={{ color: D.text1, mb: 2 }}>Exercises</Typography>
           {today.workout.exercises.map((ex, i) => (
             <ExerciseCard key={i} exercise={ex} index={i} />
           ))}
 
           <Box sx={{ bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2, mt: 3, border: '1px solid rgba(71,133,89,0.18)' }}>
-            <Typography variant="overline" sx={{ color: G.mid, letterSpacing: 2 }}>🧊 COOL DOWN</Typography>
-            <Typography sx={{ color: 'G.textDark', mt: 0.5 }}>{today.workout.cooldown}</Typography>
+            <Typography variant="overline" sx={{ color: D.bg4, letterSpacing: 2 }}>🧊 COOL DOWN</Typography>
+            <Typography sx={{ color: D.text1, mt: 0.5 }}>{today.workout.cooldown}</Typography>
           </Box>
 
           <Button
             variant="contained"
             fullWidth
-            sx={{ mt: 3, bgcolor: G.pine, '&:hover': { bgcolor: '#15803d' }, textTransform: 'none', fontWeight: 700, py: 1.5 }}
+            sx={{ mt: 3, bgcolor: D.bg2, '&:hover': { bgcolor: '#15803d' }, textTransform: 'none', fontWeight: 700, py: 1.5 }}
             startIcon={<CheckCircleIcon />}
             onClick={() => markSectionDone('workout')}
           >
@@ -491,34 +491,34 @@ export default function Health() {
       {/* MEAL TAB */}
       {tab === 1 && (
         <Box>
-          <Card sx={{ bgcolor: 'rgba(71,133,89,0.12)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
+          <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
             <CardContent sx={{ p: 3 }}>
-              <Typography variant="h5" fontWeight={700} sx={{ color: G.foam, mb: 1 }}>
+              <Typography variant="h5" fontWeight={700} sx={{ color: D.text1, mb: 1 }}>
                 🍽 {today.meal.name}
               </Typography>
               <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap', mb: 3 }}>
-                <Chip label={`${today.meal.calories}`} sx={{ bgcolor: G.pine, color: G.foam, fontWeight: 700 }} />
-                <Chip label={`Protein: ${today.meal.macros.protein}`} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: G.mint }} />
+                <Chip label={`${today.meal.calories}`} sx={{ bgcolor: D.bg2, color: D.text1, fontWeight: 700 }} />
+                <Chip label={`Protein: ${today.meal.macros.protein}`} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: D.text2 }} />
                 <Chip label={`Carbs: ${today.meal.macros.carbs}`} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: '#f59e0b' }} />
                 <Chip label={`Fat: ${today.meal.macros.fat}`} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: '#f97316' }} />
-                <Chip icon={<TimerIcon sx={{ fontSize: 14 }} />} label={today.meal.prepTime} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: 'G.textLight' }} />
+                <Chip icon={<TimerIcon sx={{ fontSize: 14 }} />} label={today.meal.prepTime} sx={{ bgcolor: 'rgba(71,133,89,0.08)', color: `rgba(255,255,255,0.4)` }} />
               </Box>
 
               {/* Ingredients */}
-              <Typography variant="h6" fontWeight={700} sx={{ color: G.foam, mb: 2 }}>
+              <Typography variant="h6" fontWeight={700} sx={{ color: D.text1, mb: 2 }}>
                 🛒 Ingredients
               </Typography>
               <Box sx={{ bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2, mb: 3 }}>
                 {today.meal.ingredients.map((ing, i) => (
                   <Box key={i} sx={{ display: 'flex', gap: 1.5, mb: 1, alignItems: 'flex-start' }}>
                     <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: '#3b82f6', mt: 1, minWidth: 6 }} />
-                    <Typography sx={{ color: 'G.textDark' }}>{ing}</Typography>
+                    <Typography sx={{ color: D.text1 }}>{ing}</Typography>
                   </Box>
                 ))}
               </Box>
 
               {/* Steps */}
-              <Typography variant="h6" fontWeight={700} sx={{ color: G.foam, mb: 2 }}>
+              <Typography variant="h6" fontWeight={700} sx={{ color: D.text1, mb: 2 }}>
                 👨‍🍳 How to Make It
               </Typography>
               {today.meal.steps.map((step, i) => (
@@ -527,27 +527,27 @@ export default function Health() {
                   onClick={() => setExpandedMealStep(expandedMealStep === i ? null : i)}
                   sx={{
                     display: 'flex', gap: 2, p: 2, borderRadius: 2, mb: 1.5,
-                    bgcolor: expandedMealStep === i ? 'rgba(71,133,89,0.12)' : 'rgba(71,133,89,0.08)',
-                    border: `1px solid ${expandedMealStep === i ? G.sage : 'rgba(71,133,89,0.18)'}`,
+                    bgcolor: expandedMealStep === i ? 'rgba(255,255,255,0.04)' : 'rgba(71,133,89,0.08)',
+                    border: `1px solid ${expandedMealStep === i ? D.text3 : 'rgba(71,133,89,0.18)'}`,
                     cursor: 'pointer', transition: 'all 0.2s',
-                    '&:hover': { bgcolor: 'rgba(71,133,89,0.12)' }
+                    '&:hover': { bgcolor: 'rgba(255,255,255,0.04)' }
                   }}
                 >
                   <Box sx={{
                     minWidth: 28, height: 28, borderRadius: '50%',
-                    bgcolor: G.pine, color: G.foam,
+                    bgcolor: D.bg2, color: D.text1,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontWeight: 700, fontSize: '0.8rem', mt: 0.2
                   }}>
                     {i + 1}
                   </Box>
-                  <Typography sx={{ color: 'G.textDark', lineHeight: 1.7 }}>{step}</Typography>
+                  <Typography sx={{ color: D.text1, lineHeight: 1.7 }}>{step}</Typography>
                 </Box>
               ))}
 
               {/* Why it works */}
-              <Box sx={{ bgcolor: '#0f2b1a', borderRadius: 2, p: 2, mb: 2, border: '1px solid G.pine', mt: 3 }}>
-                <Typography variant="overline" sx={{ color: G.mint, letterSpacing: 2 }}>⚡ WHY THIS MEAL</Typography>
+              <Box sx={{ bgcolor: '#0f2b1a', borderRadius: 2, p: 2, mb: 2, border: '1px solid D.bg2', mt: 3 }}>
+                <Typography variant="overline" sx={{ color: D.text2, letterSpacing: 2 }}>⚡ WHY THIS MEAL</Typography>
                 <Typography sx={{ color: '#86efac', mt: 0.5, lineHeight: 1.7 }}>{today.meal.whyItWorks}</Typography>
               </Box>
 
@@ -565,12 +565,12 @@ export default function Health() {
       {tab === 2 && (
         <Box>
           {/* Water Tracker */}
-          <Card sx={{ bgcolor: 'rgba(71,133,89,0.12)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
+          <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
             <CardContent sx={{ p: 3 }}>
-              <Typography variant="h6" fontWeight={700} sx={{ color: G.foam, mb: 1 }}>
+              <Typography variant="h6" fontWeight={700} sx={{ color: D.text1, mb: 1 }}>
                 💧 Water Tracker
               </Typography>
-              <Typography variant="body2" sx={{ color: 'G.textLight', mb: 3 }}>
+              <Typography variant="body2" sx={{ color: `rgba(255,255,255,0.4)`, mb: 3 }}>
                 Goal: {WATER_GOAL} glasses (2L) per day
               </Typography>
               <LinearProgress
@@ -593,7 +593,7 @@ export default function Health() {
                 <Button
                   variant="outlined"
                   onClick={() => setWaterCount(Math.max(waterCount - 1, 0))}
-                  sx={{ borderColor: 'rgba(71,133,89,0.18)', color: 'G.textLight', textTransform: 'none' }}
+                  sx={{ borderColor: 'rgba(71,133,89,0.18)', color: `rgba(255,255,255,0.4)`, textTransform: 'none' }}
                 >
                   Undo
                 </Button>
@@ -602,9 +602,9 @@ export default function Health() {
           </Card>
 
           {/* Daily Checklist */}
-          <Card sx={{ bgcolor: 'rgba(71,133,89,0.12)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3 }}>
+          <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3 }}>
             <CardContent sx={{ p: 3 }}>
-              <Typography variant="h6" fontWeight={700} sx={{ color: G.foam, mb: 2 }}>
+              <Typography variant="h6" fontWeight={700} sx={{ color: D.text1, mb: 2 }}>
                 ✅ Daily Health Checklist
               </Typography>
               {[
@@ -627,19 +627,19 @@ export default function Health() {
                       display: 'flex', alignItems: 'center', gap: 2, p: 1.5,
                       borderRadius: 2, cursor: 'pointer',
                       bgcolor: checked ? '#0f2b1a' : 'transparent',
-                      border: `1px solid ${checked ? G.pine : 'transparent'}`,
+                      border: `1px solid ${checked ? D.bg2 : 'transparent'}`,
                       mb: 1, transition: 'all 0.2s', '&:hover': { bgcolor: 'rgba(71,133,89,0.08)' }
                     }}
                   >
                     <Checkbox
                       checked={checked}
-                      sx={{ color: 'rgba(71,133,89,0.18)', '&.Mui-checked': { color: G.mid }, p: 0.5 }}
+                      sx={{ color: 'rgba(71,133,89,0.18)', '&.Mui-checked': { color: D.bg4 }, p: 0.5 }}
                     />
                     <Box>
-                      <Typography fontWeight={600} sx={{ color: checked ? G.mint : G.forest, textDecoration: checked ? 'line-through' : 'none' }}>
+                      <Typography fontWeight={600} sx={{ color: checked ? D.text2 : D.bg0, textDecoration: checked ? 'line-through' : 'none' }}>
                         {item.label}
                       </Typography>
-                      <Typography variant="caption" sx={{ color: 'G.textMid' }}>{item.detail}</Typography>
+                      <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.5)` }}>{item.detail}</Typography>
                     </Box>
                   </Box>
                 );

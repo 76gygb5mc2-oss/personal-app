@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import { G } from '../theme';
+import { D, FONTS } from '../theme';
 
 /* ── Storage ─────────────────────────────────────────────── */
 const KEY = 'swpg_activities_v1';
@@ -126,65 +126,65 @@ export default function ActivityLog() {
 
   const inputSx = {
     '& .MuiOutlinedInput-root': {
-      bgcolor: 'rgba(13,38,24,0.6)', color: G.foam,
-      '& fieldset': { borderColor: 'rgba(148,204,171,0.15)' },
-      '&:hover fieldset': { borderColor: G.mint },
-      '&.Mui-focused fieldset': { borderColor: G.mint, borderWidth: 2 },
+      bgcolor: 'rgba(13,38,24,0.6)', color: D.text1,
+      '& fieldset': { borderColor: 'rgba(255,255,255,0.10)' },
+      '&:hover fieldset': { borderColor: D.text2 },
+      '&.Mui-focused fieldset': { borderColor: D.text2, borderWidth: 2 },
     },
-    '& .MuiInputLabel-root': { color: G.sage },
-    '& .MuiInputLabel-root.Mui-focused': { color: G.mint },
-    '& .MuiInputBase-input': { color: G.foam },
-    '& .MuiSelect-icon': { color: G.sage },
+    '& .MuiInputLabel-root': { color: D.text3 },
+    '& .MuiInputLabel-root.Mui-focused': { color: D.text2 },
+    '& .MuiInputBase-input': { color: D.text1 },
+    '& .MuiSelect-icon': { color: D.text3 },
   };
 
   return (
     <Container maxWidth="lg" sx={{ py: 3, pb: 10 }}>
       {/* Header */}
       <Box sx={{ mb: 3 }}>
-        <Typography variant="h4" fontWeight={800} sx={{ color: G.foam }}>📋 Activity Log</Typography>
-        <Typography variant="body2" sx={{ color: G.sage, mt: 0.5 }}>Track everything you do, every day</Typography>
+        <Typography variant="h4" fontWeight={800} sx={{ color: D.text1 }}>📋 Activity Log</Typography>
+        <Typography variant="body2" sx={{ color: D.text3, mt: 0.5 }}>Track everything you do, every day</Typography>
       </Box>
 
       {/* Today stats */}
       <Box sx={{ display: 'flex', gap: 1.5, mb: 3, flexWrap: 'wrap' }}>
         <Box sx={{ px: 2.5, py: 1.5, borderRadius: 3, bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', display: 'flex', alignItems: 'center', gap: 1.5 }}>
-          <CalendarTodayIcon sx={{ color: G.mint, fontSize: 18 }} />
+          <CalendarTodayIcon sx={{ color: D.text2, fontSize: 18 }} />
           <Box>
-            <Typography sx={{ color: G.sage, fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: 1 }}>Today</Typography>
-            <Typography sx={{ color: G.foam, fontWeight: 800, fontSize: '1.1rem' }}>{totalToday} activities</Typography>
+            <Typography sx={{ color: D.text3, fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: 1 }}>Today</Typography>
+            <Typography sx={{ color: D.text1, fontWeight: 800, fontSize: '1.1rem' }}>{totalToday} activities</Typography>
           </Box>
         </Box>
         {topCat && (
           <Box sx={{ px: 2.5, py: 1.5, borderRadius: 3, bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', display: 'flex', alignItems: 'center', gap: 1.5 }}>
             <Typography sx={{ fontSize: '1.2rem' }}>{getCat(topCat[0]).emoji}</Typography>
             <Box>
-              <Typography sx={{ color: G.sage, fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: 1 }}>Most logged</Typography>
-              <Typography sx={{ color: G.foam, fontWeight: 800, fontSize: '1rem' }}>{topCat[0]} ({topCat[1]})</Typography>
+              <Typography sx={{ color: D.text3, fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: 1 }}>Most logged</Typography>
+              <Typography sx={{ color: D.text1, fontWeight: 800, fontSize: '1rem' }}>{topCat[0]} ({topCat[1]})</Typography>
             </Box>
           </Box>
         )}
         <Box sx={{ px: 2.5, py: 1.5, borderRadius: 3, bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.1)', display: 'flex', alignItems: 'center', gap: 1.5 }}>
-          <AccessTimeIcon sx={{ color: G.mint, fontSize: 18 }} />
+          <AccessTimeIcon sx={{ color: D.text2, fontSize: 18 }} />
           <Box>
-            <Typography sx={{ color: G.sage, fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: 1 }}>Total logged</Typography>
-            <Typography sx={{ color: G.foam, fontWeight: 800, fontSize: '1.1rem' }}>{activities.length} entries</Typography>
+            <Typography sx={{ color: D.text3, fontSize: '0.68rem', textTransform: 'uppercase', letterSpacing: 1 }}>Total logged</Typography>
+            <Typography sx={{ color: D.text1, fontWeight: 800, fontSize: '1.1rem' }}>{activities.length} entries</Typography>
           </Box>
         </Box>
       </Box>
 
       {/* Tabs */}
-      <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 3, '& .MuiTabs-indicator': { bgcolor: G.mint } }}>
-        <Tab label="➕ Log Activity" sx={{ color: G.sage, '&.Mui-selected': { color: G.mint }, textTransform: 'none', fontWeight: 600 }} />
-        <Tab label="📅 History" sx={{ color: G.sage, '&.Mui-selected': { color: G.mint }, textTransform: 'none', fontWeight: 600 }} />
+      <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 3, '& .MuiTabs-indicator': { bgcolor: D.text2 } }}>
+        <Tab label="➕ Log Activity" sx={{ color: D.text3, '&.Mui-selected': { color: D.text2 }, textTransform: 'none', fontWeight: 600 }} />
+        <Tab label="📅 History" sx={{ color: D.text3, '&.Mui-selected': { color: D.text2 }, textTransform: 'none', fontWeight: 600 }} />
       </Tabs>
 
       {/* ── TAB 0: LOG ── */}
       {tab === 0 && (
         <Box>
           {/* Quick log card */}
-          <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.12)', borderRadius: 3, mb: 3 }}>
+          <Card sx={{ bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 3, mb: 3 }}>
             <CardContent sx={{ p: 3 }}>
-              <Typography fontWeight={700} sx={{ color: G.foam, mb: 2.5 }}>What did you do?</Typography>
+              <Typography fontWeight={700} sx={{ color: D.text1, mb: 2.5 }}>What did you do?</Typography>
 
               {/* Title */}
               <TextField
@@ -208,12 +208,12 @@ export default function ActivityLog() {
                     sx={{
                       cursor: 'pointer',
                       bgcolor: form.category === cat.label ? 'rgba(71,133,89,0.3)' : 'rgba(13,38,24,0.5)',
-                      color: form.category === cat.label ? G.foam : G.sage,
+                      color: form.category === cat.label ? D.text1 : D.text3,
                       border: `1px solid ${form.category === cat.label ? cat.color + '60' : 'rgba(148,204,171,0.1)'}`,
                       fontWeight: form.category === cat.label ? 700 : 400,
                       fontSize: '0.8rem',
                       transition: 'all 0.15s',
-                      '&:hover': { bgcolor: 'rgba(71,133,89,0.2)' },
+                      '&:hover': { bgcolor: 'rgba(255,255,255,0.06)' },
                       boxShadow: form.category === cat.label ? `0 0 10px ${cat.color}30` : 'none',
                     }}
                   />
@@ -255,10 +255,10 @@ export default function ActivityLog() {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
                 {form.title && (
                   <Box sx={{ flex: 1, px: 2, py: 1, borderRadius: 2, bgcolor: 'rgba(71,133,89,0.1)', border: '1px solid rgba(148,204,171,0.1)' }}>
-                    <Typography sx={{ color: G.foam, fontSize: '0.85rem', fontWeight: 600 }}>
+                    <Typography sx={{ color: D.text1, fontSize: '0.85rem', fontWeight: 600 }}>
                       {getCat(form.category).emoji} {form.title}
                     </Typography>
-                    <Typography sx={{ color: G.sage, fontSize: '0.72rem' }}>
+                    <Typography sx={{ color: D.text3, fontSize: '0.72rem' }}>
                       {form.date === today() ? 'Today' : form.date} · {fmt12(form.startTime)}{form.endTime ? ` → ${fmt12(form.endTime)}` : ''}
                       {form.endTime && getDuration(form.startTime, form.endTime) ? ` (${getDuration(form.startTime, form.endTime)})` : ''}
                     </Typography>
@@ -271,8 +271,8 @@ export default function ActivityLog() {
                   disabled={!form.title.trim()}
                   sx={{
                     py: 1.5, px: 3, fontWeight: 800, fontSize: '0.95rem',
-                    bgcolor: G.pine, '&:hover': { bgcolor: G.fern },
-                    '&.Mui-disabled': { bgcolor: 'rgba(71,133,89,0.1)', color: G.sage },
+                    bgcolor: D.bg2, '&:hover': { bgcolor: D.bg3 },
+                    '&.Mui-disabled': { bgcolor: 'rgba(71,133,89,0.1)', color: D.text3 },
                   }}
                 >
                   Save Activity
@@ -282,12 +282,12 @@ export default function ActivityLog() {
           </Card>
 
           {/* Today's log */}
-          <Typography fontWeight={700} sx={{ color: G.foam, mb: 1.5 }}>
-            Today's Log {totalToday > 0 && <Chip label={totalToday} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.2)', color: G.mint, ml: 1, fontWeight: 700 }} />}
+          <Typography fontWeight={700} sx={{ color: D.text1, mb: 1.5 }}>
+            Today's Log {totalToday > 0 && <Chip label={totalToday} size="small" sx={{ bgcolor: 'rgba(255,255,255,0.06)', color: D.text2, ml: 1, fontWeight: 700 }} />}
           </Typography>
 
           {todayActivities.length === 0 ? (
-            <Box sx={{ textAlign: 'center', py: 5, color: G.sage }}>
+            <Box sx={{ textAlign: 'center', py: 5, color: D.text3 }}>
               <Typography sx={{ fontSize: '2rem', mb: 1 }}>📋</Typography>
               <Typography>Nothing logged today yet. Add your first activity above.</Typography>
             </Box>
@@ -300,21 +300,21 @@ export default function ActivityLog() {
                   <Box key={a.id} sx={{
                     display: 'flex', alignItems: 'flex-start', gap: 1.5, p: 2, borderRadius: 2.5,
                     bgcolor: 'rgba(13,38,24,0.7)', border: '1px solid rgba(148,204,171,0.08)',
-                    transition: 'all 0.15s', '&:hover': { borderColor: 'rgba(148,204,171,0.2)', transform: 'translateX(3px)' },
+                    transition: 'all 0.15s', '&:hover': { borderColor: 'rgba(255,255,255,0.12)', transform: 'translateX(3px)' },
                   }}>
                     {/* Color dot */}
                     <Box sx={{ width: 3, borderRadius: 99, alignSelf: 'stretch', bgcolor: cat.color, flexShrink: 0, minHeight: 36 }} />
                     <Box sx={{ fontSize: '1.2rem', flexShrink: 0, mt: 0.1 }}>{cat.emoji}</Box>
                     <Box sx={{ flex: 1, minWidth: 0 }}>
-                      <Typography sx={{ color: G.foam, fontWeight: 600, fontSize: '0.9rem' }}>{a.title}</Typography>
+                      <Typography sx={{ color: D.text1, fontWeight: 600, fontSize: '0.9rem' }}>{a.title}</Typography>
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 0.3, flexWrap: 'wrap' }}>
                         <Chip label={a.category} size="small" sx={{ bgcolor: cat.color + '20', color: cat.color, fontSize: '0.65rem', height: 18, border: `1px solid ${cat.color}40` }} />
-                        <Typography sx={{ color: G.sage, fontSize: '0.72rem' }}>
+                        <Typography sx={{ color: D.text3, fontSize: '0.72rem' }}>
                           {fmt12(a.startTime)}{a.endTime ? ` → ${fmt12(a.endTime)}` : ''}
                           {dur ? ` · ${dur}` : ''}
                         </Typography>
                       </Box>
-                      {a.note && <Typography sx={{ color: 'rgba(232,245,238,0.45)', fontSize: '0.78rem', mt: 0.4, fontStyle: 'italic' }}>"{a.note}"</Typography>}
+                      {a.note && <Typography sx={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.78rem', mt: 0.4, fontStyle: 'italic' }}>"{a.note}"</Typography>}
                     </Box>
                     <IconButton size="small" onClick={() => deleteActivity(a.id)} sx={{ color: 'rgba(232,245,238,0.15)', '&:hover': { color: '#ef4444' }, flexShrink: 0 }}>
                       <DeleteIcon sx={{ fontSize: 16 }} />
@@ -337,7 +337,7 @@ export default function ActivityLog() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               size="small"
-              InputProps={{ startAdornment: <InputAdornment position="start"><SearchIcon sx={{ color: G.sage, fontSize: 18 }} /></InputAdornment> }}
+              InputProps={{ startAdornment: <InputAdornment position="start"><SearchIcon sx={{ color: D.text3, fontSize: 18 }} /></InputAdornment> }}
               sx={{ ...inputSx, flex: 1, minWidth: 200 }}
             />
           </Box>
@@ -353,18 +353,18 @@ export default function ActivityLog() {
                 sx={{
                   cursor: 'pointer',
                   bgcolor: filterCat === cat ? 'rgba(71,133,89,0.3)' : 'rgba(13,38,24,0.5)',
-                  color: filterCat === cat ? G.foam : G.sage,
+                  color: filterCat === cat ? D.text1 : D.text3,
                   border: `1px solid ${filterCat === cat ? 'rgba(148,204,171,0.35)' : 'rgba(148,204,171,0.08)'}`,
                   fontWeight: filterCat === cat ? 700 : 400,
                   fontSize: '0.75rem',
-                  '&:hover': { bgcolor: 'rgba(71,133,89,0.15)' },
+                  '&:hover': { bgcolor: 'rgba(255,255,255,0.05)' },
                 }}
               />
             ))}
           </Box>
 
           {filtered.length === 0 ? (
-            <Box sx={{ textAlign: 'center', py: 6, color: G.sage }}>
+            <Box sx={{ textAlign: 'center', py: 6, color: D.text3 }}>
               <Typography sx={{ fontSize: '2rem', mb: 1 }}>🔍</Typography>
               <Typography>{activities.length === 0 ? 'No activities yet. Start logging!' : 'No results found.'}</Typography>
             </Box>
@@ -374,9 +374,9 @@ export default function ActivityLog() {
                 <Box key={date}>
                   {/* Date header */}
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1.5 }}>
-                    <Typography sx={{ color: G.mint, fontWeight: 800, fontSize: '0.95rem' }}>{formatDate(date)}</Typography>
-                    <Typography sx={{ color: G.sage, fontSize: '0.75rem' }}>{date}</Typography>
-                    <Chip label={`${acts.length} activities`} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.1)', color: G.sage, fontSize: '0.65rem', height: 18 }} />
+                    <Typography sx={{ color: D.text2, fontWeight: 800, fontSize: '0.95rem' }}>{formatDate(date)}</Typography>
+                    <Typography sx={{ color: D.text3, fontSize: '0.75rem' }}>{date}</Typography>
+                    <Chip label={`${acts.length} activities`} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.1)', color: D.text3, fontSize: '0.65rem', height: 18 }} />
                     <Box sx={{ flex: 1, height: 1, bgcolor: 'rgba(148,204,171,0.08)' }} />
                   </Box>
 
@@ -394,17 +394,17 @@ export default function ActivityLog() {
                           <Box sx={{ width: 3, borderRadius: 99, alignSelf: 'stretch', bgcolor: cat.color, flexShrink: 0, minHeight: 32 }} />
                           {/* Time column */}
                           <Box sx={{ width: 60, flexShrink: 0, textAlign: 'right', pt: 0.2 }}>
-                            <Typography sx={{ color: G.sage, fontSize: '0.72rem', fontWeight: 600 }}>{fmt12(a.startTime)}</Typography>
-                            {a.endTime && <Typography sx={{ color: 'rgba(148,204,171,0.3)', fontSize: '0.65rem' }}>{fmt12(a.endTime)}</Typography>}
+                            <Typography sx={{ color: D.text3, fontSize: '0.72rem', fontWeight: 600 }}>{fmt12(a.startTime)}</Typography>
+                            {a.endTime && <Typography sx={{ color: 'rgba(255,255,255,0.18)', fontSize: '0.65rem' }}>{fmt12(a.endTime)}</Typography>}
                           </Box>
                           <Box sx={{ flex: 1, minWidth: 0 }}>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                               <Typography sx={{ fontSize: '0.9rem' }}>{cat.emoji}</Typography>
-                              <Typography sx={{ color: G.foam, fontWeight: 600, fontSize: '0.88rem' }}>{a.title}</Typography>
+                              <Typography sx={{ color: D.text1, fontWeight: 600, fontSize: '0.88rem' }}>{a.title}</Typography>
                             </Box>
                             <Box sx={{ display: 'flex', gap: 1, mt: 0.3, flexWrap: 'wrap', alignItems: 'center' }}>
                               <Chip label={a.category} size="small" sx={{ bgcolor: cat.color + '18', color: cat.color, fontSize: '0.63rem', height: 16, border: `1px solid ${cat.color}35` }} />
-                              {dur && <Typography sx={{ color: G.sage, fontSize: '0.7rem' }}>⏱ {dur}</Typography>}
+                              {dur && <Typography sx={{ color: D.text3, fontSize: '0.7rem' }}>⏱ {dur}</Typography>}
                             </Box>
                             {a.note && <Typography sx={{ color: 'rgba(232,245,238,0.4)', fontSize: '0.75rem', mt: 0.3, fontStyle: 'italic' }}>"{a.note}"</Typography>}
                           </Box>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Typography, Box, Card, CardContent, Chip, Button, Accordion, AccordionSummary, AccordionDetails, LinearProgress } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { G } from '../theme';
+import { D, FONTS } from '../theme';
 
 const dailyPrinciples = [
   {
@@ -64,18 +64,18 @@ export default function Mindset() {
     <Container maxWidth="lg" sx={{ py: 4 }}>
       {/* Header */}
       <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" fontWeight={800} sx={{ color: G.foam }}>🧠 Mindset</Typography>
-        <Typography sx={{ color: G.sage, mt: 0.5 }}>Daily principles that compound into who you become</Typography>
+        <Typography variant="h4" fontWeight={800} sx={{ color: D.text1 }}>🧠 Mindset</Typography>
+        <Typography sx={{ color: D.text3, mt: 0.5 }}>Daily principles that compound into who you become</Typography>
       </Box>
 
       {/* Daily Card */}
-      <Card sx={{ borderRadius: 3, border: `1px solid ${G.cardBorder}`, mb: 3, overflow: 'hidden' }}>
+      <Card sx={{ borderRadius: 3, border: `1px solid ${'rgba(255,255,255,0.08)'}`, mb: 3, overflow: 'hidden' }}>
         {/* Top bar */}
-        <Box sx={{ background: G.heroGrad, p: 3 }}>
+        <Box sx={{ background: D.gradHero, p: 3 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 2 }}>
             <Box>
               <Chip label={content.category} size="small" sx={{ bgcolor: 'rgba(71,133,89,0.3)', color: '#a8d8b8', fontWeight: 700, mb: 1 }} />
-              <Typography variant="h5" fontWeight={800} sx={{ color: G.pearl, lineHeight: 1.3 }}>
+              <Typography variant="h5" fontWeight={800} sx={{ color: '#ffffff', lineHeight: 1.3 }}>
                 {content.title}
               </Typography>
             </Box>
@@ -83,12 +83,12 @@ export default function Mindset() {
               {dailyPrinciples.map((_, i) => (
                 <Box key={i} onClick={() => { setIdx(i); setExpanded('principle'); setReflected(false); }}
                   sx={{ width: 28, height: 28, borderRadius: '50%', cursor: 'pointer',
-                    bgcolor: i === idx ? G.green : 'rgba(245,240,232,0.2)',
-                    border: `2px solid ${i === idx ? G.greenLight : 'rgba(245,240,232,0.3)'}`,
+                    bgcolor: i === idx ? '#ffffff' : 'rgba(245,240,232,0.2)',
+                    border: `2px solid ${i === idx ? 'rgba(255,255,255,0.5)' : 'rgba(245,240,232,0.3)'}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     transition: 'all 0.2s', '&:hover': { bgcolor: 'rgba(71,133,89,0.5)' }
                   }}>
-                  <Typography sx={{ color: G.pearl, fontSize: '0.65rem', fontWeight: 700 }}>{i + 1}</Typography>
+                  <Typography sx={{ color: '#ffffff', fontSize: '0.65rem', fontWeight: 700 }}>{i + 1}</Typography>
                 </Box>
               ))}
             </Box>
@@ -102,18 +102,18 @@ export default function Mindset() {
           {sections.map(s => (
             <Accordion key={s.key} expanded={expanded === s.key}
               onChange={() => setExpanded(expanded === s.key ? null : s.key)}
-              sx={{ bgcolor: 'rgba(71,133,89,0.1)', mb: 1, border: `1px solid ${G.cardBorder}` }}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: G.sage }} />}>
-                <Typography fontWeight={700} sx={{ color: G.foam }}>{s.label}</Typography>
+              sx={{ bgcolor: 'rgba(71,133,89,0.1)', mb: 1, border: `1px solid ${'rgba(255,255,255,0.08)'}` }}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: D.text3 }} />}>
+                <Typography fontWeight={700} sx={{ color: D.text1 }}>{s.label}</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography sx={{ color: G.mint, lineHeight: 1.9 }}>{s.body}</Typography>
+                <Typography sx={{ color: D.text2, lineHeight: 1.9 }}>{s.body}</Typography>
               </AccordionDetails>
             </Accordion>
           ))}
 
           <Button variant="contained" fullWidth onClick={() => setReflected(true)}
-            sx={{ mt: 2, py: 1.5, bgcolor: G.green, '&:hover': { bgcolor: G.greenDark } }}>
+            sx={{ mt: 2, py: 1.5, bgcolor: '#ffffff', '&:hover': { bgcolor: '#111111' } }}>
             {reflected ? '✅ Challenge Accepted!' : '⚡ I Accept Today\'s Challenge'}
           </Button>
         </CardContent>

@@ -6,7 +6,7 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import SpotifyIcon from '@mui/icons-material/QueueMusic';
-import { G } from '../theme';
+import { D, FONTS } from '../theme';
 
 const CLIENT_ID = '5289d825e3404c259d7507f7c1b2ab53';
 const REDIRECT_URI = window.location.origin + '/spotify-callback';
@@ -52,10 +52,10 @@ function SpotifyAuth({ onConnect }) {
       border: '1px solid rgba(29,185,84,0.2)',
     }}>
       <Box sx={{ fontSize: '2rem', mb: 1 }}>🎧</Box>
-      <Typography sx={{ color: G.foam, fontWeight: 700, mb: 0.5 }}>
+      <Typography sx={{ color: D.text1, fontWeight: 700, mb: 0.5 }}>
         Connect Spotify
       </Typography>
-      <Typography sx={{ color: G.sage, fontSize: '0.8rem', mb: 2 }}>
+      <Typography sx={{ color: D.text3, fontSize: '0.8rem', mb: 2 }}>
         Play your workout music while training
       </Typography>
       <Button
@@ -119,7 +119,7 @@ function SpotifyPlayer({ token, onDisconnect }) {
   if (!track) {
     return (
       <Box sx={{ p: 2.5, borderRadius: 3, bgcolor: 'rgba(29,185,84,0.06)', border: '1px solid rgba(29,185,84,0.15)', textAlign: 'center' }}>
-        <Typography sx={{ color: G.sage, fontSize: '0.85rem' }}>
+        <Typography sx={{ color: D.text3, fontSize: '0.85rem' }}>
           🎵 Open Spotify on any device and start playing to control it here
         </Typography>
         {error && <Typography sx={{ color: '#f87171', fontSize: '0.75rem', mt: 1 }}>{error}</Typography>}
@@ -151,10 +151,10 @@ function SpotifyPlayer({ token, onDisconnect }) {
           </Box>
         )}
         <Box sx={{ flex: 1, minWidth: 0 }}>
-          <Typography sx={{ color: G.foam, fontWeight: 700, fontSize: '0.9rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          <Typography sx={{ color: D.text1, fontWeight: 700, fontSize: '0.9rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {track.name}
           </Typography>
-          <Typography sx={{ color: G.sage, fontSize: '0.78rem', mt: 0.3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          <Typography sx={{ color: D.text3, fontSize: '0.78rem', mt: 0.3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {artists}
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mt: 0.5 }}>
@@ -184,7 +184,7 @@ function SpotifyPlayer({ token, onDisconnect }) {
 
       {/* Controls */}
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, py: 1.2 }}>
-        <IconButton onClick={() => control('prev')} sx={{ color: G.sage, '&:hover': { color: G.mint } }}>
+        <IconButton onClick={() => control('prev')} sx={{ color: D.text3, '&:hover': { color: D.text2 } }}>
           <SkipPreviousIcon />
         </IconButton>
         <IconButton
@@ -196,7 +196,7 @@ function SpotifyPlayer({ token, onDisconnect }) {
         >
           {playing ? <PauseIcon /> : <PlayArrowIcon />}
         </IconButton>
-        <IconButton onClick={() => control('next')} sx={{ color: G.sage, '&:hover': { color: G.mint } }}>
+        <IconButton onClick={() => control('next')} sx={{ color: D.text3, '&:hover': { color: D.text2 } }}>
           <SkipNextIcon />
         </IconButton>
       </Box>

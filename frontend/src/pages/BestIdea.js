@@ -1,4 +1,4 @@
-import { G } from '../theme';
+import { D, FONTS } from '../theme';
 import React, { useState } from 'react';
 import {
   Container, Typography, Box, Card, CardContent, Chip,
@@ -53,7 +53,7 @@ const bestIdeas = [
     tagline: "Build an audience → sell them something once → earn forever",
     icon: "🎯",
     badge: "BEST FOR SOLO",
-    badgeColor: "G.pine",
+    badgeColor: "D.bg2",
     whyBest: "The personal brand model is the most scalable solo business. You build authority in ONE specific topic by posting content consistently. Once you have an audience (even 1,000 true fans), you sell them a digital product: course, ebook, template pack, masterclass. You create it once — it sells for years. The key insight: you don't need millions of followers. 1,000 people paying $97 for a course = $97,000. This has zero cost of goods, infinite scalability, and compounds over time.",
     realExamples: [
       "Justin Welsh — LinkedIn personal brand → $5M/year from courses and newsletters (solo, no employees)",
@@ -86,7 +86,7 @@ const bestIdeas = [
     tagline: "One client = $2,000–$10,000/month. You only need 5 to change your life.",
     icon: "💼",
     badge: "FASTEST INCOME",
-    badgeColor: "G.pine",
+    badgeColor: "D.bg2",
     whyBest: "If you need money NOW — not in 6 months — this is the model. You offer a high-value service to businesses (not individuals). Businesses have budgets. They pay without flinching if you solve a real problem. The three highest-demand B2B services right now: AI automation consulting, paid ads management, and B2B lead generation. A single client at $3,000/month and you're making $36K/year. Get 5 clients = $180K/year. No product to build, no audience needed, just skills and outreach.",
     realExamples: [
       "Sam Ovens — consulting agency → $10M/year (started with cold outreach, zero audience)",
@@ -124,11 +124,11 @@ export default function BestIdea() {
       <Box sx={{ mb: 4 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 0.5 }}>
           <EmojiEventsIcon sx={{ color: '#f59e0b', fontSize: 32 }} />
-          <Typography variant="h4" fontWeight={700} sx={{ color: G.foam }}>
+          <Typography variant="h4" fontWeight={700} sx={{ color: D.text1 }}>
             Best Business Ideas
           </Typography>
         </Box>
-        <Typography variant="body2" sx={{ color: 'G.textLight' }}>
+        <Typography variant="body2" sx={{ color: `rgba(255,255,255,0.4)` }}>
           Not just ideas — complete models with real examples, launch plans, and income timelines
         </Typography>
       </Box>
@@ -141,23 +141,23 @@ export default function BestIdea() {
             onClick={() => { setSelected(i); setExpandedSection('why'); }}
             sx={{
               flex: 1, minWidth: 200, p: 2.5, borderRadius: 2, cursor: 'pointer',
-              bgcolor: selected === i ? G.foam : 'rgba(71,133,89,0.08)',
+              bgcolor: selected === i ? D.text1 : 'rgba(71,133,89,0.08)',
               border: `2px solid ${selected === i ? '#3b82f6' : 'rgba(71,133,89,0.18)'}`,
-              transition: 'all 0.2s', '&:hover': { borderColor: G.sage }
+              transition: 'all 0.2s', '&:hover': { borderColor: D.text3 }
             }}
           >
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
               <Typography variant="h3" component="span">{idea.icon}</Typography>
               <Chip label={idea.badge} size="small" sx={{ bgcolor: idea.badgeColor, color: '#fff', fontWeight: 700, fontSize: '0.6rem' }} />
             </Box>
-            <Typography fontWeight={700} sx={{ color: G.foam, fontSize: '0.95rem' }}>{idea.title}</Typography>
-            <Typography variant="caption" sx={{ color: 'G.textLight' }}>{idea.tagline}</Typography>
+            <Typography fontWeight={700} sx={{ color: D.text1, fontSize: '0.95rem' }}>{idea.title}</Typography>
+            <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.4)` }}>{idea.tagline}</Typography>
           </Box>
         ))}
       </Box>
 
       {/* Main Card */}
-      <Card sx={{ bgcolor: 'rgba(71,133,89,0.12)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
+      <Card sx={{ bgcolor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(71,133,89,0.08)', borderRadius: 3, mb: 3 }}>
         <CardContent sx={{ p: 4 }}>
           <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', mb: 3, flexWrap: 'wrap', gap: 2 }}>
             <Box>
@@ -165,29 +165,29 @@ export default function BestIdea() {
                 <Chip label={`#${idea.rank} Pick`} sx={{ bgcolor: '#78350f', color: '#fcd34d', fontWeight: 700 }} />
                 <Chip label={idea.badge} sx={{ bgcolor: idea.badgeColor, color: '#fff', fontWeight: 700 }} />
               </Box>
-              <Typography variant="h4" fontWeight={700} sx={{ color: G.foam }}>{idea.title}</Typography>
-              <Typography sx={{ color: 'G.textLight', mt: 0.5 }}>{idea.tagline}</Typography>
+              <Typography variant="h4" fontWeight={700} sx={{ color: D.text1 }}>{idea.title}</Typography>
+              <Typography sx={{ color: `rgba(255,255,255,0.4)`, mt: 0.5 }}>{idea.tagline}</Typography>
             </Box>
           </Box>
 
           {/* Stats Row */}
           <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 4 }}>
             {[
-              { label: 'Investment', value: idea.investmentRequired, color: G.mid },
-              { label: 'Revenue Timeline', value: idea.revenueTimeline.split('|')[0].trim() + ' → ' + idea.revenueTimeline.split('|')[3]?.trim(), color: G.sage },
+              { label: 'Investment', value: idea.investmentRequired, color: D.bg4 },
+              { label: 'Revenue Timeline', value: idea.revenueTimeline.split('|')[0].trim() + ' → ' + idea.revenueTimeline.split('|')[3]?.trim(), color: D.text3 },
             ].map((s) => (
               <Box key={s.label} sx={{ flex: 1, minWidth: 200, bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2.5 }}>
-                <Typography variant="caption" sx={{ color: 'G.textLight', textTransform: 'uppercase', letterSpacing: 1 }}>{s.label}</Typography>
+                <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.4)`, textTransform: 'uppercase', letterSpacing: 1 }}>{s.label}</Typography>
                 <Typography fontWeight={700} sx={{ color: s.color, mt: 0.5 }}>{s.value}</Typography>
               </Box>
             ))}
             <Box sx={{ flex: 1, minWidth: 200, bgcolor: 'rgba(71,133,89,0.08)', borderRadius: 2, p: 2.5 }}>
-              <Typography variant="caption" sx={{ color: 'G.textLight', textTransform: 'uppercase', letterSpacing: 1 }}>Success Rate</Typography>
+              <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.4)`, textTransform: 'uppercase', letterSpacing: 1 }}>Success Rate</Typography>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mt: 1 }}>
-                <LinearProgress variant="determinate" value={idea.successRate} sx={{ flex: 1, height: 8, borderRadius: 4, bgcolor: 'rgba(71,133,89,0.18)', '& .MuiLinearProgress-bar': { bgcolor: G.mid } }} />
-                <Typography fontWeight={700} sx={{ color: G.mid }}>{idea.successRate}%</Typography>
+                <LinearProgress variant="determinate" value={idea.successRate} sx={{ flex: 1, height: 8, borderRadius: 4, bgcolor: 'rgba(71,133,89,0.18)', '& .MuiLinearProgress-bar': { bgcolor: D.bg4 } }} />
+                <Typography fontWeight={700} sx={{ color: D.bg4 }}>{idea.successRate}%</Typography>
               </Box>
-              <Typography variant="caption" sx={{ color: 'G.textMid', fontSize: '0.7rem' }}>{idea.successNote}</Typography>
+              <Typography variant="caption" sx={{ color: `rgba(255,255,255,0.5)`, fontSize: '0.7rem' }}>{idea.successNote}</Typography>
             </Box>
           </Box>
 
@@ -198,7 +198,7 @@ export default function BestIdea() {
             {
               key: 'why',
               label: '🏆 Why This Is The Best Model',
-              content: <Typography sx={{ color: 'G.textDark', lineHeight: 1.9 }}>{idea.whyBest}</Typography>
+              content: <Typography sx={{ color: D.text1, lineHeight: 1.9 }}>{idea.whyBest}</Typography>
             },
             {
               key: 'examples',
@@ -207,8 +207,8 @@ export default function BestIdea() {
                 <Box>
                   {idea.realExamples.map((ex, i) => (
                     <Box key={i} sx={{ display: 'flex', gap: 1.5, mb: 1.5 }}>
-                      <CheckCircleIcon sx={{ color: G.mid, fontSize: 18, mt: 0.3 }} />
-                      <Typography sx={{ color: 'G.textDark', lineHeight: 1.7 }}>{ex}</Typography>
+                      <CheckCircleIcon sx={{ color: D.bg4, fontSize: 18, mt: 0.3 }} />
+                      <Typography sx={{ color: D.text1, lineHeight: 1.7 }}>{ex}</Typography>
                     </Box>
                   ))}
                 </Box>
@@ -220,12 +220,12 @@ export default function BestIdea() {
               content: (
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                   {idea.bestNiches.map((n, i) => (
-                    <Box key={i} sx={{ p: 2, bgcolor: 'rgba(71,133,89,0.12)', borderRadius: 2, border: '1px solid rgba(71,133,89,0.08)' }}>
+                    <Box key={i} sx={{ p: 2, bgcolor: 'rgba(255,255,255,0.04)', borderRadius: 2, border: '1px solid rgba(71,133,89,0.08)' }}>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                        <Chip label={n.niche} size="small" sx={{ bgcolor: G.pine, color: G.foam, fontWeight: 600 }} />
-                        <Typography variant="caption" sx={{ color: G.mid, fontWeight: 700 }}>{n.income}</Typography>
+                        <Chip label={n.niche} size="small" sx={{ bgcolor: D.bg2, color: D.text1, fontWeight: 600 }} />
+                        <Typography variant="caption" sx={{ color: D.bg4, fontWeight: 700 }}>{n.income}</Typography>
                       </Box>
-                      <Typography sx={{ color: 'G.textLight', mt: 0.5 }}>{n.idea}</Typography>
+                      <Typography sx={{ color: `rgba(255,255,255,0.4)`, mt: 0.5 }}>{n.idea}</Typography>
                     </Box>
                   ))}
                 </Box>
@@ -240,13 +240,13 @@ export default function BestIdea() {
                     <Box key={i} sx={{ display: 'flex', gap: 2, mb: 2.5, alignItems: 'flex-start' }}>
                       <Box sx={{
                         minWidth: 80, height: 28, borderRadius: 2,
-                        bgcolor: G.pine, color: G.foam,
+                        bgcolor: D.bg2, color: D.text1,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         fontSize: '0.7rem', fontWeight: 700
                       }}>
                         {step.week}
                       </Box>
-                      <Typography sx={{ color: 'G.textDark', lineHeight: 1.7 }}>{step.task}</Typography>
+                      <Typography sx={{ color: D.text1, lineHeight: 1.7 }}>{step.task}</Typography>
                     </Box>
                   ))}
                 </Box>
@@ -259,8 +259,8 @@ export default function BestIdea() {
                 <Box>
                   {idea.revenueTimeline.split('|').map((phase, i) => (
                     <Box key={i} sx={{ display: 'flex', gap: 1.5, mb: 1.5, alignItems: 'center' }}>
-                      <ArrowForwardIcon sx={{ color: G.sage, fontSize: 16 }} />
-                      <Typography sx={{ color: 'G.textDark' }}>{phase.trim()}</Typography>
+                      <ArrowForwardIcon sx={{ color: D.text3, fontSize: 16 }} />
+                      <Typography sx={{ color: D.text1 }}>{phase.trim()}</Typography>
                     </Box>
                   ))}
                 </Box>
@@ -273,8 +273,8 @@ export default function BestIdea() {
               onChange={() => setExpandedSection(expandedSection === section.key ? null : section.key)}
               sx={{ bgcolor: 'rgba(71,133,89,0.08)', border: '1px solid rgba(71,133,89,0.18)', borderRadius: '8px !important', mb: 1, '&:before': { display: 'none' } }}
             >
-              <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'G.textLight' }} />}>
-                <Typography fontWeight={600} sx={{ color: G.foam }}>{section.label}</Typography>
+              <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: `rgba(255,255,255,0.4)` }} />}>
+                <Typography fontWeight={600} sx={{ color: D.text1 }}>{section.label}</Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ pt: 0 }}>
                 {section.content}

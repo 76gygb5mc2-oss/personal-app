@@ -7,7 +7,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
-import { G } from '../theme';
+import { D, FONTS } from '../theme';
 
 /* Firefly canvas — same as Layout but self-contained */
 function FireflyBg() {
@@ -37,7 +37,7 @@ function FireflyBg() {
       frame++;
       ctx.clearRect(0, 0, W, H);
       const bg = ctx.createLinearGradient(0, 0, 0, H);
-      bg.addColorStop(0, '#0d2618'); bg.addColorStop(1, '#0a1f12');
+      bg.addColorStop(0, '#080808'); bg.addColorStop(1, '#0a1f12');
       ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
 
       mist.forEach(m => {
@@ -139,14 +139,14 @@ export default function LoginPage({ onLogin }) {
   const inputSx = {
     mb: 2,
     '& .MuiOutlinedInput-root': {
-      borderRadius: 2, bgcolor: 'rgba(13,38,24,0.7)', color: G.foam,
-      '& fieldset': { borderColor: 'rgba(148,204,171,0.2)' },
-      '&:hover fieldset': { borderColor: G.mint },
-      '&.Mui-focused fieldset': { borderColor: G.mint, borderWidth: 2 },
+      borderRadius: 2, bgcolor: 'rgba(13,38,24,0.7)', color: D.text1,
+      '& fieldset': { borderColor: 'rgba(255,255,255,0.12)' },
+      '&:hover fieldset': { borderColor: D.text2 },
+      '&.Mui-focused fieldset': { borderColor: D.text2, borderWidth: 2 },
     },
-    '& .MuiInputLabel-root': { color: G.sage },
-    '& .MuiInputLabel-root.Mui-focused': { color: G.mint },
-    '& input': { color: G.foam },
+    '& .MuiInputLabel-root': { color: D.text3 },
+    '& .MuiInputLabel-root.Mui-focused': { color: D.text2 },
+    '& input': { color: D.text1 },
   };
 
   return (
@@ -161,19 +161,19 @@ export default function LoginPage({ onLogin }) {
         <Box sx={{ textAlign: 'center', mb: 5 }}>
           <Box sx={{
             width: 68, height: 68, borderRadius: 4, mx: 'auto', mb: 2,
-            background: `linear-gradient(135deg, ${G.fern} 0%, ${G.forest} 100%)`,
+            background: `linear-gradient(135deg, ${D.bg3} 0%, ${D.bg0} 100%)`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             boxShadow: `0 0 40px rgba(71,133,89,0.5), 0 8px 24px rgba(0,0,0,0.5)`,
             border: '1px solid rgba(148,204,171,0.25)',
           }}>
-            <Typography sx={{ fontWeight: 900, color: G.foam, fontSize: '1.3rem', fontFamily: '"Georgia", serif' }}>
+            <Typography sx={{ fontWeight: 900, color: D.text1, fontSize: '1.3rem', fontFamily: '"Georgia", serif' }}>
               SW
             </Typography>
           </Box>
-          <Typography sx={{ fontWeight: 900, fontSize: '1.6rem', color: G.foam, letterSpacing: '-0.5px' }}>
+          <Typography sx={{ fontWeight: 900, fontSize: '1.6rem', color: D.text1, letterSpacing: '-0.5px' }}>
             SW PG
           </Typography>
-          <Typography sx={{ color: G.sage, fontSize: '0.8rem', letterSpacing: 3, textTransform: 'uppercase' }}>
+          <Typography sx={{ color: D.text3, fontSize: '0.8rem', letterSpacing: 3, textTransform: 'uppercase' }}>
             Personal OS
           </Typography>
         </Box>
@@ -198,12 +198,12 @@ export default function LoginPage({ onLogin }) {
                   flex: 1, py: 1, borderRadius: 1.5, cursor: 'pointer', textAlign: 'center',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.8,
                   bgcolor: mode === m.key ? 'rgba(71,133,89,0.25)' : 'transparent',
-                  border: `1px solid ${mode === m.key ? 'rgba(148,204,171,0.3)' : 'transparent'}`,
+                  border: `1px solid ${mode === m.key ? 'rgba(255,255,255,0.18)' : 'transparent'}`,
                   transition: 'all 0.2s',
                 }}>
                 {m.icon}
                 <Typography sx={{ fontSize: '0.85rem', fontWeight: mode === m.key ? 700 : 500,
-                  color: mode === m.key ? G.mint : G.sage }}>
+                  color: mode === m.key ? D.text2 : D.text3 }}>
                   {m.label}
                 </Typography>
               </Box>
@@ -211,7 +211,7 @@ export default function LoginPage({ onLogin }) {
           </Box>
 
           {error && <Alert severity="error" sx={{ mb: 2, bgcolor: 'rgba(100,20,20,0.5)', color: '#f87171', border: '1px solid rgba(248,113,113,0.3)', '& .MuiAlert-icon': { color: '#f87171' } }}>{error}</Alert>}
-          {success && <Alert severity="success" sx={{ mb: 2, bgcolor: 'rgba(20,60,30,0.6)', color: G.mint, border: `1px solid rgba(148,204,171,0.3)` }}>{success}</Alert>}
+          {success && <Alert severity="success" sx={{ mb: 2, bgcolor: 'rgba(20,60,30,0.6)', color: D.text2, border: `1px solid rgba(255,255,255,0.18)` }}>{success}</Alert>}
 
           {/* Username */}
           <TextField fullWidth label="Username" value={form.username}
@@ -226,7 +226,7 @@ export default function LoginPage({ onLogin }) {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={() => setShowPw(!showPw)} edge="end" sx={{ color: G.sage }}>
+                  <IconButton onClick={() => setShowPw(!showPw)} edge="end" sx={{ color: D.text3 }}>
                     {showPw ? <VisibilityOffIcon /> : <VisibilityIcon />}
                   </IconButton>
                 </InputAdornment>
@@ -241,7 +241,7 @@ export default function LoginPage({ onLogin }) {
                 onChange={e => set('confirm', e.target.value)} sx={inputSx} />
 
               <Box sx={{ mb: 1 }}>
-                <Typography sx={{ color: G.sage, fontSize: '0.78rem', mb: 1 }}>
+                <Typography sx={{ color: D.text3, fontSize: '0.78rem', mb: 1 }}>
                   🔐 Set a 4-digit PIN for your Financial page
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 1.5, justifyContent: 'center', mb: 2 }}>
@@ -251,9 +251,9 @@ export default function LoginPage({ onLogin }) {
                       sx={{
                         width: 52, height: 56, borderRadius: 2,
                         bgcolor: 'rgba(13,38,24,0.7)',
-                        border: `2px solid ${form.pin.length > i ? G.mint : 'rgba(148,204,171,0.2)'}`,
+                        border: `2px solid ${form.pin.length > i ? D.text2 : 'rgba(255,255,255,0.12)'}`,
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '1.4rem', color: G.foam, fontWeight: 800,
+                        fontSize: '1.4rem', color: D.text1, fontWeight: 800,
                         transition: 'border-color 0.2s',
                       }}
                     >
@@ -271,8 +271,8 @@ export default function LoginPage({ onLogin }) {
                     }} sx={{
                       py: 1.5, borderRadius: 2, textAlign: 'center', cursor: k === '' ? 'default' : 'pointer',
                       bgcolor: k === '' ? 'transparent' : 'rgba(71,133,89,0.1)',
-                      border: `1px solid ${k === '' ? 'transparent' : 'rgba(148,204,171,0.15)'}`,
-                      color: G.foam, fontWeight: 700, fontSize: '1rem',
+                      border: `1px solid ${k === '' ? 'transparent' : 'rgba(255,255,255,0.10)'}`,
+                      color: D.text1, fontWeight: 700, fontSize: '1rem',
                       transition: 'all 0.15s',
                       '&:hover': k !== '' ? { bgcolor: 'rgba(71,133,89,0.25)', borderColor: 'rgba(148,204,171,0.35)' } : {},
                     }}>{k}</Box>
@@ -287,20 +287,20 @@ export default function LoginPage({ onLogin }) {
             onClick={mode === 'login' ? handleLogin : handleRegister}
             sx={{
               mt: 2, py: 1.6, borderRadius: 2, fontWeight: 800, fontSize: '1rem',
-              background: `linear-gradient(135deg, ${G.fern} 0%, ${G.pine} 100%)`,
-              color: G.foam, letterSpacing: 0.5,
+              background: `linear-gradient(135deg, ${D.bg3} 0%, ${D.bg2} 100%)`,
+              color: D.text1, letterSpacing: 0.5,
               boxShadow: '0 4px 20px rgba(45,106,79,0.45)',
               '&:hover': { boxShadow: '0 6px 28px rgba(45,106,79,0.6)', transform: 'translateY(-1px)' },
-              '&.Mui-disabled': { bgcolor: 'rgba(71,133,89,0.2)', color: G.sage },
+              '&.Mui-disabled': { bgcolor: 'rgba(255,255,255,0.06)', color: D.text3 },
             }}>
-            {loading ? <CircularProgress size={22} sx={{ color: G.mint }} /> :
+            {loading ? <CircularProgress size={22} sx={{ color: D.text2 }} /> :
               mode === 'login' ? '→ Sign In' : '→ Create Account'}
           </Button>
 
           {mode === 'login' && (
-            <Typography sx={{ textAlign: 'center', mt: 2.5, color: 'rgba(148,204,171,0.4)', fontSize: '0.78rem' }}>
+            <Typography sx={{ textAlign: 'center', mt: 2.5, color: 'rgba(255,255,255,0.25)', fontSize: '0.78rem' }}>
               Don't have an account? Click <Box component="span" onClick={() => setMode('register')}
-                sx={{ color: G.mint, cursor: 'pointer', fontWeight: 700, '&:hover': { textDecoration: 'underline' } }}>
+                sx={{ color: D.text2, cursor: 'pointer', fontWeight: 700, '&:hover': { textDecoration: 'underline' } }}>
                 Register
               </Box> to create one.
             </Typography>
