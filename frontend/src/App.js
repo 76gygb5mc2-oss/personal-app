@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import { AuthProvider, useAuth } from './context/AuthContext';
@@ -15,6 +15,7 @@ import AIAdvisor from './pages/AIAdvisor';
 import ActivityLog from './pages/ActivityLog';
 import Layout    from './components/Layout';
 import LoginPage from './pages/LoginPage';
+import GatePage  from './pages/GatePage';
 import { D, FONTS } from './theme';
 
 const theme = createTheme({
@@ -178,6 +179,15 @@ function AppRoutes() {
 }
 
 function App() {
+  const [unlocked, setUnlocked] = useState(false);
+
+  if (!unlocked) return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <GatePage onUnlock={() => setUnlocked(true)} />
+    </ThemeProvider>
+  );
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

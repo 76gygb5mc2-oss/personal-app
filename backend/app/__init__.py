@@ -37,8 +37,9 @@ def create_app(config_name=None):
     limiter.init_app(app)
 
     # Register blueprints
-    from app.routes import auth, dashboard, business, financial, communication, mindset, relationships, learning, health, checkin, reports, ai_advisor
+    from app.routes import auth, dashboard, business, financial, communication, mindset, relationships, learning, health, checkin, reports, ai_advisor, gate
 
+    app.register_blueprint(gate.bp)
     app.register_blueprint(auth.bp)
     app.register_blueprint(dashboard.bp)
     app.register_blueprint(business.bp)
